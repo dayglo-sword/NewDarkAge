@@ -1,0 +1,1222 @@
+# events
+# 94100 - 1842 conjunction
+# 94101 - 1861 conjuction
+# 94102 - 1881 conjuction
+# 94103 - 1901 conjuction
+# 94104 - 1921 conjuction
+# 94105 - Eldritch conjunction effects
+# 94106 - Dagon conjunction effects
+# 94107 - Yig conjunction effects
+# 94108 - Cultists present effects
+# 94110 - Eldritch Cash aid to Yig and Dagon
+# 94111 - Cultists distribute money
+# 94112 - Distribute money (All)
+ # 25 January 1842	22:22:31	32' South	26.8° West	Capricorn
+country_event = {
+
+	id = 94100
+
+	trigger = {
+		year = 1842
+		month = 1
+		NOT = { has_global_flag = alignment_1_occured }	
+	}
+ 	
+	fire_only_once = yes
+
+	title = "EVTNAME94100"
+	desc = "EVTDESC94100" #"Cultists around the world celebrate!"
+	picture = "sight"
+	major = yes
+	news = yes
+	news_desc_long = "EVTDESC94100_NEWS_LONG"
+	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94100_NEWS_SHORT"
+
+	immediate = { 
+		set_global_flag = alignment_1_occured # stop retriggering
+
+		# make this a called event?
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and reduce internal strife
+				militancy = -1 
+				consciousness = -1
+				money = 10
+			}
+			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = 20
+			}
+			relation = {
+				who = DAG
+				value = 20
+			}
+			relation = {
+				who = YIG
+				value = 20
+			}
+		}	
+
+		# keep overt cultist nations close
+		ELD = { country_event = { id=94105 days=1 } }
+		DAG = { country_event = { id=94106 days=2 } }
+		YIG = { country_event = { id=94107 days=3 } }
+
+		# make non-cultist country cultist agitated?
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 3 
+				consciousness = 2
+			}	
+		}
+	}
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..." # Nothing you can do
+	}
+}
+
+
+ # 25 October 1861	15:11:20	52' South	43.1° West	Virgo
+country_event = {
+
+	id = 94101
+
+	trigger = {
+		year = 1861
+		month = 10
+		NOT = { has_global_flag = alignment_2_occured }	
+	}
+ 	
+	fire_only_once = yes
+
+	title = "EVTNAME94100"
+	desc = "EVTDESC94100" #"Cultists around the world celebrate!"
+	picture = "sight"
+	major = yes
+	news = yes
+	news_desc_long = "EVTDESC94100_NEWS_LONG"
+	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94100_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+		set_global_flag = alignment_2_occured # stop retriggering
+
+		# make this a called event?
+		any_country = { 
+			limit = { 				
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and reduce internal strife
+				militancy = -1 
+				consciousness = -1
+				money = 10
+			}
+			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = 50
+			}
+			relation = {
+				who = DAG
+				value = 50
+			}
+			relation = {
+				who = YIG
+				value = 50
+			}
+		}
+
+		# keep overt cultist nations close
+		ELD = { country_event = { id=94105 days=1 } }
+		DAG = { country_event = { id=94106 days=2 } }
+		YIG = { country_event = { id=94107 days=3 } }
+		
+		# make non-cultist country cultist agitated?
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 4 
+				consciousness = 3
+			}	
+		}
+	}
+}
+
+ # 22 April 1881	11:58:20	1°18' North	1.0° East	Taurus
+country_event = {
+
+	id = 94102
+
+	trigger = {
+		year = 1881
+		month = 4
+		NOT = { has_global_flag = alignment_3_occured }	
+	}
+ 	
+	fire_only_once = yes
+
+	title = "EVTNAME94100"
+	desc = "EVTDESC94100" #"Cultists around the world celebrate!"
+	picture = "sight"
+	major = yes
+	news = yes
+	news_desc_long = "EVTDESC94100_NEWS_LONG"
+	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94100_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+		set_global_flag = alignment_3_occured # stop retriggering
+
+		# make this a called event?
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and reduce internal strife
+				militancy = -1 
+				consciousness = -1
+				money = 10
+			}
+			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = 50
+			}
+			relation = {
+				who = DAG
+				value = 50
+			}
+			relation = {
+				who = YIG
+				value = 50
+			}
+			DAG = {
+				create_alliance = ELD
+			}
+		}
+		
+		any_country = { 
+			limit = { 
+				ai = yes
+				NOT = { has_country_modifier = full_cultists }
+			}
+
+			# make scared of cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = -100
+			}
+			relation = {
+				who = DAG
+				value = -100
+			}
+			relation = {
+				who = YIG
+				value = -100
+			}
+		}
+
+		# keep overt cultist nations close
+		ELD = { country_event = { id=94105 days=1 } }
+		DAG = { country_event = { id=94106 days=2 } }
+		YIG = { country_event = { id=94107 days=3 } }
+
+		# distribute excess money
+		ELD = {
+			limit = { money = 30000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+		# more money if v rich
+		ELD = {
+			limit = { money = 60000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+
+		# make non-cultist country cultist agitated?
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 4 
+				consciousness = 3
+			}	
+		}
+	}
+}
+
+ # 28 November 1901	06:10:38	27' South	38.6° East	Capricorn
+country_event = {
+
+	id = 94103
+
+	trigger = {
+		year = 1901
+		month = 11
+		NOT = { has_global_flag = alignment_4_occured }	
+	}
+ 	
+	fire_only_once = yes
+
+	title = "EVTNAME94100"
+	desc = "EVTDESC94100" #"Cultists around the world celebrate!"
+	picture = "sight"
+	major = yes
+	news = yes
+	news_desc_long = "EVTDESC94100_NEWS_LONG"
+	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94100_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+		set_global_flag = alignment_4_occured # stop retriggering
+
+		# make this a called event?
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and reduce internal strife
+				militancy = -1 
+				consciousness = -1
+				money = 10
+			}
+			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = 50
+			}
+			relation = {
+				who = DAG
+				value = 50
+			}
+			relation = {
+				who = YIG
+				value = 50
+			}
+		}
+
+		any_country = { 
+			limit = { 
+				ai = yes
+				NOT = { has_country_modifier = full_cultists }
+			}
+
+			# make scared of cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = -100
+			}
+			relation = {
+				who = DAG
+				value = -100
+			}
+			relation = {
+				who = YIG
+				value = -100
+			}
+		}
+
+		# keep overt cultist nations close
+		ELD = { country_event = { id=94105 days=1 } }
+		DAG = { country_event = { id=94106 days=2 } }
+		YIG = { country_event = { id=94107 days=3 } }
+
+		# distribute excess money
+		ELD = {
+			limit = { money = 30000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+		# more money if v rich
+		ELD = {
+			limit = { money = 60000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+
+		# make non-cultist country cultist agitated?
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 4 
+				consciousness = 3
+			}	
+		}	
+	}
+}
+
+ # 14 September 1921	16:22:08	1°02' South	6.2° East	Virgo
+country_event = {
+
+	id = 94104
+
+	trigger = {
+		year = 1921
+		month = 9
+		NOT = { has_global_flag = alignment_5_occured }	
+	}
+ 	
+	fire_only_once = yes
+
+	title = "EVTNAME94100"
+	desc = "EVTDESC94100" #"Cultists around the world celebrate!"
+	picture = "sight"
+	major = yes
+	news = yes
+	news_desc_long = "EVTDESC94100_NEWS_LONG"
+	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94100_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+		set_global_flag = alignment_4_occured # stop retriggering
+
+		# make this a called event?
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and reduce internal strife
+				militancy = -1 
+				consciousness = -1
+				money = 10
+			}
+			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = 20
+			}
+			relation = {
+				who = DAG
+				value = 20
+			}
+			relation = {
+				who = YIG
+				value = 20
+			}
+		}
+
+		any_country = { 
+			limit = { 
+				ai = yes
+				NOT = { has_country_modifier = full_cultists }
+			}
+
+			# make scared of cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = -100
+			}
+			relation = {
+				who = DAG
+				value = -100
+			}
+			relation = {
+				who = YIG
+				value = -100
+			}
+		}
+
+		# keep overt cultist nations close
+		ELD = { country_event = { id=94105 days=1 } }
+		DAG = { country_event = { id=94106 days=2 } }
+		YIG = { country_event = { id=94107 days=3 } }
+		
+		# distribute excess money
+		ELD = {
+			limit = { money = 30000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+		# more money if v rich
+		ELD = {
+			limit = { money = 60000000}
+			DAG = { limit = { exists = yes } country_event = 94110}
+			YIG = { limit = { exists = yes } country_event = 94110}
+			country_event = 94111
+		}
+
+		# make non-cultist country cultist agitated?
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 4
+				consciousness = 4
+			}	
+		}	
+	}
+}
+
+country_event = {
+	
+	id = 94105
+	title = "EVTNAME94105" #"Darkness is returning!"
+	desc = "EVTDESC94105" #"The end times approach nigh! The Old Ones are returning!"
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		years = 1
+	}
+
+	option = {
+		name = "EVTOPT94105" #"Getting Stronger"
+
+		ELD = {
+			military_access = DAG 
+			military_access = YIG
+
+			# Increase jingoism in cultists
+			any_pop = { 
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				dominant_issue = { value = jingoism factor = 0.10 }
+				ideology = { value = reactionary factor = 0.10 }
+			}
+			# make war not love
+			war_exhaustion = -5
+			badboy = -5
+		}
+	}
+}
+
+country_event = {
+	
+	id = 94106
+	title = "EVTNAME94106" #"Dagon is returning!"
+	desc = "EVTDESC94106" #"The end times approach nigh! Dagon is returning!"
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94106" #"Getting Stronger"
+
+		DAG = {
+			end_war = ELD
+			relation = { who = ELD value = 100 }
+			create_alliance = ELD
+			military_access = ELD
+
+			end_war = YIG 
+			relation = { who = YIG value = 100 }
+			create_alliance = YIG 
+			military_access = YIG
+
+			ELD = {
+				diplomatic_influence = { who = THIS value = 200 }
+			}
+
+			# Increase jingoism in cultists
+			any_pop = { 
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				dominant_issue = { value = jingoism factor = 0.1 }
+				ideology = { value = reactionary factor = 0.10 }
+			} 
+			# make war not love
+			war_exhaustion = -5
+			badboy = -5
+
+			# Extra Resources (for Navy)
+			clipper_convoy = 500
+			steamer_convoy = 200
+			artillery = 200
+			canned_food = 400
+			telephones = 200
+			fuel = 200
+		
+			# capital should be coastal
+		}
+
+		# check for Dagonic cultist conversion
+		any_country = { 
+			limit = { 
+				ai = yes
+					OR = { 
+						continent = oceania 
+						tag = PHI
+						tag = NZL
+						tag = JAP
+						tag = HAW
+						tag = BRU
+						tag = JAV
+						tag = KOR
+						tag = DAI
+						tag = JOH
+						tag = NEN
+						tag = BAL
+						tag = CUB
+						tag = HAI
+					}
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+			}
+
+			add_accepted_culture = cultists # still friends with other cults
+			primary_culture = deep_ones # but now we are fish people
+			plurality = 25
+			capital_scope = {
+				assimilate = yes
+			}
+		}
+		# transfer cultist provinces to DAG
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies  
+					}
+    				}
+				remove_core = ELD
+    				secede_province = DAG
+				add_core = DAG
+			}
+		}
+		YIG = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies     
+					}
+    				}
+				remove_core = YIG
+    				secede_province = DAG
+				add_core = DAG
+			}
+		}
+		THIS = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = south_america
+						continent = europe 
+						continent = africa 
+					}
+    				}
+				remove_core = DAG
+    				secede_province = ELD
+				add_core = ELD
+			}
+		}
+	}
+}
+
+country_event = {
+	
+	id = 94107
+	title = "EVTNAME94107" #"Yig is returning!"
+	desc = "EVTDESC94107" #"The end times approach nigh! Yig is returning!"
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	#mean_time_to_happen = {
+	#	years = 1
+	#}
+
+	option = {
+		name = "EVTOPT94107" #"Getting Stronger"
+
+		YIG = {
+			end_war = ELD
+			relation = { who = ELD value = 200 }
+			create_alliance = ELD
+			military_access = ELD
+
+			end_war = DAG 
+			relation = { who = DAG value = 200 }
+			create_alliance = DAG 
+			military_access = DAG 
+
+			ELD = {
+				diplomatic_influence = { who = THIS value = 200 }
+			}
+
+			# Increase jingoism in cultists
+			any_pop = { 
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				dominant_issue = { value = jingoism factor = 0.10 }
+				ideology = { value = reactionary factor = 0.10 }
+			}
+			# make war not love
+			war_exhaustion = -5
+			badboy = -5
+		}
+
+		# check for Yigian cultist conversion
+		any_country = { 
+			limit = { 
+				ai = yes
+				OR = {
+					capital_scope = { continent = south_america }
+					tag = MEX
+					tag = ELS
+					tag = GUA
+					tag = PNM
+					tag = UCA
+					tag = COS
+				}
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+				NOT = { 
+					tag = ELD
+					tag = DAG
+					tag = YIG
+				}
+			}
+
+			add_accepted_culture = cultists # still friends with other cults
+			primary_culture = yigian # but now we are snake people
+			religion = yigian
+			plurality = 25
+			capital_scope = {
+				assimilate = yes
+			}
+			relation = { who = YIG value = 200 }
+		}
+		any_country = { 
+			limit = { #should also limit to capital in these area?
+				ai = yes
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+				any_owned_province = {
+	        			OR = {
+  	          				region = UCA_2186 
+  	          				region = UCA_2191 
+						region = UCA_2197 
+  	          				region = UCA_2201 
+  	          				#region = USA_158 
+						#region = USA_162 
+  	      				}
+
+				}
+				NOT = { 
+					tag = ELD
+					tag = DAG
+				}
+			}
+			
+			add_accepted_culture = cultists # still friends with other cults
+			primary_culture = yigian # but now we are snake people
+			religion = yigian
+			plurality = 25
+			capital_scope = {
+				assimilate = yes
+			}			
+		}
+		# transfer cultist provinces to YIG 
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS	
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL				
+					}
+    				}
+
+				remove_core = ELD
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}
+		DAG = {
+			any_owned = {
+    				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL
+					}
+    				}
+
+				remove_core = DAG
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}
+		THIS = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = asia
+						continent = europe 
+						continent = africa 
+					}
+    				}
+				remove_core = YIG
+    				secede_province = ELD
+				add_core = ELD
+			}
+		}
+		# cause trouble in unassociated provinces
+		
+	}
+}
+
+country_event = {
+	
+	id = 94110
+	title = "EVTNAME94110" #"Distribute Eldritch Wealth"
+	desc = "EVTDESC94110" #""
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94110" #"Money"
+
+		ELD = {
+			money = -5000000
+		}
+		THIS = {
+			money = 5000000	
+		}
+		country_event = { id=94111 days=2 }
+	}
+}
+
+# 94111 - Cultists distribute money
+country_event = {
+	id = 94111 
+	title = "EVTNAME94111"
+	desc = "EVTDESC94111"
+	picture = "Poor"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94111"
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+	}
+}
+
+# random money distribution to keep major economy going
+# 94112 - distribute money
+country_event = {
+	id = 94112 
+	title = "EVTNAME94112"
+	desc = "EVTDESC94112"
+	picture = "Poor"
+
+	trigger = { money = 5000000}
+
+	mean_time_to_happen = {
+		years = 5
+	}
+
+	option = {
+		name = "EVTOPT94112A"
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = poor
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { money = -2500 }
+		}
+	}
+	#option = {
+	#	name = "EVTOPT94112B" # do nothing
+	#}
+}

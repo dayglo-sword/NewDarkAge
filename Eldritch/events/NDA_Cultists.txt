@@ -1,0 +1,1678 @@
+# events
+# 94001 - Initial cult presence
+# 94002 - Cult presence expands
+# 94003 - Country has been taken over.
+# 94004 - cultists recruit
+# 94005 - Unity of purpose
+# 94006 - Eldritch GP Annex
+# 94007 - The ritual begins
+# 94008 - Join the ritual
+# 94009 - The ritual intensifies
+# 94010 - HE ARRIVES!
+# 94011 - Random
+# 94012 - The world surrenders.
+# 94013 - The war begins
+# 94014 - White peace fail.
+# 94015 - Victory.
+# 94016 - Crush the resistance.
+# 94017 - Dismantle Empire
+# 94018 - Granted independence
+# 94019 - Cultists Unite
+# 94020 - Dagon Rises!
+# 94021 - Yig
+# 94022 - Transfer to Dagon
+# 94023 - Transfer to Yig
+# 94030 - Cultist Pan-National!
+# 94031 - Cultist Union
+
+# Initial cult presence
+country_event = {
+	id = 94001
+	title = EVTNAME94001
+	desc = EVTDESC94001
+	picture = "Alice"
+	major = yes
+	
+	trigger = {		
+		NOT = {
+			OR = {
+				has_country_modifier = early_cultists
+				has_country_modifier = mid_cultists
+				has_country_modifier = full_cultists
+			}
+		}
+		NOT = {	# Do not convert after final war has started - must conquor instead
+			OR = {
+				has_global_flag = cthulhu_is_dead
+				has_global_flag = final_war_started
+			}
+		}
+		NOT = {
+			OR = {
+				tag = ELD
+				tag = DAG
+				tag = YIG
+			}
+		}
+		ai = yes		    
+	}
+
+	mean_time_to_happen = {
+		years = 9 # was 11
+	}
+
+	option = {
+		name = EVTOPT94001
+		add_country_modifier = {
+			name = early_cultists
+			duration = -1
+		}
+	}
+}
+
+# Cult presence expands
+country_event = {
+	id = 94002
+	title = EVTNAME94002
+	desc = EVTDESC94002
+	picture = "Alice"
+	
+	trigger = {
+		has_country_modifier = early_cultists
+		ai = yes		    
+	}
+
+	mean_time_to_happen = {
+		years = 8 # was 10
+	}
+
+	option = {
+		name = EVTOPT94002
+		remove_country_modifier = early_cultists
+		add_country_modifier = {
+			name = mid_cultists
+			duration = -1
+		}
+		add_accepted_culture = cultists
+		
+		# boost relations with the cults
+		relation = {
+				who = ELD
+				value = 20
+		}
+		relation = {
+				who = DAG
+				value = 20
+		}
+		relation = { 
+			who = YIG
+			value = 20 
+		}
+	}
+}
+
+# Country has been taken over.
+country_event = {
+	id = 94003
+	title = "EVTNAME94003"
+	desc = "EVTDESC94003"
+	picture = "Alice"
+	major = yes
+	
+	trigger = {
+		has_country_modifier = mid_cultists
+		ai = yes
+	}
+
+	mean_time_to_happen = {
+		years = 5 # was 7
+	}
+
+	option = {
+		name = "EVTOPT94003"
+		remove_country_modifier = mid_cultists
+		add_country_modifier = {
+			name = full_cultists
+			duration = -1
+		}
+		remove_accepted_culture = cultists
+		primary_culture = cultists
+		religion = cultist
+		#Plan A was to make the old primary culture accepted.
+		#But we can't do that, so plan B is to assimilate the capital, so the country still has primary culture pops.
+		plurality = 25
+		capital_scope = {
+			assimilate = yes
+		}
+		relation = { 
+			who = DAG 
+			value = 50 
+		}
+		relation = { 
+			who = ELD
+			value = 50 
+		}
+		relation = { 
+			who = YIG
+			value = 50 
+		}
+
+	}
+}
+
+# Recruitment
+country_event = {
+	id = 94004
+	title = EVTNAME94004
+	desc = EVTDESC94004
+	picture = "Alice"
+	
+	trigger = {
+		has_country_modifier = full_cultists
+		NOT = {
+			has_country_flag = cult_recruitment_drive
+		}
+	}
+
+	mean_time_to_happen = {
+		years = 2
+		modifier = {
+			factor = 0.01
+			OR = { 
+				tag = ELD
+				tag = DAG
+				tag = YIG
+			}
+		}
+	}
+
+	option = {
+		name = EVTOPT94004
+		add_country_modifier = {
+			name = cultist_recruitment
+			duration = 7300 # 20 years.
+		}
+		set_country_flag = cult_recruitment_drive
+	}
+}
+
+#Make ELD unstoppable.
+country_event = {
+	id = 94005
+	title = EVTNAME94005
+	desc = EVTDESC94005
+	picture = "Alice"
+	news = yes
+	news_desc_long = EVTDESC94005
+	news_desc_medium = EVTDESC94005
+	news_desc_short = EVTDESC94005	
+
+	trigger = {
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}
+		NOT = {
+			has_country_modifier = unity_of_purpose
+		}		
+	}
+
+	mean_time_to_happen = {
+		months = 2
+	}
+
+	option = {
+		name = EVTOPT94005
+		add_country_modifier = {
+			name = unity_of_purpose
+			duration = -1
+		}
+		any_owned = {
+			add_core = THIS
+		}
+		tech_school = eldritch_tech_school
+		prestige = 100 #It's super lame if they're not #1 GP.
+		badboy = -20.0 
+		plurality = 15
+	}
+}
+
+# gutter crown is internal event based on cultural union - it'll create ELD in certain conditions. - how to initially create DAG and YIG??
+#Because of gutter crown, it's possible ELD is actually something like #6 GP if they formed out of Belgium or someone similarly lame.  ~1880, we have them inherit another GP, just to keep the player on their toes.
+country_event = {
+	id = 94006
+	title = "EVTNAME94006"
+	desc = "EVTDESC94006"
+	picture = "Alice"
+	major = yes
+	fire_only_once = yes	
+	news = yes
+	news_desc_long = "EVTDESC94006"
+	news_desc_medium = "EVTDESC94006"
+	news_desc_short = "EVTDESC94006"
+	
+	trigger = {
+		NOT = {
+			tag = ELD #This is the annexer.
+			tag = YIG #These should not be merging unless by event
+			tag = DAG
+			tag = IAM
+		}
+		exists = ELD
+		year = 1850
+		has_country_modifier = full_cultists
+		ai = yes
+		is_greater_power = yes
+	}
+	
+	mean_time_to_happen = {
+		years = 50
+
+		modifier = {
+			factor = 0.7
+			year = 1865
+		}
+		
+		modifier = {
+			factor = 0.1
+			year = 1880
+		}
+	}
+
+	option = {
+		name = "EVTOPT94006"
+
+		# leave any wars
+
+		# let ELD take control	
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			
+			# release any overseas territories to allow other cults to grow
+			any_country = { 
+				limit = { 
+					is_our_vassal = THIS 
+					capital_scope = { OR = { continent = south_america continent = asia continent = oceania }}
+
+				} 
+				release_vassal = THIS 
+				relation = { 
+					who = THIS 
+					value = 400 
+				} 
+			} 
+
+			prestige = 100 #Keep them at #1 GP.
+			#If ELD doesn't keep doing stuff, they stop being scary and start being a color on a map.  This should help them keep moving.		
+			badboy = -25.0
+			any_owned = {
+				add_core = ELD
+			}
+
+
+		}	   
+	}
+}
+
+#The midgame is scary enough, it's time to focus on late game.
+
+#The ritual begins! ~1900
+country_event = {
+	id = 94007
+	title = "EVTNAME94007"
+	desc = "EVTDESC94007"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94007"
+	news_desc_medium = "EVTDESC94007"
+	news_desc_short = "EVTDESC94007"
+
+	trigger = {
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}
+		NOT = {
+			has_global_flag = ritual_started
+		}
+		year = 1895
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.1
+			year = 1899
+		}
+	}
+
+	option = {
+		name = "EVTOPT94007"
+		set_global_flag = ritual_started
+		add_country_modifier = {
+			name = ritual_in_progress
+			duration = -1
+		}
+		prestige = 200 #We should be at #1 at this point.
+		badboy = -25.0 #We do what we want.
+		plurality = 10
+		random_pop = {
+			reduce_pop = 0.5
+			militancy = 7.0
+		}
+				
+
+		# Free people should worry
+		any_country = { 
+			limit = { 
+				ai = yes
+				NOT = { has_country_modifier = full_cultists }
+			}
+
+			# make scared of cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = -100
+			}
+			relation = {
+				who = DAG
+				value = -100
+			}
+			relation = {
+				who = YIG
+				value = -100
+			}
+
+			any_pop = { # try and increase internal strife from cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 4 
+			}
+		}
+	}
+}
+
+#Join the ritual
+country_event = {
+	id = 94008
+	title = "EVTNAME94008"
+	desc = "EVTDESC94008"
+	picture = "Alice"
+	major = yes
+	
+	trigger = {
+		NOT = {
+			OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+			} #These are possible annexers.
+		}
+		exists = ELD
+		has_global_flag = ritual_started
+		has_country_modifier = full_cultists
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		years = 35 #50% chance over the rest of the game if ritual starts in 1900.
+
+		#Strong nations try to hold on to independence.
+		modifier = {
+			factor = 2.0
+			is_secondary_power = yes
+		}
+		
+		modifier = {
+			factor = 6.0
+			is_greater_power = yes
+		}
+
+		modifier = {
+			factor = 0.5
+			has_global_flag = ritual_faster
+		}
+	}
+
+	option = {
+		name = "EVTOPT94008"
+
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = ELD
+			}
+		}
+
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 10
+				OR = { vassal_of = ELD 
+                    		   in_sphere = ELD 
+				}
+			}
+			modifier = {
+				factor = 0.01
+				capital_scope = { OR = { continent = oceania continent = south_america } }
+			}
+		}
+	}
+	
+	# could join with DAG instead
+	option = {
+		name = "EVTOPT94008"
+
+		DAG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = DAG
+			}
+		}
+
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 8
+				any_owned_province = { is_coastal = yes }
+			}
+			modifier = { # don't want landlocked for sea monsters!
+				factor = 0.01
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+			modifier = {
+				factor = 10
+				capital_scope = { continent = oceania }
+			}
+		}
+	}
+
+	# could join with YIG instead
+	option = {
+		name = "EVTOPT94008"
+
+		YIG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = YIG
+			}
+		}
+
+		ai_chance = {
+			factor = 10	
+			modifier = {
+				factor = 10
+				capital_scope = { continent = south_america }
+			}
+			modifier = { # ok for landlocked for snakes!
+				factor = 2
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+		}
+	}
+}
+
+#The ritual intensifies ~1910
+country_event = {
+	id = 94009
+	title = "EVTNAME94009"
+	desc = "EVTDESC94009"
+	picture = "Alice"
+	major = yes
+	
+	news = yes
+	news_desc_long = "EVTDESC94009"
+	news_desc_medium = "EVTDESC94009"
+	news_desc_short = "EVTDESC94009"
+
+	trigger = {
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+			}
+		NOT = {
+			has_global_flag = ritual_faster
+		}
+		has_global_flag = ritual_started
+		year = 1905
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.1
+			year = 1910
+		}
+	}
+
+	option = {
+		name = "EVTOPT94009"
+		set_global_flag = ritual_faster
+		remove_country_modifier = ritual_in_progress
+		add_country_modifier = {
+			name = intense_ritual
+			duration = -1
+		}
+		prestige = 200 #We should really be at #1 at this point.
+		plurality = 10
+		random_pop = {
+			reduce_pop = 0.25
+			militancy = 7.0
+		}
+	}
+}
+
+#Gotta mess with the player a little.
+country_event = {
+	id = 94011
+	title = "EVTNAME94011"
+	desc = "EVTDESC94011"
+	fire_only_once = yes
+	
+	trigger = {
+		has_global_flag = ritual_faster
+		NOT = {
+			has_global_flag = he_is_here
+		}
+		ai = no
+	}
+
+	mean_time_to_happen = {
+		years = 5
+	}
+
+	option = {
+		name = "EVTOPT94011"
+	}
+}
+
+#HE ARRIVES! ~1922-25
+country_event = {
+	id = 94010
+	title = "EVTNAME94010"
+	desc = "EVTDESC94010"
+	picture = "Alice"
+	major = yes
+	
+	news = yes
+	news_desc_long = "EVTDESC94010"
+	news_desc_medium = "EVTDESC94010"
+	news_desc_short = "EVTDESC94010"
+
+	trigger = {
+		tag = ELD # don't include YIG or DAG as can crash
+
+		NOT = {
+			has_global_flag = he_is_here
+		}
+		has_global_flag = ritual_faster
+		year = 1922 # after last conjunction
+	}
+
+	mean_time_to_happen = {
+		months = 20
+		modifier = {
+			factor = 0.5
+			year = 1923
+		}
+		modifier = {
+			factor = 0.1
+			year = 1925
+		}
+	}
+
+	option = {
+		name = "EVTOPT94010"
+		set_global_flag = he_is_here
+		remove_country_modifier = intense_ritual
+
+		ELD = {
+			add_country_modifier = {
+				name = cthulhu_is_here
+				duration = -1
+			}
+			
+			# Absolute Monarch
+			government = absolute_monarchy
+
+			prestige = 250 #He's here.
+			war_exhaustion = -100
+			any_owned = {
+				add_core = THIS
+			}
+			badboy = -50
+			random_pop = {
+				reduce_pop = 0.01
+				militancy = 7.0
+			}
+			treasury = 50000000 #AI may be short on cash.
+			nationalize = yes
+
+			# non cultists in ELD should worry
+			any_pop = { # try and increase internal strife from cultists
+				limit = {
+					NOT = {
+					 	OR = {
+                        				culture = cultists
+                        				culture = yigian
+							culture = deep_ones
+                    				}
+					}
+				}
+				reduce_pop = 0.9
+				militancy = 6 
+			}
+		}
+		
+		# merge the separate cults
+		DAG = {country_event = { id=94019 days=2 } }	
+		YIG = {country_event = { id=94019 days=4 } }
+
+		# Claims the world
+		any_country = {
+			any_owned = {
+				add_core = THIS
+			}
+		}
+		
+		# make non-cult country cultist rebellious (inc player)
+		any_country = { 
+			limit = { 
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+			}
+
+			# remove cults from accepted cultures - can previously be added via events
+			remove_accepted_culture = cultists
+			remove_accepted_culture = yigian
+			remove_accepted_culture = deep_ones
+
+			any_pop = { # try and increase strife from cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				militancy = 7.0
+			}
+
+			# country not run by cultists so oppose ELD
+			relation = { who = ELD value = -400 }	
+
+			# 
+			add_casus_belli = {
+				target = ELD
+				type = conquest
+				months = 200 # rest of game
+			}
+			end_military_access = ELD
+		}		
+	}
+}
+
+#94011 is used above.
+#The world surrenders.
+country_event = {
+	id = 94012
+	title = EVTNAME94012
+	desc = EVTDESC94012
+	picture = "Alice"
+	major = yes
+
+	trigger = {
+		NOT = {
+			tag = ELD #This is the annexer.
+		}
+		exists = ELD
+		has_global_flag = he_is_here
+		has_country_modifier = full_cultists
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 30 #We're not messing around.
+
+		#Strong nations try to hold on to independence.  For like a month.
+		modifier = {
+			factor = 2.0
+			is_secondary_power = yes
+		}
+		
+		modifier = {
+			factor = 6.0
+			is_greater_power = yes
+		}
+	}
+
+	option = {
+		name = EVTOPT94012
+
+		# reduce non-cultist POPs
+		THIS = {
+			any_pop = { 
+				limit = {
+					NOT = 	{
+                       				has_pop_culture = cultists
+                      				has_pop_culture = yigian
+						has_pop_culture = deep_ones
+                   			}
+				}
+				reduce_pop = 0.5
+				militancy = 7
+			}
+		}
+		# end all wars - stop 'ghost armies'
+
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = ELD
+			}
+		}
+	}
+}
+
+#The war begins
+country_event = {
+	id = 94013
+	title = "EVTNAME94013"
+	desc = "EVTDESC94013"
+	picture = "cityfire"
+	major = yes
+	
+	news = yes
+	news_desc_long = "EVTDESC94013"
+	news_desc_medium = "EVTDESC94013"
+	news_desc_short = "EVTDESC94013"
+
+	trigger = { # needs to be all non-cultist nations not just players? or will prev events drag them in?
+		ai = no
+		has_global_flag = he_is_here
+		NOT = {
+			#has_country_modifier = full_cultists
+			has_global_flag = final_war_started
+		}
+	}
+
+	mean_time_to_happen = {
+		years = 4
+		modifier = {
+			factor = 0.1
+			year = 1926
+		}
+	}
+
+	option = {
+		name = "EVTOPT94013"
+		set_global_flag = final_war_started
+		add_country_modifier = {
+			name = final_war
+			duration = -1
+		}
+		prestige = 100 #We're famous!
+		war_exhaustion = -100
+		badboy = -50
+		end_war = ELD #Just in case.
+		ELD = {
+			country_event = 94016
+		}		
+	}
+}
+
+#Player tried to get out with white peace.
+country_event = {
+	id = 94014
+	title = EVTNAME94014
+	desc = EVTDESC94014
+	picture = "Alice"
+
+	news = yes
+	news_desc_long = "EVTDESC94014"
+	news_desc_medium = "EVTDESC94014"
+	news_desc_short = "EVTDESC94014"
+
+	trigger = {
+		ai = no
+		has_global_flag = final_war_started
+		NOT = {
+			tag = ELD # don't trigger if manual switch from console
+		}
+		NOT = {
+			war_with = ELD
+		}
+		NOT = {
+			has_global_flag = cthulhu_is_dead
+		}		
+		ELD = {
+			is_disarmed = no
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = EVTOPT94014
+		prestige = -10 
+		ELD = {
+			country_event = 94016
+		}
+	}
+}
+# Crush the resistance
+country_event = {
+	id = 94016
+	title = EVTNAME94016
+	desc = EVTDESC94016
+	is_triggered_only = yes
+
+	option = {
+		name = EVTOPT94016
+		treasury = 20000000 #Gotta pay for the war somehow.
+		war = {
+			target = FROM
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			defender_goal = {
+				casus_belli = cut_down_to_size
+			}
+		}
+	}
+}
+		
+
+#No event for defeat.  The conquest cb takes care of that.
+#Victory.  You forced Cthulhu to leave.
+country_event = {
+	id = 94015
+	title = "EVTNAME94015"
+	desc = "EVTDESC94015"
+	picture = "Alice"
+	major = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94015"
+	news_desc_medium = "EVTDESC94015"
+	news_desc_short = "EVTDESC94015"
+
+	trigger = {
+		ai = no
+		has_global_flag = final_war_started
+		NOT = {
+			war_with = ELD
+		}
+		NOT = {
+			has_global_flag = cthulhu_is_dead
+		}
+		ELD = {
+			is_disarmed = yes
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = "EVTOPT94015"
+		prestige = 750
+		remove_country_modifier = final_war
+		set_global_flag = cthulhu_is_dead
+		clr_global_flag = ritual_started
+
+		ELD = {
+			remove_country_modifier = cthulhu_is_here
+			remove_country_modifier = unity_of_purpose
+			prestige = -10000
+			badboy = 50
+			plurality = -100
+			war_exhaustion = 100
+			add_country_modifier = {
+				name = national_disillusionment
+				duration = -1
+			}			
+		}
+		any_country = {
+			remove_country_modifier = early_cultists
+			remove_country_modifier = mid_cultists
+			remove_country_modifier = full_cultists
+			remove_country_modifier = cultist_recruitment
+			remove_accepted_culture = cultists
+			remove_accepted_culture = yigian
+			remove_accepted_culture = deep_ones
+		}
+
+		# reduce POP of cultists
+		any_pop = { 
+			limit = {
+				OR = {
+                       			has_pop_culture = cultists
+                      			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                   		}
+			}
+			reduce_pop = 0.9
+		}
+		# need to try and set primary cultures for major players
+		ENG = { limit = { primary_culture = cultists } primary_culture = british }
+		FRA = { limit = { primary_culture = cultists } primary_culture = french }
+		GER = { limit = { primary_culture = cultists } primary_culture = north_german }
+		GRE = { limit = { primary_culture = cultists } primary_culture = greek }
+		ITA = { limit = { primary_culture = cultists } primary_culture = north_italian }
+		JAP = { limit = { primary_culture = cultists } primary_culture = japanese }
+		KUK = { limit = { primary_culture = cultists } primary_culture = south_german }
+		MEX = { limit = { primary_culture = cultists } primary_culture = mexican }
+		NET = { limit = { primary_culture = cultists } primary_culture = dutch }
+		NGF = { limit = { primary_culture = cultists } primary_culture = north_german }
+		NOR = { limit = { primary_culture = cultists } primary_culture = norwegian }
+		RUS = { limit = { primary_culture = cultists } primary_culture = russian }
+		SCA = { limit = { primary_culture = cultists } primary_culture = swedish }
+		SPA = { limit = { primary_culture = cultists } primary_culture = spanish }
+		USA = { limit = { primary_culture = cultists } primary_culture = yankee }
+		TUR = { limit = { primary_culture = cultists } primary_culture = turkish }
+	}
+}
+
+#94016 used above.
+#Dismantle Cthulhu!  Inspired by dismantle empire from HFM, but stronger and doesn't care about who won the war.
+country_event = {
+	id = 94017
+	title = "EVTNAME94017" #"Cthulhu's domain falls apart"
+	desc = "EVTDESC94017" #"With no supernatural assistance, and no unifying purpose, $COUNTRY$ is falling apart."
+	picture = "Alice"
+	major = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94017"
+	news_desc_medium = "EVTDESC94017"
+	news_desc_short = "EVTDESC94017"
+
+	trigger = {
+		tag = ELD
+		has_global_flag = cthulhu_is_dead
+	}
+	
+	mean_time_to_happen = {
+		days = 40 # dropped from 50
+	}
+
+	option = {
+		name = "EVTOPT94017" #"We have failed."
+		any_country = {
+			limit = {
+				any_core = { owned_by = THIS }
+				exists = no
+				NOT = {
+					OR = {
+						tag = DAG
+						tag = YIG
+						tag = IAM
+					}
+				}
+			}
+			random = {
+				chance = 2 #2% seems low, but remember this is every tag in the game.
+				all_core = {
+					limit = {
+						is_core = THIS
+						state_scope = {
+							NOT = { any_owned_province = { is_capital = yes } }
+						}
+					}
+					remove_core = THIS
+				}
+				country_event = 94018
+			}
+		}
+	}
+}
+
+#granted independence
+country_event = {
+	id = 94018
+	title = "EVTNAME94018" #"$COUNTRY$ granted independence"
+	desc = "EVTDESC94018" #"Resistance to the cultists' rule has resulted in the independence of $COUNTRY$"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94018" #"Freedom"
+
+		FROM = {
+			prestige = -20
+			any_state = {
+				limit = {
+					any_owned_province = { is_core = THIS }
+					NOT = { any_owned_province = { is_capital = yes } }
+				}
+				any_owned = {
+					limit = { is_core = THIS }
+					secede_province = THIS
+				}
+			}
+			relation = {
+				who = ELD
+				value = -200
+			}
+
+
+		}
+		THIS = {
+			any_pop = { 
+				limit = {
+					 OR = {
+                       				has_pop_culture = cultists
+                      				has_pop_culture = yigian
+						has_pop_culture = deep_ones
+                   			}
+				}
+				reduce_pop = 0.5
+			}						
+		}
+	}
+}	
+	
+
+#Cultists Unite
+country_event = {
+	
+	id = 94019
+	title = "EVTNAME94019" #"Cultists Unite"
+	desc = "EVTDESC94019" #"The end is nigh! Time for the cultists' to unite!"
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPT94019" #"Stronger Together"
+		
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			any_owned = {
+				add_core = ELD
+			}
+		}
+	}
+}
+
+#Dagon Rises!
+country_event = {
+	
+	id = 94020
+	title = "EVTNAME94020" #"Dagon Rises!"
+	desc = "EVTDESC94020" #"The end times approach! Dagon prepares to rise!"
+	picture = "Alice"
+	major = yes
+
+	news = yes
+	news_desc_long = EVTDESC94020
+	news_desc_medium = EVTDESC94020
+	news_desc_short = EVTDESC94020
+
+	fire_only_once = yes
+
+	trigger = {
+		has_country_modifier = full_cultists
+		OR = {
+			capital_scope = { continent = oceania }
+			tag = PHI
+			tag = NZL
+			tag = JAP
+			tag = HAW
+			tag = BRU
+			tag = JAV
+			tag = KOR
+			tag = DAI
+			tag = JOH
+			tag = NEN
+		}
+		exists = ELD
+		NOT = { exists = DAG}
+	}
+
+	mean_time_to_happen = {
+		years = 4
+	}
+
+	option = {
+		name = "EVTOPT94020" #"From the Depths"
+		
+		DAG = {
+			end_war = THIS
+			inherit = THIS
+			#set_country_modifier = full_cultists
+
+			add_country_modifier = {
+				name = full_cultists
+				duration = -1
+			}
+	
+			relation = { who = ELD value = 200 }
+			create_alliance = ELD
+			military_access = ELD
+
+			relation = { who = YIG value = 200 }
+			create_alliance = YIG
+			military_access = YIG
+
+			prestige = 100 # give boost to prestige
+
+			#activate_technology = battleship_column_doctrine
+			#activate_technology = raider_group_doctrine
+			#activate_technology = blue_and_brown_water_schools
+			#activate_technology = high_sea_battle_fleet
+			#activate_technology = clipper_design
+			#activate_technology = steamers
+			#activate_technology = iron_steamers 
+			#activate_technology = steel_steamers
+			#activate_technology = naval_design_bureaus
+			#activate_technology = fire_control_systems 
+			#activate_technology = weapon_platforms 
+			#activate_technology = main_armament 
+			#activate_technology = advanced_naval_design
+			#activate_technology = alphabetic_flag_signaling
+			#activate_technology = naval_plans 
+			#activate_technology = naval_statistics 
+			#activate_technology = naval_logistics 
+			#activate_technology = the_command_principle
+			#activate_technology = naval_professionalism
+			#activate_technology = naval_decision_making
+			#activate_technology = naval_risk_management
+			#activate_technology = naval_nco_training
+		}
+
+		# try and assimilate other countries
+		any_country = {
+			limit = {
+				NOT = { tag = DAG }
+				has_country_modifier = full_cultists
+				OR = {
+					capital_scope = { continent = oceania }
+					tag = PHI
+					tag = NZL
+					tag = JAP
+					tag = HAW
+					tag = BRU
+					tag = JAV
+					tag = KOR
+					tag = DAI
+					tag = JOH
+					tag = NEN
+				}
+			}
+			DAG = {
+				end_war = THIS
+				inherit = THIS 
+			}
+		}
+
+		# transfer cultist provinces to DAG (same as 94106)
+		DAG = { country_event = { id=94022 days=3 }}
+
+		247 = { # this is Concord\Arkham !!
+			limit = {			
+				NOT = { is_core = DAG }	
+			}
+			
+			remove_core = ELD #need to remove else never ally.
+			remove_core = YIG
+			add_core = DAG 
+		}
+
+		any_owned = {				#Any province owned by the taker
+			limit = {			
+				NOT = { is_core = DAG }	
+			}
+			add_core = DAG 
+			remove_core = ELD #need to remove else never ally.
+			remove_core = YIG
+			#naval_base = 1
+			#fort = 1
+		}
+		DAG = {
+			any_owned = {
+				limit = { is_coastal = yes }	
+				naval_base = 2
+				fort = 2
+			}
+		}
+	}
+}
+
+#Yig is returning
+country_event = {
+	
+	id = 94021
+	title = "EVTNAME94021" #"Yig is returning!"
+	desc = "EVTDESC94021" #"The end times approach nigh! Yig is returning!"
+	picture = "Alice"
+	major = yes
+	fire_only_once = yes
+
+	news = yes
+	news_desc_long = EVTDESC94021
+	news_desc_medium = EVTDESC94021
+	news_desc_short = EVTDESC94021
+
+	trigger = {
+		has_country_modifier = full_cultists
+		capital_scope = { continent = south_america }
+		exists = ELD
+		NOT = { exists = DAG}
+	}
+
+	mean_time_to_happen = {
+		years = 4
+	}
+
+	option = {
+		name = "EVTOPT94021" #"From the Jungle"
+		
+		# convert cultists to serpent people
+		add_accepted_culture = cultists # still friends with other cults
+		primary_culture = yigian # but now we are snake people
+		religion = yigian
+		plurality = 25
+		capital_scope = {
+				assimilate = yes
+			}
+
+		YIG = { 
+			end_war = THIS
+			inherit = THIS 
+
+			add_country_modifier = {
+				name = full_cultists
+				duration = -1
+			}
+			#set_country_modifier = full_cultists
+
+			relation = { who = ELD value = 200 }
+			create_alliance = ELD
+			military_access = ELD
+
+			relation = { who = DAG value = 200 }
+			create_alliance = DAG
+			military_access = DAG
+
+			prestige = 100 # give boost to prestige
+		}
+		
+		# try and assimilate other countries
+		any_country = {
+			limit = {
+				NOT = { tag = YIG }
+				has_country_modifier = full_cultists
+				OR = {
+					capital_scope = { continent = south_america }
+					tag = MEX
+					tag = ELS
+					tag = GUA
+					tag = PNM
+					tag = UCA
+					tag = COS
+				}
+			}
+			# convert cultists to snakes
+			add_accepted_culture = cultists # still friends with other cults
+			primary_culture = yigian # but now we are snake people
+			religion = yigian
+
+			capital_scope = {
+				assimilate = yes
+			}
+
+			YIG = {
+				end_war = THIS
+				inherit = THIS 
+			}
+		}
+
+		# transfer cultist provinces to YIG (same as 94107)
+		YIG = { country_event = { id=94023 days=3 } }
+		#ELD = {
+		#	any_owned = {
+ 		#		limit = {
+		#			OR = { 
+		#				continent = south_america
+		#				is_core = MEX
+		#				is_core = ELS
+		#				is_core = GUA
+		#				is_core = PNM
+		#				is_core = UCA
+		#				is_core = COS	
+		#				is_core = BRA
+		#				is_core = ARG
+		#				is_core = CHI	
+		#				is_core = PAR
+		#				is_core = COL					
+		#			}
+    		#		}
+#
+		#		remove_core = ELD
+    		#		secede_province = YIG
+		#		add_core = YIG 
+		#	}
+		#}
+		#DAG = {
+		#	any_owned = {
+    		#		limit = {
+		#			OR = { 
+		#				continent = south_america
+		#				is_core = MEX
+		#				is_core = ELS
+		#				is_core = GUA
+		#				is_core = PNM
+		#				is_core = UCA
+		#				is_core = COS
+		#				is_core = BRA
+		#				is_core = ARG
+		#				is_core = CHI	
+		#				is_core = PAR
+		#				is_core = COL
+		#			}
+    		#		}
+#
+		#		remove_core = DAG
+    		#		secede_province = YIG
+		#		add_core = YIG 
+		#	}
+		#}
+
+		any_owned = {	#Any province owned by the taker
+			limit = {			
+				NOT = { is_core = YIG }	
+			}
+			add_core = YIG 
+			remove_core = ELD #need to remove else never ally.
+			remove_core = DAG
+		}
+		# strongholds
+		any_owned = {
+			limit = { is_coastal = no }	
+			fort = 2
+		}
+		# initially claim neigbours
+		any_neighbor_country = {
+			# don't annoy the powers just yet
+			limit = {
+				OR = { 
+					capital_scope = { continent = south_america }
+					tag = MEX
+					tag = ELS
+					tag = GUA
+					tag = PNM
+					tag = UCA
+					tag = COS
+					tag = BRA
+					tag = ARG
+					tag = CHI	
+					tag = PAR
+					tag = COL
+				}
+			}
+			any_owned = {
+				#limit = { continent = south_america }	
+				add_core = YIG 
+			}
+		}
+	}
+}
+
+# Event to transfer to dagon
+country_event = {
+	id = 94022 # transfer to Dagon
+	title = "EVTNAME94020"
+	desc = "EVTNAME94020"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94020"
+
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies  
+					}
+    				}
+				remove_core = ELD
+    				secede_province = DAG
+				add_core = DAG
+			}
+		
+		}
+
+		YIG = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies  
+					}
+    				}
+				remove_core = YIG
+    				secede_province = DAG
+				add_core = DAG
+			}
+		}
+	}
+
+}
+
+# Event to transfer to Yig
+country_event = {
+	id = 94023
+	title = "EVTNAME94021"
+	desc = "EVTDESC94021"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94021"
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS	
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL					
+					}
+    				}
+
+				remove_core = ELD
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}
+		DAG = {
+			any_owned = {
+    				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL
+					}
+    				}
+
+				remove_core = DAG
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}
+	}
+
+}
+
+## Cultist equivalent to pan-national 11100
+# Pan-Nationalist
+# needs to only effect one country.
+country_event = {
+	title = "EVTNAME94030"
+	desc = "EVTDESC94030"
+	picture = "Celebration"
+
+	id = 94030 
+
+	major = yes
+	news = yes
+	news_desc_long = EVTDESC94030
+	news_desc_medium = EVTDESC94030
+	news_desc_short = EVTDESC94030
+
+	is_triggered_only = yes
+
+	option = {				# Accept inheritance
+		name = "EVTOPTA11100"
+		change_tag = culture
+		any_country = {
+			limit = {
+				NOT = {
+					tag = THIS
+				}
+				is_culture_group = THIS
+				#is_greater_power = no
+				num_of_cities = 1
+			}
+			country_event = { id=94031 days=0 }
+		}
+		#political_reform = wealth_voting
+		#political_reform = population_equal_weight
+		#political_reform = yes_meeting
+		#political_reform = free_press
+		#political_reform = non_socialist
+		#political_reform = secret_ballots
+		government = hms_government
+		add_accepted_culture = union
+		prestige = 100
+		badboy = 10
+	}
+}
+
+# Event to Inherit
+country_event = {
+	id = 94031
+	title = "EVTNAME11101"
+	desc = "EVTDESC11101"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA11101"
+		FROM = {
+			inherit = THIS
+		}
+	}
+
+}

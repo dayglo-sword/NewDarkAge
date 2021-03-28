@@ -1,0 +1,846 @@
+#94120 - Nameless Cults published
+#94121 - Spread of the book
+#94122 - Death of Junzt
+#94123 - Play in Paris
+#94124 - Spread of Play
+#94125 - Suicide Chambers
+#94126 - Repairer of Reputations
+#94127 - Decide on offer
+#94128 - Imperial America
+#94130 - Release New England
+#94131 - Carnaki Parties in England
+#94132 - Carnaki Requests exile
+#94133 - Carnaki Research
+#94134 - Carnaki Succeeds
+#94135 - Death of Carnaki
+#94136 - House on the Borderlands
+#94140 - Appeal for reinstatement
+#94141 - Plague in Arkham
+#94142 - Research breakthrough
+#94143 - Disappearence of Dr West
+#94150 - Holy See Falls
+
+# Book - Nameless Cults - mostly chrome, possible forshadowing.
+country_event = {
+	id = 94120
+	title = "EVTNAME94120" #"Unaussprechlichen Kulten"
+	desc = "EVTDESC94120"
+	picture = "Almqvist"
+	fire_only_once = yes
+	news = yes
+	news_desc_long = "EVTDESC94120_NEWS_LONG"
+	news_desc_medium = "EVTDESC94120_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94120_NEWS_SHORT"	
+	
+	trigger = {
+		year = 1839			
+		owns = 578  # owner of dusseldorf (578)		    
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+major = yes # remove once sure it works
+
+	option = {
+		name = "EVTOPT94120A" #"What harm can a book do?"
+		ai_chance =  { factor = 50 } 
+		# make cultists acceptable, book can openly spread abroad
+		set_country_flag = nameless_cults
+		add_accepted_culture = cultists
+		# spread book to great and secondary powers (~6 years to imprint)
+		# priest are upset?		
+	}
+
+	option = {
+		name = "EVTOPT94120B" #"Such writings must be supressed!"
+		ai_chance =  { factor = 50 } 
+		# upset people but stops the open spread
+		any_pop = { 
+			militancy = 0.5 
+			consciousness = 0.5
+		}
+		# priest are happy?
+
+		set_country_flag = nameless_cults_supressed
+		set_global_flag = nameless_cults_supressed
+		# Junzt death in ~6 months
+		country_event = {id=94122 days=0}
+	}
+}
+
+country_event = {
+	id = 94121
+	title = "EVTNAME94121"
+	desc = "EVTDESC94121"
+	picture = "Almqvist"
+	
+	#news = yes # no need for news as possible multiple entries
+	#news_desc_long = "EVTDESC94121"
+	#news_desc_medium = "EVTDESC94121"
+	#news_desc_short = "EVTDESC94121"
+
+	trigger = {
+		has_global_flag = alignment_1_occured
+		NOT = {
+			has_global_flag = nameless_cults_supressed
+			has_global_flag = alignment_2_occured # stop after 2nd conjuction
+			has_country_flag = nameless_cults
+			has_country_flag = nameless_cults_supressed	
+		}
+		OR = { 
+			is_secondary_power = yes
+			is_greater_power = yes 
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 30
+	}
+
+	option = {
+		name = "EVTOPT94121A"
+				ai_chance =  { 
+			factor = 50 
+			modifier = {
+				factor = 10
+				press_rights = free_press
+			}
+		}
+		# make cultists acceptable, book can openly spread abroad
+		set_country_flag = nameless_cults
+		add_accepted_culture = cultists
+		# spread book to great and secondary powers (~6 years to imprint)
+		
+		# priest are upset?
+	}
+
+	option = {
+		name = "EVTOPT94121B"
+		ai_chance =  { 
+			factor = 50 
+			modifier = {
+				factor = 10
+				NOT = { press_rights = free_press }
+			}
+		} 
+		# upset people but stops the open spread - increase demand for free press
+		any_pop = { 
+			militancy = 0.5 
+			consciousness = 0.5
+		}
+		# priest are happy?
+
+		set_country_flag = nameless_cults_supressed
+		# Junzt death in ~6 months (if not already)
+		country_event = {id=94122 days=0}
+	}
+}
+
+country_event = {
+	id = 94122
+	title = "EVTNAME94122"
+	desc = "EVTDESC94122"
+	picture = "Almqvist"
+	
+	fire_only_once = yes
+
+	news = yes 
+	news_desc_long = "EVTDESC94122"
+	news_desc_medium = "EVTDESC94122"
+	news_desc_short = "EVTDESC94122"
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	trigger = {
+		NOT = { has_global_flag = junzt_dead }
+		OR = { 
+			has_global_flag = nameless_cults_supressed
+			has_country_flag = nameless_cults_supressed
+		}
+	}
+	option = {
+		name = "EVTOPT94122A"	
+		set_global_flag = junzt_dead
+	}
+
+}
+
+## King in Yellow Events
+# Play - King in Yellow - mostly chrome, possible forshadowing.
+country_event = {
+	id = 94123
+	title = "EVTNAME94123" #"The King in Yellow"
+	desc = "EVTDESC94123"
+	picture = "Almqvist"
+	fire_only_once = yes
+	news = yes
+	news_desc_long = "EVTDESC94123_NEWS_LONG"
+	news_desc_medium = "EVTDESC94123_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94123_NEWS_SHORT"	
+	
+	trigger = {
+		year = 1890			
+		owns = 425 # owner of Paris		    
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+major = yes # remove once sure it works
+
+	option = {
+		name = "EVTOPT94123A" #"What harm can a play do?"
+		ai_chance =  { factor = 100 } 
+		# make cultists acceptable, script can openly spread abroad
+		set_country_flag = king_in_yellow
+		add_accepted_culture = cultists
+		
+	}
+
+	option = {
+		name = "EVTOPT94123B" #"Such writings must be supressed!"
+		ai_chance =  { factor = 10 } # outside chance of complete halt
+		# upset people but stops the open spread
+		any_pop = { 
+			militancy = 0.5 
+			consciousness = 0.5
+		}
+		# priest are happy?
+
+		set_country_flag = king_in_yellow_supressed
+		set_global_flag = king_in_yellow_supressed
+		
+	}
+}
+
+country_event = {
+	id = 94124
+	title = "EVTNAME94124"
+	desc = "EVTDESC94124"
+	picture = "Almqvist"
+
+	trigger = {
+		year = 1891	
+
+		NOT = {
+			has_global_flag = king_in_yellow
+			has_country_flag = king_in_yellow
+			has_country_flag = king_in_yellow_supressed
+			has_global_flag = cthulhu_is_dead
+			has_global_flag = final_war_started	
+		}
+		OR = { 
+			is_secondary_power = yes
+			is_greater_power = yes 
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 30
+	}
+
+	option = {
+		name = "EVTOPT94124A"
+				ai_chance =  { 
+			factor = 50 
+			modifier = {
+				factor = 10
+				press_rights = free_press
+			}
+		}
+		# make cultists acceptable, play can openly spread abroad
+		set_country_flag = king_in_yellow
+		add_accepted_culture = cultists		
+	}
+
+	option = {
+		name = "EVTOPT94124B"
+		ai_chance =  { 
+			factor = 50 
+			modifier = {
+				factor = 10
+				NOT = { press_rights = free_press }
+			}
+		} 
+		# upset people but stops the open spread - increase demand for free press
+		any_pop = { 
+			militancy = 0.5 
+			consciousness = 0.5
+		}
+	}
+}
+
+country_event = {
+	id = 94125
+	title = "EVTNAME94125" # Suicide Chambers - Chrome Event limit to owner of New York
+	desc = "EVTDESC94125"
+	picture = "Almqvist"
+	
+	fire_only_once = yes
+
+	news = yes 
+	news_desc_long = "EVTDESC94125"
+	news_desc_medium = "EVTDESC94125"
+	news_desc_short = "EVTDESC94125"
+
+major = yes # remove once sure it works
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	trigger = {		
+		has_country_flag = king_in_yellow
+		owns = 232 # New York
+	}
+	option = {
+		name = "EVTOPT94125A"	
+		#set_global_flag = junzt_dead
+	}
+
+}
+
+country_event = {
+	id = 94126
+	title = "EVTNAME94126" # The Repairer of Reputations
+	desc = "EVTDESC94126"
+	picture = "Almqvist"
+	
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	trigger = {		
+		has_country_flag = king_in_yellow
+		NOT = { has_global_flag = king_in_yellow }
+		owns = 232 # New York
+	}
+	option = {
+		name = "EVTOPT94126A"	# Ignore and have reputation ruined and unrest
+		#set_global_flag = junzt_dead
+	}
+	option = {
+		ai_chance =  { factor = 100 }
+		name = "EVTOPT94126B"	# Have meeting
+		country_event = {id=94127 days=5}
+		#set_global_flag = junzt_dead
+	}
+}
+
+country_event = {
+	id = 94127
+	title = "EVTNAME94127" # The Repairers offer
+	desc = "EVTDESC94127"
+	picture = "Almqvist"
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPT94127A"	# Ignore and have reputation ruined and unrest
+		#set_global_flag = junzt_dead
+	}
+	option = {
+		ai_chance =  { factor = 100 }
+		name = "EVTOPT94127B"	# Imperial America
+		country_event = {id=94128 days=5}
+		
+		#set_global_flag = junzt_dead
+	}
+}
+
+country_event = {
+	id = 94128
+	title = "EVTNAME94128" # Create Imperial America
+	desc = "EVTDESC94128"
+	picture = "Almqvist"
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	major = yes
+
+	news = yes 
+	news_desc_long = "EVTDESC94128"
+	news_desc_medium = "EVTDESC94128"
+	news_desc_short = "EVTDESC94128"
+
+	option = {
+		name = "EVTOPT94128A"	# The coronation of the Emperor
+		FROM = {
+			change_tag = IAM
+			government = absolute_monarchy
+			nationalize = yes
+			# need to add extra cores else good chance of flip to 'Kingdom of America' via decision
+			# all of america should do
+
+			any_country = { 				
+				any_owned = { 
+					limit = { continent = north_america }
+					add_core = IAM
+				}
+			}
+		}
+
+		set_global_flag = king_in_yellow
+	}
+
+}
+
+#country_event = {
+#	id = 94130
+#	title = "EVTNAME94130" # Release New England with option to play
+#	desc = "EVTDESC94130"
+#	picture = "Almqvist"
+#	
+#	fire_only_once = yes
+#	
+#	trigger = { ai = no
+#			year = 1835 month = 1 }
+#	option = {
+#		name = "EVTOPT94130A"	# Do nothing
+#		
+#	}
+#
+#	option = {
+#		name = "EVTOPT94130B"	# Release Country
+#		USA = { release = NEN }
+#		NEN = {
+#			247 = { # 245 isn't coastal!?
+#				change_province_name = "Arkham"
+#				add_province_modifier = {
+#					name = miskatonic_campus
+#					duration = -1
+#				}
+#			}
+#
+#			set_country_flag = miskatonic_u_class_of_1836
+#
+#			# add leaders else will get swamped by USA
+#			define_general = {
+#				name = "William Peabody"
+#				personality = audacious
+#				background = school_of_defense
+#			}
+#			define_general = {
+#				name = "Howard Wilmarth"
+#				personality = defiant
+#				background = school_of_the_bayonet
+#			}
+#
+#			# New England needs powerful friend - but seems to lose it quickly - put in sphere??
+#			relation = { who = ENG value = 200 }
+#			create_alliance = ENG
+#		
+#			ENG = {
+#				diplomatic_influence = { who = NEN value = 400 }
+#
+#
+#			}
+#				# give Caribou? 250
+#				250 = {
+#					remove_core = ENG
+#					secede_province = NEN
+#				}
+#
+#			relation = { who = MEX value = 200 }
+#			relation = { who = FRA value = 200 }
+#
+#			any_owned = {
+#				fort = 1
+#			}
+#
+#			# give tech boost
+#			activate_technology = strategic_mobility
+#			activate_technology = muzzle_loaded_rifles
+#			activate_technology = iron_muzzle_loaded_artillery
+#			activate_technology = military_plans
+#			activate_technology = army_professionalism
+#		}
+#	}
+#
+#	option = {
+#		name = "EVTOPT94130C"	# Release and play as (need to stop insta war by USA)
+#		USA = { release = NEN }
+#		NEN = {
+#			247 = { # 245 isn't coastal!? Change to Concord
+#				change_province_name = "Arkham"
+#				add_province_modifier = {
+#					name = miskatonic_campus
+#					duration = -1
+#				}
+#			}
+#			set_country_flag = miskatonic_u_class_of_1836
+#
+#			# add leaders else will get swamped by USA
+#			define_general = {
+#				name = "William Peabody"
+#				personality = audacious
+#				background = school_of_defense
+#			}
+#			define_general = {
+#				name = "Howard Wilmarth"
+#				personality = defiant
+#				background = school_of_the_bayonet
+#			}
+#
+#			# New England needs powerful friend - but seems to lose it quickly - put in sphere??
+#			relation = { who = ENG value = 200 }
+#			create_alliance = ENG
+#		
+#			ENG = {
+#				diplomatic_influence = { who = NEN value = 400 }
+#			}
+#
+#				# give Caribou? 250
+#				250 = {
+#					remove_core = ENG
+#					secede_province = NEN
+#				}
+#
+#			relation = { who = MEX value = 200 }
+#			relation = { who = FRA value = 200 }
+#
+#			any_owned = {
+#				fort = 1
+#			}
+#
+#			# give tech boost
+#			activate_technology = strategic_mobility
+#			activate_technology = muzzle_loaded_rifles
+#			activate_technology = iron_muzzle_loaded_artillery
+#			activate_technology = military_plans
+#			activate_technology = army_professionalism
+#		}
+#
+#		change_tag_no_core_switch = NEN	
+#	}
+#}
+
+# Carnacki the ghostfinder in London (William Hope Hodgeson)
+country_event = {
+	id = 94131
+	title = "EVTNAME94131" #"Carnacki the GhostFinder"
+	desc = "EVTDESC94131"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	fire_only_once = yes
+	news = yes
+	news_desc_long = "EVTDESC94131_NEWS_LONG"
+	news_desc_medium = "EVTDESC94131_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94131_NEWS_SHORT"	
+	
+	trigger = {
+		year = 1904			
+		owns = 300 # owner of london (300)
+		NOT = { has_global_flag = carnacki_ghostfinder }		    
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPT94131A" # A dinner party? how interesting
+ 
+		# warm up for other Carnacki events
+		set_global_flag = carnacki_ghostfinder	
+	}
+}
+
+#94132 - Carnacki Requests exile
+country_event = {
+	id = 94132
+	title = "EVTNAME94132" #"Carnacki the GhostFinder"
+	desc = "EVTDESC94132"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	fire_only_once = yes
+	
+	trigger = {
+		ai = no
+		year = 1906
+		has_global_flag = carnacki_ghostfinder
+		NOT = { has_global_flag = carnacki_in_exile }
+		# needs condition for checking if london is cult controlled? no need for exile?									    
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPT94132A" # Of course
+ 
+		# warm up for other Carnacki events
+		set_global_flag = carnacki_in_exile 
+		country_event = { id=94133 days=150 }
+	}
+	option = {
+		name = "EVTOPT94132B" # no we will not
+		# Carnacki is doomed
+ 		country_event = { id=94135 days=150 }
+		
+	}
+}
+
+#94133 - Carnacki Research
+country_event = {
+	id = 94133
+	title = "EVTNAME94133"
+	desc = "EVTDESC94133"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPT94133A" # continue research
+ 
+		country_event = { id=94134 days=150 }
+		# warm up for other Carnacki events
+		set_country_flag = carnacki_pentangle
+	}
+}
+
+#94134 - Carnacki Succeeds
+country_event = {
+	id = 94134
+	title = "EVTNAME94134"
+	desc = "EVTDESC94134"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPT94134A" # A tragic event
+ 
+		#country_event = { id=94135 days=150 }
+		# warm up for other Carnacki events
+		set_global_flag = carnacki_succesful
+		set_country_flag = carnacki_succesful	
+	}
+}
+
+#94135 - Death of Carnacki 
+country_event = {
+	id = 94135
+	title = "EVTNAME94135" #"Carnacki the GhostFinder Dies"
+	desc = "EVTDESC94135"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	news = yes
+
+	news_desc_long = "EVTDESC94135_NEWS_LONG"
+	news_desc_medium = "EVTDESC94135_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94135_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94135A" # A tragic event
+ 
+		# warm up for other Carnacki events
+		set_global_flag = carnacki_dead	
+	}
+}
+
+
+#94136 - House on the Borderlands
+country_event = {
+	id = 94136
+	title = "EVTNAME94136" #"The House on the Borderlands"
+	desc = "EVTDESC94136" # Pig faced creatures
+	picture = "Almqvist"
+
+	#major = yes # remove once sure it works
+
+	fire_only_once = yes
+	news = yes
+	news_desc_long = "EVTDESC94136_NEWS_LONG"
+	news_desc_medium = "EVTDESC94136_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94136_NEWS_SHORT"	
+	# A tale is circulating of an old house in Galway whose inhabitant had been harrased by 'Swine-Things'.
+	# The inhabitant has disappeared without trace leaving only a journal behind.
+
+	trigger = {
+		year = 1901			
+		owns = 258 # a place in Ireland near 258 - Galway
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPT94136A" # Pig Men, In our country?
+	}
+}
+
+#94140 - Appeal for reinstatement
+country_event = {
+	id = 94140
+	title = "EVTNAME94140" #"Herbert West appeals for reinstatement"
+	desc = "EVTDESC94140"
+	picture = "Almqvist"
+
+	fire_only_once = yes
+	
+	major = yes # remove once sure it works
+
+	trigger = {
+		year = 1903		
+		owns = 247 # owner of Arkham		    						    
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPT94140A" # Of course
+ 
+		# main stream herbert
+		set_global_flag = herbert_west_approval	
+		country_event = { id=94141 days=150 }
+	}
+	option = {
+		name = "EVTOPT94140B" # no we will not
+		# herbert in secret
+ 		country_event = { id=94141 days=150 }
+		
+	}
+}
+
+#94141 - Plague in Arkham
+country_event = {
+	id = 94141
+	title = "EVTNAME94141" #"Typhoid Deaths and madness"
+	desc = "EVTDESC94141"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	news = yes
+	news_desc_long = "EVTDESC94141_NEWS_LONG"
+	news_desc_medium = "EVTDESC94141_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94141_NEWS_SHORT"
+
+	option = {
+		name = "EVTOPT94141A" # A tragic event
+
+	}
+}
+
+#94142 - Research breakthrough
+country_event = {
+	id = 94142
+	title = "EVTNAME94142" #"Breakthrough"
+	desc = "EVTDESC94142"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	fire_only_once = yes
+
+	trigger = { # needs to have great war
+		has_global_flag = herbert_west_approval	
+		ai = no
+		year = 1918		
+		owns = 247 # owner of Arkham		    						    
+	}
+
+	option = {
+		name = "EVTOPT94142A" 
+		# enable decision 'tonic for the troops'
+		set_country_flag = dr_west_succesful	
+	}
+
+	option = {
+		name = "EVTOPT94142B" 
+		# do nothing	
+	}
+}
+
+#94143 - Disappearence of Dr West
+country_event = {
+	id = 94143
+	title = "EVTNAME94143" #"Dr West disappears after breakout from Sefton Asylum"
+	desc = "EVTDESC94143"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	news = yes
+	news_desc_long = "EVTDESC94143_NEWS_LONG"
+	news_desc_medium = "EVTDESC94143_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94143_NEWS_SHORT"
+
+	fire_only_once = yes
+
+	trigger = {
+		ai = no
+		year = 1920		
+		owns = 247 # owner of Arkham		    						    
+	}
+
+	option = {
+		name = "EVTOPT94143A" # A tragic event
+
+	}
+}
+
+#94150 - Holy See Falls
+country_event = {
+	id = 94150
+	title = "EVTNAME94150" 
+	desc = "EVTDESC94150"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	news = yes
+	news_desc_long = "EVTDESC94150_NEWS_LONG"
+	news_desc_medium = "EVTDESC94150_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94150_NEWS_SHORT"
+
+	fire_only_once = yes
+
+	trigger = {
+		NOT = { has_global_flag = fall_of_rome }	
+		owns = 749 # owner of Rome
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}						    
+	}
+
+	option = {
+		name = "EVTOPT94150A" 
+		# make catholics agitated, set flag to allow for 'New Rome'
+		set_global_flag = fall_of_rome
+	}
+}
