@@ -2604,9 +2604,9 @@ serpentine = {
 	is_overseas = no
 	yigian = {
 		color = { 63 90 22 }
-		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of"}
+		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of" "Hatchling of" "Neonate of"}
 		
-		last_names = { Yigg "the Snake" "the Serpent" "the Viper" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Ghatanothoa Zoth-Ommog "the Blackadder" "the Ophidia" }
+		last_names = { Yig "the Snake" "the Serpent" "the Viper" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Ghatanothoa Zoth-Ommog "the Blackadder" "the Ophidia" Yidhra Ayi'ig }
 	}
 	union = YIG
 }

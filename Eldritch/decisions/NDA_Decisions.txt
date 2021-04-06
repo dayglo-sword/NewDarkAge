@@ -104,17 +104,20 @@ political_decisions = {
 		effect = {
 			any_country = { 
 				limit = { 
+					ai = yes
 					NOT = {
 						has_country_modifier = full_cultists
+						tag = ELD # don't allow obviously
 					}
 				}
 
 				# make friends
-				relation = { who = THIS value = 400 }	
-
+				relation = { who = THIS value = 400 }					
 				create_alliance = THIS
 			}
-
+			ELD = {
+				relation = { who = THIS value = -400 }	
+			}
 		}
 		
 		ai_will_do = {

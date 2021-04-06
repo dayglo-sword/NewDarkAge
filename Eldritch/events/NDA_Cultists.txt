@@ -156,7 +156,32 @@ country_event = {
 			who = YIG
 			value = 50 
 		}
+		# if country contains following provinces make Snakepeoples acceptable and convert Upper class POPs
+		# Snakes should originate Oklahoma, Texas and Yucatan before spread across Central and South America		
+		any_owned = {
+			limit = {
+				OR = {
+					province_id = 129
+					province_id = 135
+					province_id = 2183 
+				}
+			}
 
+			# temp change - will this work?
+			THIS = {
+				primary_culture = yigian # country likes snakes
+				add_accepted_culture = cultists
+				religion = yigian
+			}
+						
+			assimilate = yes
+			
+			#revert back
+			THIS = {
+				primary_culture = cultists # country likes snakes
+				add_accepted_culture = yigian 
+			}
+		}	
 	}
 }
 
@@ -215,6 +240,7 @@ country_event = {
 		}
 		NOT = {
 			has_country_modifier = unity_of_purpose
+			has_global_flag = cthulhu_is_dead # do not regain it after defeat
 		}		
 	}
 
@@ -779,6 +805,12 @@ country_event = {
 	option = {
 		name = EVTOPT94012
 
+		# end all wars - stop 'ghost armies'		
+		any_country= { 
+			limit = { war_with = THIS }
+			end_war = THIS
+		}
+
 		# reduce non-cultist POPs
 		THIS = {
 			any_pop = { 
@@ -793,10 +825,8 @@ country_event = {
 				militancy = 7
 			}
 		}
-		# end all wars - stop 'ghost armies'
 
 		ELD = {
-			end_war = THIS
 			inherit = THIS
 			
 			prestige = 10 #Keep them at #1 GP.
@@ -1049,7 +1079,7 @@ country_event = {
 				}
 			}
 			random = {
-				chance = 2 #2% seems low, but remember this is every tag in the game.
+				chance = 3 #2% seems low, but remember this is every tag in the game. - boost to 3
 				all_core = {
 					limit = {
 						is_core = THIS
@@ -1488,6 +1518,7 @@ country_event = {
 						is_core = CUB
 						is_core = HAI
 						region = CHI_1082 #
+						region = CHI_1499 #hannan ?
 						region = CHI_2562 #formosa 
 						region = SPA_2517 #micronesia 
 						region = BRU_1394 #brunei
@@ -1528,6 +1559,7 @@ country_event = {
 						is_core = CUB
 						is_core = HAI
 						region = CHI_1082 #
+						region = CHI_1499 #hannan ?
 						region = CHI_2562 #formosa 
 						region = SPA_2517 #micronesia 
 						region = BRU_1394 #brunei
@@ -1577,7 +1609,9 @@ country_event = {
 						is_core = ARG
 						is_core = CHI	
 						is_core = PAR
-						is_core = COL					
+						is_core = COL	
+						region = USA_129 # Oklahoma	
+						region = TEX_132 # Texas
 					}
     				}
 
@@ -1602,6 +1636,8 @@ country_event = {
 						is_core = CHI	
 						is_core = PAR
 						is_core = COL
+						region = USA_129 # Oklahoma	
+						region = TEX_132 # Texas
 					}
     				}
 
@@ -1641,17 +1677,11 @@ country_event = {
 					tag = THIS
 				}
 				is_culture_group = THIS
-				#is_greater_power = no
 				num_of_cities = 1
 			}
 			country_event = { id=94031 days=0 }
 		}
-		#political_reform = wealth_voting
-		#political_reform = population_equal_weight
-		#political_reform = yes_meeting
-		#political_reform = free_press
-		#political_reform = non_socialist
-		#political_reform = secret_ballots
+
 		government = hms_government
 		add_accepted_culture = union
 		prestige = 100

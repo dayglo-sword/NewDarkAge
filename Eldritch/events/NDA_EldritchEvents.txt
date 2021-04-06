@@ -1,3 +1,4 @@
+#94160 - New Dark Age Intro
 #94120 - Nameless Cults published
 #94121 - Spread of the book
 #94122 - Death of Junzt
@@ -19,6 +20,25 @@
 #94142 - Research breakthrough
 #94143 - Disappearence of Dr West
 #94150 - Holy See Falls
+#94151 - Jerusalem Falls
+#94152 - Mecca Falls
+
+country_event = {
+	id = 94160
+	title = "EVTNAME94160" #"Start of the game"
+	desc = "EVTDESC94160"
+	picture = "Almqvist"
+	fire_only_once = yes
+	
+	trigger = {
+		not = { has_global_flag = new_dark_age_intro }		
+	}
+
+	option = {
+		name = "EVTOPT94160A"
+		set_global_flag = new_dark_age_intro
+	}
+}
 
 # Book - Nameless Cults - mostly chrome, possible forshadowing.
 country_event = {
@@ -319,18 +339,24 @@ country_event = {
 
 	trigger = {		
 		has_country_flag = king_in_yellow
-		NOT = { has_global_flag = king_in_yellow }
+		NOT = { has_global_flag = king_in_yellow 
+			tag = ELD # don't do for cult countries
+			tag = DAG
+			tag = YIG 
+		}
 		owns = 232 # New York
 	}
 	option = {
 		name = "EVTOPT94126A"	# Ignore and have reputation ruined and unrest
-		#set_global_flag = junzt_dead
+		any_pop = {
+			militancy = 5
+			consciousness = 3
+		}
 	}
 	option = {
 		ai_chance =  { factor = 100 }
 		name = "EVTOPT94126B"	# Have meeting
 		country_event = {id=94127 days=5}
-		#set_global_flag = junzt_dead
 	}
 }
 
@@ -346,14 +372,15 @@ country_event = {
 
 	option = {
 		name = "EVTOPT94127A"	# Ignore and have reputation ruined and unrest
-		#set_global_flag = junzt_dead
+		any_pop = {
+			militancy = 5
+			consciousness = 3
+		}
 	}
 	option = {
 		ai_chance =  { factor = 100 }
 		name = "EVTOPT94127B"	# Imperial America
 		country_event = {id=94128 days=5}
-		
-		#set_global_flag = junzt_dead
 	}
 }
 
@@ -838,9 +865,139 @@ country_event = {
 		}						    
 	}
 
+	immediate = {
+		any_country = {
+			any_pop = {
+				limit = { has_pop_religion = catholic 
+					NOT ={ 
+						OR = {
+							is_culture_group = abomination 
+							is_culture_group = serpentine 
+						} 
+					} 
+				}
+				militancy = 1
+				consciousness = 0.5
+			}
+		}
+	}
+	
 	option = {
 		name = "EVTOPT94150A" 
 		# make catholics agitated, set flag to allow for 'New Rome'
 		set_global_flag = fall_of_rome
+	}
+}
+
+#94151 - Jerusalem Falls
+country_event = {
+	id = 94151
+	title = "EVTNAME94151" 
+	desc = "EVTDESC94151"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	news = yes
+	news_desc_long = "EVTDESC94151_NEWS_LONG"
+	news_desc_medium = "EVTDESC94151_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94151_NEWS_SHORT"
+
+	fire_only_once = yes
+
+	trigger = {
+		NOT = { has_global_flag = fall_of_jerusalem }	
+		owns = 917 # owner of Jerusalem
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}						    
+	}
+
+	immediate = {
+		any_country = {
+			any_pop = {
+				limit = { 
+					NOT ={ 
+						OR = {
+							is_culture_group = abomination 
+							is_culture_group = serpentine 
+						} 
+					} 
+					
+					OR = { 
+						has_pop_religion = jewish
+						has_pop_religion = catholic 
+						has_pop_religion = orthodox
+						has_pop_religion = coptic
+						has_pop_religion = protestant
+						has_pop_religion = shiite
+						has_pop_religion = sunni
+					} 
+				}
+				militancy = 1
+				consciousness = 0.5
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPT94151A" 
+		# make jews, christians, muslims agitated
+		set_global_flag = fall_of_jerusalem 
+	}
+}
+
+#94152 - Mecca Falls
+country_event = {
+	id = 94152
+	title = "EVTNAME94152" 
+	desc = "EVTDESC94152"
+	picture = "Almqvist"
+
+	major = yes # remove once sure it works
+
+	news = yes
+	news_desc_long = "EVTDESC94152_NEWS_LONG"
+	news_desc_medium = "EVTDESC94152_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC94152_NEWS_SHORT"
+
+	fire_only_once = yes
+
+	trigger = {
+		NOT = { has_global_flag = fall_of_mecca }	
+		owns = 1151 # owner of Mecca
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}						    
+	}
+
+	immediate = {
+		any_country = {
+			any_pop = {
+				limit = {
+					NOT ={ 
+						OR = {is_culture_group = abomination 
+							is_culture_group = serpentine 
+						} 
+					} 
+					OR = { 
+						has_pop_religion = shiite
+						has_pop_religion = sunni
+					} 
+				}
+				militancy = 1
+				consciousness = 0.5
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPT94152A" 
+		# make muslims agitated
+		set_global_flag = fall_of_mecca 
 	}
 }

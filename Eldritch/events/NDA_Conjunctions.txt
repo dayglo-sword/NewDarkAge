@@ -18,7 +18,7 @@ country_event = {
 
 	trigger = {
 		year = 1842
-		month = 1
+		month = 0  #prior month
 		NOT = { has_global_flag = alignment_1_occured }	
 	}
  	
@@ -104,7 +104,7 @@ country_event = {
 
 	trigger = {
 		year = 1861
-		month = 10
+		month = 9  #prior month
 		NOT = { has_global_flag = alignment_2_occured }	
 	}
  	
@@ -187,7 +187,7 @@ country_event = {
 
 	trigger = {
 		year = 1881
-		month = 4
+		month = 3 #prior month
 		NOT = { has_global_flag = alignment_3_occured }	
 	}
  	
@@ -309,7 +309,7 @@ country_event = {
 
 	trigger = {
 		year = 1901
-		month = 11
+		month = 10  #prior month
 		NOT = { has_global_flag = alignment_4_occured }	
 	}
  	
@@ -428,7 +428,7 @@ country_event = {
 
 	trigger = {
 		year = 1921
-		month = 9
+		month = 8 #prior month
 		NOT = { has_global_flag = alignment_5_occured }	
 	}
  	
@@ -569,6 +569,7 @@ country_event = {
 						culture = deep_ones
                     			}
 				}
+				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
 				ideology = { value = reactionary factor = 0.10 }
 			}
@@ -615,7 +616,8 @@ country_event = {
 						culture = deep_ones
                     			}
 				}
-				dominant_issue = { value = jingoism factor = 0.1 }
+				dominant_issue = { value = moralism factor = 0.10 }
+				dominant_issue = { value = jingoism factor = 0.10 }
 				ideology = { value = reactionary factor = 0.10 }
 			} 
 			# make war not love
@@ -798,6 +800,7 @@ country_event = {
 						culture = deep_ones
                     			}
 				}
+				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
 				ideology = { value = reactionary factor = 0.10 }
 			}

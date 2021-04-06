@@ -2779,7 +2779,8 @@ cultist_rebels = {
 		democracy = absolute_monarchy
 	}
 
-	defection = culture_group #pan_nationalist # If the country seeks independence, defection specifies what type of provinces it wants.
+	defection = pan_nationalist # If the country seeks independence, defection specifies what type of provinces it wants.
+	# culture_group - caused defection to other nations with primary culture? - including removing provs from ELD!
 	independence = none
 	defect_delay = 12			# Can spontaneously declare independence after 12 months (earliest)
 	
@@ -2797,7 +2798,7 @@ cultist_rebels = {
 	
 	occupation_mult = 3.0			# The amount of strength this rebel gains from taking provinces
 
-	# triggers a general rising, modifier will be multiplied with the countrys army strength and compared to the factions strenght
+	# triggers a general rising, modifier will be multiplied with the countrys army strength and compared to the factions strength
 	will_rise = 
 	{
 		factor = 0.4
@@ -2825,7 +2826,7 @@ cultist_rebels = {
 	
 	# The rebel type with the highest modifier for this pop gets picked
 	spawn_chance = {
-		factor = 1.1
+		factor = 2
 		
 		modifier = {
 			factor = 0
@@ -2845,23 +2846,23 @@ cultist_rebels = {
 				NOT = { is_culture_group = THIS }
 			}
 		}
+		# Rebels even after union exists
+		#modifier = {
+		#	factor = 0
+		#	cultural_union = {
+		#		exists = yes
+		#	}
+		#}		
 		modifier = {
 			factor = 0
-			cultural_union = {
-				exists = yes
-			}
-		}		
-		modifier = {
-			factor = 0
-			OR = { # don't want to have cult rebels in cult country
-				country = {
-					OR = {
-						tag = ELD
-						tag = DAG
-						tag = YIG 
-					}
-				}				
-			}
+			# don't want to have cult rebels in cult country
+			country = {
+				OR = {
+					tag = ELD
+					tag = DAG
+					tag = YIG 
+				}
+			}				
 		}
 	}
  
@@ -2891,6 +2892,18 @@ cultist_rebels = {
 		modifier = {
 			factor = 2.0
 			is_capital = yes
+		}
+		modifier = {
+			factor = 0.001
+			owned_by = ELD # don't ransack own
+		}
+		modifier = {
+			factor = 0.001
+			owned_by = YIG # don't ransack own
+		}
+		modifier = {
+			factor = 0.001
+			owned_by = DAG # don't ransack own
 		}
 	}
 	
