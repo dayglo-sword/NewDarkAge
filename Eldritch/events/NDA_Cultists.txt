@@ -164,6 +164,7 @@ country_event = {
 					province_id = 129
 					province_id = 135
 					province_id = 2183 
+					province_id = 2417 # Vila Bela - 'City of Z'
 				}
 			}
 
@@ -173,7 +174,8 @@ country_event = {
 				add_accepted_culture = cultists
 				religion = yigian
 			}
-						
+			
+			add_core = YIG			
 			assimilate = yes
 			
 			#revert back
@@ -296,7 +298,7 @@ country_event = {
 		years = 50
 
 		modifier = {
-			factor = 0.7
+			factor = 0.6
 			year = 1865
 		}
 		
@@ -309,26 +311,27 @@ country_event = {
 	option = {
 		name = "EVTOPT94006"
 
-		# leave any wars
+		# expand cultists to gve more POP?
+
+		# release any overseas territories to allow other cults to grow
+		any_country = { 
+			limit = { 
+				vassal_of = THIS 
+				capital_scope = { OR = { continent = south_america continent = asia continent = oceania }}
+
+			} 
+			THIS = { release_vassal = THIS } # will this release the vassal? think we need event to release FROM??
+			#release_vassal = THIS 
+			relation = { 
+				who = THIS 
+				value = 400 
+			} 
+		} 
 
 		# let ELD take control	
-		ELD = {
+		ELD = {		
 			end_war = THIS
 			inherit = THIS
-			
-			# release any overseas territories to allow other cults to grow
-			any_country = { 
-				limit = { 
-					is_our_vassal = THIS 
-					capital_scope = { OR = { continent = south_america continent = asia continent = oceania }}
-
-				} 
-				release_vassal = THIS 
-				relation = { 
-					who = THIS 
-					value = 400 
-				} 
-			} 
 
 			prestige = 100 #Keep them at #1 GP.
 			#If ELD doesn't keep doing stuff, they stop being scary and start being a color on a map.  This should help them keep moving.		
@@ -1193,6 +1196,10 @@ country_event = {
 			tag = DAI
 			tag = JOH
 			tag = NEN
+			tag = BAL
+			tag = CUB
+			tag = HAI
+			tag = AST
 		}
 		exists = ELD
 		NOT = { exists = DAG}
@@ -1204,6 +1211,14 @@ country_event = {
 
 	option = {
 		name = "EVTOPT94020" #"From the Depths"
+			
+		# if capital coastal make deep one prior to transfer
+		primary_culture = deep_ones 
+		add_accepted_culture = cultists
+			
+		capital_scope = {
+			assimilate = yes
+		}		
 		
 		DAG = {
 			end_war = THIS
@@ -1215,11 +1230,11 @@ country_event = {
 				duration = -1
 			}
 	
-			relation = { who = ELD value = 200 }
+			relation = { who = ELD value = 400 }
 			create_alliance = ELD
 			military_access = ELD
 
-			relation = { who = YIG value = 200 }
+			relation = { who = YIG value = 400 }
 			create_alliance = YIG
 			military_access = YIG
 
@@ -1266,8 +1281,21 @@ country_event = {
 					tag = DAI
 					tag = JOH
 					tag = NEN
+					tag = BAL
+					tag = CUB
+					tag = HAI
+					tag = AST
 				}
 			}
+
+			# if capital coastal make deep one prior to transfer
+			primary_culture = deep_ones
+			add_accepted_culture = cultists
+			
+			capital_scope = {
+				assimilate = yes
+			}		
+
 			DAG = {
 				end_war = THIS
 				inherit = THIS 
@@ -1324,9 +1352,9 @@ country_event = {
 
 	trigger = {
 		has_country_modifier = full_cultists
-		capital_scope = { continent = south_america }
+		capital_scope = { OR = { continent = south_america continent = north_america } }
 		exists = ELD
-		NOT = { exists = DAG}
+		NOT = { exists = YIG}
 	}
 
 	mean_time_to_happen = {
@@ -1353,13 +1381,12 @@ country_event = {
 				name = full_cultists
 				duration = -1
 			}
-			#set_country_modifier = full_cultists
 
-			relation = { who = ELD value = 200 }
+			relation = { who = ELD value = 400 }
 			create_alliance = ELD
 			military_access = ELD
 
-			relation = { who = DAG value = 200 }
+			relation = { who = DAG value = 400 }
 			create_alliance = DAG
 			military_access = DAG
 
@@ -1398,68 +1425,23 @@ country_event = {
 
 		# transfer cultist provinces to YIG (same as 94107)
 		YIG = { country_event = { id=94023 days=3 } }
-		#ELD = {
-		#	any_owned = {
- 		#		limit = {
-		#			OR = { 
-		#				continent = south_america
-		#				is_core = MEX
-		#				is_core = ELS
-		#				is_core = GUA
-		#				is_core = PNM
-		#				is_core = UCA
-		#				is_core = COS	
-		#				is_core = BRA
-		#				is_core = ARG
-		#				is_core = CHI	
-		#				is_core = PAR
-		#				is_core = COL					
-		#			}
-    		#		}
-#
-		#		remove_core = ELD
-    		#		secede_province = YIG
-		#		add_core = YIG 
-		#	}
-		#}
-		#DAG = {
-		#	any_owned = {
-    		#		limit = {
-		#			OR = { 
-		#				continent = south_america
-		#				is_core = MEX
-		#				is_core = ELS
-		#				is_core = GUA
-		#				is_core = PNM
-		#				is_core = UCA
-		#				is_core = COS
-		#				is_core = BRA
-		#				is_core = ARG
-		#				is_core = CHI	
-		#				is_core = PAR
-		#				is_core = COL
-		#			}
-    		#		}
-#
-		#		remove_core = DAG
-    		#		secede_province = YIG
-		#		add_core = YIG 
-		#	}
-		#}
-
-		any_owned = {	#Any province owned by the taker
-			limit = {			
-				NOT = { is_core = YIG }	
+	
+		YIG = {
+			any_owned = {	#Any province owned by the taker
+				limit = {			
+					NOT = { is_core = YIG }	
+				}
+				add_core = YIG 
+				remove_core = ELD #need to remove else never ally.
+				remove_core = DAG
 			}
-			add_core = YIG 
-			remove_core = ELD #need to remove else never ally.
-			remove_core = DAG
+			# strongholds
+			any_owned = {
+				limit = { is_coastal = no }	
+				fort = 1
+			}
 		}
-		# strongholds
-		any_owned = {
-			limit = { is_coastal = no }	
-			fort = 2
-		}
+
 		# initially claim neigbours
 		any_neighbor_country = {
 			# don't annoy the powers just yet
@@ -1479,8 +1461,7 @@ country_event = {
 					tag = COL
 				}
 			}
-			any_owned = {
-				#limit = { continent = south_america }	
+			any_owned = {	
 				add_core = YIG 
 			}
 		}

@@ -2583,12 +2583,12 @@ abomination = {
 		color = { 115  45  205 }
 		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of"}
 		
-		last_names = { "the Blood" "the Dark" "the Chaos" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Cthugha Cthulhu Ghatanothoa Hydra Zoth-Ommog}
+		last_names = { "the Blood" "the Dark" "the Chaos" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Cthugha Cthulhu Ghatanothoa Hydra Zoth-Ommog Nephren-Ka}
 		
 	}
 	deep_ones = {
 		color = { 5 35 195 }
-		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of"}
+		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of" "Spawn of"}
 
 		last_names = { "the Deep" "the Abyss" "the Storm" "the Waves" "the Pelagic" "the Cetacean" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Cthugha Cthulhu Dagon Ghatanothoa Hydra Zoth-Ommog}
 		
