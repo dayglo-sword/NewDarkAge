@@ -36,7 +36,7 @@ govt_flag =
 	flag = presidential_dictatorship
 }
 
-ruling_party = eldritch_conservative
+ruling_party = ELD_conservative
 upper_house = {
 	fascist = 10
 	liberal = 0
