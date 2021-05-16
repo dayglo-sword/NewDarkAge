@@ -44,7 +44,7 @@ country_event = {
 	}
 }
 
-# Book - Nameless Cults - mostly chrome, possible forshadowing.
+# Book - Nameless Cults - mostly chrome, possible forshadowing. Is kick off event for cults.
 country_event = {
 	id = 94120
 	title = "EVTNAME94120" #"Unaussprechlichen Kulten"
@@ -64,8 +64,13 @@ country_event = {
 	mean_time_to_happen = {
 		months = 6
 	}
+	
+	major = yes
+	
+	immediate = {
+		set_global_flag = nameless_cults_exists
+	}
 
-major = yes # remove once sure it works
 
 	option = {
 		name = "EVTOPT94120A" #"What harm can a book do?"
@@ -74,7 +79,8 @@ major = yes # remove once sure it works
 		set_country_flag = nameless_cults
 		add_accepted_culture = cultists
 		# spread book to great and secondary powers (~6 years to imprint)
-		# priest are upset?		
+		# priests are upset?
+		
 	}
 
 	option = {

@@ -53,6 +53,33 @@ naval_decision_making = 1
 naval_risk_management = 1
 naval_nco_training = 1
 
+classicism_n_early_romanticism = 1
+late_enlightenment_philosophy = 1
+malthusian_thought = 1
+enlightenment_thought = 1
+introspectionism = 1
+private_banks = 1
+stock_exchange = 1
+no_standard = 1
+ad_hoc_money_bill_printing = 1
+early_classical_theory_and_critique = 1
+freedom_of_trade = 1
+guild_based_production = 1
+water_wheel_power = 1
+practical_steam_engine = 1
+high_n_low_pressure_steam_engines = 1
+steam_turbine = 1
+publishing_industry = 1
+mechanical_production = 1
+interchangeable_parts = 1
+mechanized_mining = 1
+clean_coal = 1
+cheap_iron = 1
+basic_chemistry = 1
+experimental_railroad = 1
+early_railroad = 1
+iron_railroad = 1
+
 #inventions
 fast_ship_killer = yes
 blue_water_school = yes

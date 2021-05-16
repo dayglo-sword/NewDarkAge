@@ -36,35 +36,12 @@ country_event = {
 	immediate = { 
 		set_global_flag = alignment_1_occured # stop retriggering
 
-		# make this a called event?
-		any_country = { 
-			limit = { 
-				has_country_modifier = full_cultists
-			}
-			any_pop = { # try and reduce internal strife
-				militancy = -1 
-				consciousness = -1
-				money = 10
-			}
-			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
-			relation = {
-				who = ELD
-				value = 20
-			}
-			relation = {
-				who = DAG
-				value = 20
-			}
-			relation = {
-				who = YIG
-				value = 20
-			}
-		}	
+		# don't need to do any of the below as not yet existing?
 
 		# keep overt cultist nations close
-		ELD = { country_event = { id=94105 days=1 } }
-		DAG = { country_event = { id=94106 days=2 } }
-		YIG = { country_event = { id=94107 days=3 } }
+		#ELD = { country_event = { id=94105 days=1 } }
+		#DAG = { country_event = { id=94106 days=2 } }
+		#YIG = { country_event = { id=94107 days=3 } }
 
 		# make non-cultist country cultist agitated?
 		any_country = { 
@@ -80,10 +57,10 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 3 
 				consciousness = 2
@@ -129,11 +106,11 @@ country_event = {
 			limit = { 				
 				has_country_modifier = full_cultists
 			}
-			any_pop = { # try and reduce internal strife
-				militancy = -1 
-				consciousness = -1
-				money = 10
-			}
+			#any_pop = { # try and reduce internal strife
+			#	militancy = -1 
+			#	consciousness = -1
+			#	money = 10
+			#}
 			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
 			relation = {
 				who = ELD
@@ -167,11 +144,11 @@ country_event = {
 			}
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 4 
 				consciousness = 3
@@ -212,11 +189,11 @@ country_event = {
 			limit = { 
 				has_country_modifier = full_cultists
 			}
-			any_pop = { # try and reduce internal strife
-				militancy = -1 
-				consciousness = -1
-				money = 10
-			}
+			#any_pop = { # try and reduce internal strife
+			#	militancy = -1 
+			#	consciousness = -1
+			#	money = 10
+			#}
 			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
 			relation = {
 				who = ELD
@@ -275,7 +252,23 @@ country_event = {
 			YIG = { limit = { exists = yes } country_event = 94110}
 			country_event = 94111
 		}
-
+		# add some if poor
+		ELD = {
+			limit = { not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		YIG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		DAG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		
 		# make non-cultist country cultist agitated?
 		any_country = { 
 			limit = { 
@@ -289,11 +282,11 @@ country_event = {
 			}
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 4 
 				consciousness = 3
@@ -334,11 +327,11 @@ country_event = {
 			limit = { 
 				has_country_modifier = full_cultists
 			}
-			any_pop = { # try and reduce internal strife
-				militancy = -1 
-				consciousness = -1
-				money = 10
-			}
+			#any_pop = { # try and reduce internal strife
+			#	militancy = -1 
+			#	consciousness = -1
+			#	money = 10
+			#}
 			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
 			relation = {
 				who = ELD
@@ -394,7 +387,23 @@ country_event = {
 			YIG = { limit = { exists = yes } country_event = 94110}
 			country_event = 94111
 		}
-
+		# add some if poor
+		ELD = {
+			limit = { not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		YIG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		DAG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		
 		# make non-cultist country cultist agitated?
 		any_country = { 
 			limit = { 
@@ -409,10 +418,10 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 4 
 				consciousness = 3
@@ -453,23 +462,19 @@ country_event = {
 			limit = { 
 				has_country_modifier = full_cultists
 			}
-			any_pop = { # try and reduce internal strife
-				militancy = -1 
-				consciousness = -1
-				money = 10
-			}
+
 			# boost relations with other cultists - do tags need to exist or can it be raised 'in secret'?
 			relation = {
 				who = ELD
-				value = 20
+				value = 50
 			}
 			relation = {
 				who = DAG
-				value = 20
+				value = 50
 			}
 			relation = {
 				who = YIG
-				value = 20
+				value = 50
 			}
 		}
 
@@ -513,25 +518,39 @@ country_event = {
 			YIG = { limit = { exists = yes } country_event = 94110}
 			country_event = 94111
 		}
-
-		# make non-cultist country cultist agitated?
+		# add some if poor
+		ELD = {
+			limit = { not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		YIG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		DAG = {
+			limit = { exists = yes not = { money = 1000000 } }
+			treasury = 1000000
+			country_event = 94111
+		}
+		
+		# make all cultists outside of the main countries
 		any_country = { 
 			limit = { 
 				OR = {
 					has_country_modifier = early_cultists
 					has_country_modifier = mid_cultists 
-				}
-				NOT = {
 					has_country_modifier = full_cultists
 				}
 			}
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 4
 				consciousness = 4
@@ -563,11 +582,11 @@ country_event = {
 			# Increase jingoism in cultists
 			any_pop = { 
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
@@ -594,12 +613,12 @@ country_event = {
 
 		DAG = {
 			end_war = ELD
-			relation = { who = ELD value = 100 }
+			relation = { who = ELD value = 200 }
 			create_alliance = ELD
 			military_access = ELD
 
 			end_war = YIG 
-			relation = { who = YIG value = 100 }
+			relation = { who = YIG value = 200 }
 			create_alliance = YIG 
 			military_access = YIG
 
@@ -610,11 +629,11 @@ country_event = {
 			# Increase jingoism in cultists
 			any_pop = { 
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
@@ -623,6 +642,7 @@ country_event = {
 			# make war not love
 			war_exhaustion = -5
 			badboy = -5
+			prestige = 50 # needs boost 
 
 			# Extra Resources (for Navy)
 			clipper_convoy = 500
@@ -703,7 +723,7 @@ country_event = {
 					}
     				}
 				remove_core = ELD
-    				secede_province = DAG
+    			secede_province = DAG
 				add_core = DAG
 			}
 		}
@@ -742,7 +762,7 @@ country_event = {
 					}
     				}
 				remove_core = YIG
-    				secede_province = DAG
+    			secede_province = DAG
 				add_core = DAG
 			}
 		}
@@ -754,9 +774,9 @@ country_event = {
 						continent = europe 
 						continent = africa 
 					}
-    				}
+    			}
 				remove_core = DAG
-    				secede_province = ELD
+    			secede_province = ELD
 				add_core = ELD
 			}
 		}
@@ -797,11 +817,11 @@ country_event = {
 			# Increase jingoism in cultists
 			any_pop = { 
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                        culture = cultists
+                        culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
@@ -810,6 +830,7 @@ country_event = {
 			# make war not love
 			war_exhaustion = -5
 			badboy = -5
+			prestige = 50 # needs boost 
 		}
 
 		# check for Yigian cultist conversion
@@ -824,6 +845,11 @@ country_event = {
 					tag = PNM
 					tag = UCA
 					tag = COS
+					tag = BRA
+					tag = ARG
+					tag = CHI	
+					tag = PAR
+					tag = COL
 				}
 				primary_culture = cultists
 				has_country_modifier = full_cultists
@@ -849,14 +875,14 @@ country_event = {
 				primary_culture = cultists
 				has_country_modifier = full_cultists
 				any_owned_province = {
-	        			OR = {
-  	          				region = UCA_2186 
-  	          				region = UCA_2191 
+					OR = {
+						region = UCA_2186 
+						region = UCA_2191 
 						region = UCA_2197 
-  	          				region = UCA_2201 
-  	          				#region = USA_158 
+						region = UCA_2201 
+						#region = USA_158 
 						#region = USA_162 
-  	      				}
+					}
 
 				}
 				NOT = { 
@@ -891,10 +917,10 @@ country_event = {
 						is_core = PAR
 						is_core = COL				
 					}
-    				}
+    			}
 
 				remove_core = ELD
-    				secede_province = YIG
+    			secede_province = YIG
 				add_core = YIG 
 			}
 		}
@@ -915,10 +941,10 @@ country_event = {
 						is_core = PAR
 						is_core = COL
 					}
-    				}
+    			}
 
 				remove_core = DAG
-    				secede_province = YIG
+    			secede_province = YIG
 				add_core = YIG 
 			}
 		}
@@ -930,9 +956,9 @@ country_event = {
 						continent = europe 
 						continent = africa 
 					}
-    				}
+    			}
 				remove_core = YIG
-    				secede_province = ELD
+    			secede_province = ELD
 				add_core = ELD
 			}
 		}
@@ -954,10 +980,10 @@ country_event = {
 		name = "EVTOPT94110" #"Money"
 
 		ELD = {
-			money = -5000000
+			treasury = -5000000
 		}
 		THIS = {
-			money = 5000000	
+			treasury = 5000000	
 		}
 		country_event = { id=94111 days=2 }
 	}
@@ -977,71 +1003,85 @@ country_event = {
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
                    		}
 				NOT = { cash_reserves = 500 }
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
+		}
+
+		random_pop = {
+			limit = {
+				OR = {
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                }
+				NOT = { cash_reserves = 500 }
+				strata = middle
+			}
+			money = 2500
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1055,63 +1095,49 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 				NOT = { cash_reserves = 500 }
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
-		}
-
-		random_pop = {
-			limit = {
-				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
-					has_pop_culture = deep_ones
-                   		}
-				NOT = { cash_reserves = 500 }
-				strata = middle
-			}
-			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 	}
 }
@@ -1138,7 +1164,7 @@ country_event = {
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1147,7 +1173,7 @@ country_event = {
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1156,7 +1182,7 @@ country_event = {
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1165,7 +1191,7 @@ country_event = {
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1174,7 +1200,7 @@ country_event = {
 				strata = poor
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1183,7 +1209,7 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1192,7 +1218,7 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1201,7 +1227,7 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1210,7 +1236,7 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 
 		random_pop = {
@@ -1219,7 +1245,7 @@ country_event = {
 				strata = middle
 			}
 			money = 2500
-			THIS = { money = -2500 }
+			THIS = { treasury = -2500 }
 		}
 	}
 	#option = {

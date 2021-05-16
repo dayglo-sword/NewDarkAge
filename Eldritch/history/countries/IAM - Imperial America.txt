@@ -33,10 +33,20 @@ school_reforms = no_schools
 
 # Technologies
 post_napoleonic_thought = 1
+strategic_mobility = 1
+point_defense_system = 1
 flintlock_rifles = 1
+muzzle_loaded_rifles = 1
+breech_loaded_rifles = 1
 bronze_muzzle_loaded_artillery = 1
+iron_muzzle_loaded_artillery = 1
+iron_breech_loaded_artillery = 1
 military_staff_system = 1
+military_plans = 1
+military_statistics = 1
 army_command_principle = 1
+army_professionalism = 1
+army_decision_making = 1
 post_nelsonian_thought = 1
 clipper_design = 1
 naval_design_bureaus = 1
@@ -55,13 +65,30 @@ early_classical_theory_and_critique = 1
 freedom_of_trade = 1
 guild_based_production = 1
 water_wheel_power = 1
-publishing_industry = 1
-mechanized_mining = 1
-basic_chemistry = 1
-battleship_column_doctrine = 1
-steamers = 1
 practical_steam_engine = 1
+high_n_low_pressure_steam_engines = 1
+steam_turbine = 1
+combustion_engine = 1
+publishing_industry = 1
+mechanical_production = 1
+interchangeable_parts = 1
+semi_automatization = 1
+assembly_line = 1
+mechanized_mining = 1
+clean_coal = 1
+cheap_iron = 1
+cheap_steel = 1
+advanced_metallurgy = 1
 experimental_railroad = 1
+early_railroad = 1
+iron_railroad = 1
+steel_railroad = 1
+basic_chemistry = 1
+medicine = 1
+inorganic_chemistry = 1
+organic_chemistry = 1
+electricity = 1
+
 
 #Inventions
 #corvettes = yes

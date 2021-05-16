@@ -33,7 +33,8 @@ country_event = {
 	picture = "Alice"
 	major = yes
 	
-	trigger = {		
+	trigger = {	
+		has_global_flag = nameless_cults_exists	# kick off regardless of any supression of book
 		NOT = {
 			OR = {
 				has_country_modifier = early_cultists
@@ -156,7 +157,7 @@ country_event = {
 			who = YIG
 			value = 50 
 		}
-		# if country contains following provinces make Snakepeoples acceptable and convert Upper class POPs
+		# if country contains following provinces make Snakepeoples acceptable and convert POPs
 		# Snakes should originate Oklahoma, Texas and Yucatan before spread across Central and South America		
 		any_owned = {
 			limit = {
@@ -422,10 +423,10 @@ country_event = {
 			any_pop = { # try and increase internal strife from cultists
 				limit = {
 					 OR = {
-                        			culture = cultists
-                        			culture = yigian
-						culture = deep_ones
-                    			}
+                        	culture = cultists
+                        	culture = yigian
+							culture = deep_ones
+                    }
 				}
 				militancy = 4 
 			}
@@ -535,6 +536,10 @@ country_event = {
 				factor = 10
 				capital_scope = { continent = oceania }
 			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
+			}
 		}
 	}
 
@@ -564,6 +569,10 @@ country_event = {
 				NOT = { 
 				   any_owned_province = { is_coastal = yes }
 				}
+			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
 			}
 		}
 	}
@@ -711,10 +720,10 @@ country_event = {
 				limit = {
 					NOT = {
 					 	OR = {
-                        				culture = cultists
-                        				culture = yigian
+                        	culture = cultists
+                        	culture = yigian
 							culture = deep_ones
-                    				}
+                    	}
 					}
 				}
 				reduce_pop = 0.9
@@ -748,11 +757,11 @@ country_event = {
 
 			any_pop = { # try and increase strife from cultists
 				limit = {
-					 OR = {
-                        			culture = cultists
-                        			culture = yigian
+					OR = {
+                    	culture = cultists
+                    	culture = yigian
 						culture = deep_ones
-                    			}
+                    }
 				}
 				militancy = 7.0
 			}
@@ -818,11 +827,11 @@ country_event = {
 		THIS = {
 			any_pop = { 
 				limit = {
-					NOT = 	{
-                       				has_pop_culture = cultists
-                      				has_pop_culture = yigian
+					NOT = {
+                       	has_pop_culture = cultists
+                      	has_pop_culture = yigian
 						has_pop_culture = deep_ones
-                   			}
+                   	}
 				}
 				reduce_pop = 0.5
 				militancy = 7
@@ -1004,6 +1013,16 @@ country_event = {
 			}			
 		}
 		any_country = {
+			limit = { 
+				NOT = { 
+					OR = { 
+						tag = ELD 
+						tag = IAM 			
+						tag = DAG
+						tag = YIG 
+					}
+				}
+			}
 			remove_country_modifier = early_cultists
 			remove_country_modifier = mid_cultists
 			remove_country_modifier = full_cultists
@@ -1017,30 +1036,56 @@ country_event = {
 		any_pop = { 
 			limit = {
 				OR = {
-                       			has_pop_culture = cultists
-                      			has_pop_culture = yigian
+                    has_pop_culture = cultists
+                    has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                   		}
+                }
 			}
 			reduce_pop = 0.9
 		}
-		# need to try and set primary cultures for major players
-		ENG = { limit = { primary_culture = cultists } primary_culture = british }
-		FRA = { limit = { primary_culture = cultists } primary_culture = french }
-		GER = { limit = { primary_culture = cultists } primary_culture = north_german }
-		GRE = { limit = { primary_culture = cultists } primary_culture = greek }
-		ITA = { limit = { primary_culture = cultists } primary_culture = north_italian }
-		JAP = { limit = { primary_culture = cultists } primary_culture = japanese }
-		KUK = { limit = { primary_culture = cultists } primary_culture = south_german }
-		MEX = { limit = { primary_culture = cultists } primary_culture = mexican }
-		NET = { limit = { primary_culture = cultists } primary_culture = dutch }
-		NGF = { limit = { primary_culture = cultists } primary_culture = north_german }
-		NOR = { limit = { primary_culture = cultists } primary_culture = norwegian }
-		RUS = { limit = { primary_culture = cultists } primary_culture = russian }
-		SCA = { limit = { primary_culture = cultists } primary_culture = swedish }
-		SPA = { limit = { primary_culture = cultists } primary_culture = spanish }
-		USA = { limit = { primary_culture = cultists } primary_culture = yankee }
-		TUR = { limit = { primary_culture = cultists } primary_culture = turkish }
+		# need to try and set primary cultures for major players - for every country?
+		ABU = { limit = { primary_culture = cultists } primary_culture = bedouin religion = shiite}
+		AFG = { limit = { primary_culture = cultists } primary_culture = pashtun religion = sunni}
+		ARA = { limit = { primary_culture = cultists } primary_culture = mashriqi religion = sunni}
+		ARG = { limit = { primary_culture = cultists } primary_culture = platinean religion = catholic}
+		AUS = { limit = { primary_culture = cultists } primary_culture = south_german religion = catholic}		
+		BAV = { limit = { primary_culture = cultists } primary_culture = south_german religion = catholic}
+		BEL = { limit = { primary_culture = cultists } primary_culture = wallonian religion = catholic}
+		BOL = { limit = { primary_culture = cultists } primary_culture = south_andean religion = catholic}
+		BRZ = { limit = { primary_culture = cultists } primary_culture = brazilian religion = catholic}
+		BUL = { limit = { primary_culture = cultists } primary_culture = bulgarian religion = orthodox}	
+		CHI = { limit = { primary_culture = cultists } primary_culture = south_andean religion = mahayana}
+		CHL = { limit = { primary_culture = cultists } primary_culture = brazilian religion = catholic}	
+		CLM = { limit = { primary_culture = cultists } primary_culture = north_andean religion = catholic}			
+		EGY = { limit = { primary_culture = cultists } primary_culture = misri religion = sunni}		
+		ENG = { limit = { primary_culture = cultists } primary_culture = british religion = protestant}
+		ETH = { limit = { primary_culture = cultists } primary_culture = amhara religion = coptic}		
+		FRA = { limit = { primary_culture = cultists } primary_culture = french religion = catholic}
+		GCO = { limit = { primary_culture = cultists } primary_culture = north_andean religion = catholic}		
+		GER = { limit = { primary_culture = cultists } primary_culture = north_german religion = protestant}
+		GRE = { limit = { primary_culture = cultists } primary_culture = greek religion = orthodox}
+		HAW = { limit = { primary_culture = cultists } primary_culture = polynesian religion = protestant}		
+		ITA = { limit = { primary_culture = cultists } primary_culture = north_italian religion = catholic}
+		JAP = { limit = { primary_culture = cultists } primary_culture = japanese religion = mahayana}
+		KOR = { limit = { primary_culture = cultists } primary_culture = korean religion = mahayana}		
+		KUK = { limit = { primary_culture = cultists } primary_culture = south_german religion = catholic}
+		MEX = { limit = { primary_culture = cultists } primary_culture = mexican religion = catholic}
+		NEN = { limit = { primary_culture = cultists } primary_culture = yankee religion = protestant}		
+		NET = { limit = { primary_culture = cultists } primary_culture = dutch religion = protestant}
+		NGF = { limit = { primary_culture = cultists } primary_culture = north_german religion = protestant}
+		NOR = { limit = { primary_culture = cultists } primary_culture = norwegian religion = protestant}
+		PAP = { limit = { primary_culture = cultists } primary_culture = south_italian religion = catholic}
+		PER = { limit = { primary_culture = cultists } primary_culture = persian religion = shiite}		
+		POL = { limit = { primary_culture = cultists } primary_culture = polish religion = protestant}		
+		POR = { limit = { primary_culture = cultists } primary_culture = portuguese religion = catholic}
+		PRG = { limit = { primary_culture = cultists } primary_culture = platinean religion = catholic}
+		PRU = { limit = { primary_culture = cultists } primary_culture = north_german religion = protestant}
+		RUS = { limit = { primary_culture = cultists } primary_culture = russian religion = orthodox}
+		SCA = { limit = { primary_culture = cultists } primary_culture = swedish religion = protestant}
+		SGF = { limit = { primary_culture = cultists } primary_culture = south_german religion = catholic}
+		SPA = { limit = { primary_culture = cultists } primary_culture = spanish religion = catholic}
+		USA = { limit = { primary_culture = cultists } primary_culture = yankee religion = protestant}
+		TUR = { limit = { primary_culture = cultists } primary_culture = turkish religion = sunni}
 	}
 }
 
@@ -1406,6 +1451,11 @@ country_event = {
 					tag = PNM
 					tag = UCA
 					tag = COS
+					tag = BRA
+					tag = ARG
+					tag = CHI	
+					tag = PAR
+					tag = COL
 				}
 			}
 			# convert cultists to snakes
@@ -1554,9 +1604,9 @@ country_event = {
 						region = ENG_2224 #w indies
 						region = ENG_2228 #lesser antillies  
 					}
-    				}
+    			}
 				remove_core = YIG
-    				secede_province = DAG
+    			secede_province = DAG
 				add_core = DAG
 			}
 		}
@@ -1594,10 +1644,10 @@ country_event = {
 						region = USA_129 # Oklahoma	
 						region = TEX_132 # Texas
 					}
-    				}
+    			}
 
 				remove_core = ELD
-    				secede_province = YIG
+    			secede_province = YIG
 				add_core = YIG 
 			}
 		}
