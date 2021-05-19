@@ -1176,11 +1176,11 @@ country_event = {
 		THIS = {
 			any_pop = { 
 				limit = {
-					 OR = {
-                       				has_pop_culture = cultists
-                      				has_pop_culture = yigian
+					OR = {
+                       	has_pop_culture = cultists
+                      	has_pop_culture = yigian
 						has_pop_culture = deep_ones
-                   			}
+                   	}
 				}
 				reduce_pop = 0.5
 			}						

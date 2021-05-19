@@ -35,9 +35,9 @@ country_event = {
 		ai = no
 		not = { has_global_flag = new_dark_age_intro }		
 	}
-	mean_time_to_happen = {
-		months = 0.01
-	}
+	#mean_time_to_happen = {
+	#	months = 0.001
+	#}
 	option = {
 		name = "EVTOPT94160A"
 		set_global_flag = new_dark_age_intro
