@@ -1,0 +1,455 @@
+#94170 - Migo Intro - In The Night
+#94171 - All A Dream - Migo rejected
+#94172 - We Will Return
+#94173 - Time To Move On
+#94174 - A New Place
+#94175 - Moving On
+#94176 - The End Is Nigh
+#94177 - The End Of Time
+
+country_event = {
+	id = 94170
+	title = "EVTNAME94170" #  Migo Intro - In The Night
+	desc = "EVTDESC94170"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+		year = 1838
+		ai = no
+		not = { has_global_flag = migo_intro }
+	}
+
+	immediate = { set_global_flag = migo_intro }
+	option = {
+		name = "EVTOPT94170A"
+		set_global_flag = migo_experiment
+		country_event = {id=94172 days=0}
+	}
+	option = {
+		name = "EVTOPT94170B"
+		country_event = {id=94171 days=0}
+	}
+}
+
+country_event = {
+	id = 94171
+	title = "EVTNAME94171" # All A Dream - Migo rejected
+	desc = "EVTDESC94171"
+	picture = "migo"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPT94171A"
+	}
+}
+
+country_event = {
+	id = 94172
+	title = "EVTNAME94172" # We Will Return
+	desc = "EVTDESC94172"
+	picture = "migo"
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPT94172A"
+
+		add_country_modifier = {
+			name = migo_timetable
+			duration = 2900 # 8 years to rule
+		}
+	}
+}
+
+country_event = {
+	id = 94173
+	title = "EVTNAME94173" # Time To Move On
+	desc = "EVTDESC94173"
+	picture = "migo"
+
+	trigger = {
+		ai = no
+		has_global_flag = migo_experiment
+		NOT = { has_country_modifier = migo_timetable } #time has run out
+		NOT = { has_country_flag = migo_visited }
+	}
+
+	option = {
+		name = "EVTOPT94173A"
+
+		set_country_flag = migo_visited # so we don't return
+
+		random_country = {
+			limit = {
+				ai = yes
+				exists = yes
+				NOT = { has_country_flag = migo_visited }
+				OR = {
+					tag = ARG
+					tag = AUS
+					tag = BAV
+					tag = BEL
+					tag = BRZ
+					tag = CHI
+					tag = CHL
+					tag = CSA
+					tag = ENG
+					tag = FRA
+					tag = JAP
+					tag = KHI
+					tag = KOR
+					tag = MAN
+					tag = MEX
+					tag = PER
+					tag = PRU
+					tag = POL
+					tag = POR
+					tag = RUS
+					tag = SPA
+					tag = SWE
+					tag = SIC
+					tag = TUR
+					tag = USA
+					tag = VNZ
+				}
+			}
+			any_country = {
+				clr_country_flag = migo_next_stop
+			}
+			set_country_flag = migo_next_stop
+			country_event = 94174
+		}
+	}
+}
+
+country_event = {
+	id = 94174
+	title = "EVTNAME94174" # Time To Move On
+	desc = "EVTDESC94174"
+	picture = "migo"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94174A"
+
+		FROM = {
+			country_event = 94175
+		}
+
+	}
+}
+
+country_event = {
+	id = 94175
+	title = "EVTNAME94175" # A New Place
+	desc = "EVTDESC94175"
+	picture = "migo"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94174A"
+
+		FROM = {
+			add_country_modifier = {
+				name = migo_timetable
+				duration = 35 #1825  # 5 years
+			}
+		}
+
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = ARG
+			}
+			THIS = {
+				change_tag_no_core_switch = ARG
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = AUS
+			}
+			THIS = {
+				change_tag_no_core_switch = AUS
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = BAV
+			}
+			THIS = {
+				change_tag_no_core_switch = BAV
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = BEL
+			}
+			THIS = {
+				change_tag_no_core_switch = BEL
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = BRZ
+			}
+			THIS = {
+				change_tag_no_core_switch = BRZ
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = CHI
+			}
+			THIS = {
+				change_tag_no_core_switch = CHI
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = CHL
+			}
+			THIS = {
+				change_tag_no_core_switch = CHL
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = CSA
+			}
+			THIS = {
+				change_tag_no_core_switch = CSA
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = ENG
+			}
+			THIS = {
+				change_tag_no_core_switch = ENG
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = FRA
+			}
+			THIS = {
+				change_tag_no_core_switch = FRA
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = JAP
+			}
+			THIS = {
+				change_tag_no_core_switch = JAP
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = KHI
+			}
+			THIS = {
+				change_tag_no_core_switch = KHI
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = KOR
+			}
+			THIS = {
+				change_tag_no_core_switch = KOR
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = MAN
+			}
+			THIS = {
+				change_tag_no_core_switch = MAN
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = MEX
+			}
+			THIS = {
+				change_tag_no_core_switch = MEX
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = PER
+			}
+			THIS = {
+				change_tag_no_core_switch = PER
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = PRU
+			}
+			THIS = {
+				change_tag_no_core_switch = PRU
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = POL
+			}
+			THIS = {
+				change_tag_no_core_switch = POL
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = POR
+			}
+			THIS = {
+				change_tag_no_core_switch = POR
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = RUS
+			}
+			THIS = {
+				change_tag_no_core_switch = RUS
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = SPA
+			}
+			THIS = {
+				change_tag_no_core_switch = SPA
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = SWE
+			}
+			THIS = {
+				change_tag_no_core_switch = SWE
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = SIC
+			}
+			THIS = {
+				change_tag_no_core_switch = SIC
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = TUR
+			}
+			THIS = {
+				change_tag_no_core_switch = TUR
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = USA
+			}
+			THIS = {
+				change_tag_no_core_switch = USA
+			}
+		}
+		random_country = {
+			limit = {
+				has_country_flag = migo_next_stop
+				tag = VNZ
+			}
+			THIS = {
+				change_tag_no_core_switch = VNZ
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 94176
+	title = "EVTNAME94176" # The End Is Nigh
+	desc = "EVTDESC94176"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+
+		ai = no
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 
+		has_global_flag = he_is_here
+		NOT = {
+			has_global_flag = cthulhu_is_dead
+		}
+	}
+
+	immediate = {
+		# no more switching - in the experiment till game end
+		add_country_modifier = { 
+			name = migo_timetable
+			duration = -1
+		}
+	}
+	option = {
+		name = "EVTOPT94176A"		
+	}
+}
+
+country_event = {
+	id = 94177
+	title = "EVTNAME94177" # The End Is Nigh
+	desc = "EVTDESC94177"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+
+		ai = no
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 
+		has_global_flag = cthulhu_is_dead		
+	}
+
+	immediate = {
+	}
+	
+	option = {
+		name = "EVTOPT94177A"		
+	}
+}
