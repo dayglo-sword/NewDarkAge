@@ -2581,9 +2581,9 @@ abomination = {
 	unit = EuropeanGC
 	cultists = {
 		color = { 115  45  205 }
-		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of"}
+		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of" "Offspring of"}
 		
-		last_names = { "the Blood" "the Dark" "the Chaos" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Cthugha Cthulhu Ghatanothoa Hydra Zoth-Ommog Nephren-Ka}
+		last_names = { "the Blood" "the Dark" "the Chaos" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Cthugha Cthulhu Ghatanothoa Hydra Zoth-Ommog Nephren-Ka Gobogeg "Khal'kru" "Chaugnar Faugn" Bokrug Juk-Shabb Shaurash-Ho Ghoth}
 		
 	}
 	deep_ones = {
@@ -2606,7 +2606,7 @@ serpentine = {
 		color = { 63 90 22 }
 		first_names = { "Child of" "Son of" "Daughter of" "Slave of" "Servant of" "Beloved of" "Follower of" "Acolyte of" "Minion of" "Squire of" "Bairn of" "Consort of" "Hatchling of" "Neonate of"}
 		
-		last_names = { Yig "the Snake" "the Serpent" "the Viper" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Ghatanothoa Zoth-Ommog "the Blackadder" "the Ophidia" Yidhra Ayi'ig }
+		last_names = { Yig "the Snake" "the Serpent" "the Viper" Hastur Ithaqua Nyarlathotep Zhar Lloigor Cyäegha Nyogtha Shub-Niggurath Tsathoggua Aphoom-Zhah Ghatanothoa Zoth-Ommog "the Blackadder" "the Ophidia" Yidhra Ayi'ig K'baa}
 	}
 	union = YIG
 }

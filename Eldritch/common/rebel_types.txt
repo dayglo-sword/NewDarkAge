@@ -2957,3 +2957,122 @@ cultist_rebels = {
 			}
 	}
 }
+
+#### The consequences of Herbert West
+## Only after Cthulhu and Tonic for the Troops
+the_reanimated = {
+	icon = 4
+
+	area = all
+	break_alliance_on_win = no
+	
+	government = {
+		proletarian_dictatorship = proletarian_dictatorship
+		presidential_dictatorship = presidential_dictatorship
+		bourgeois_dictatorship = bourgeois_dictatorship
+		fascist_dictatorship = fascist_dictatorship
+		absolute_monarchy = absolute_monarchy
+		prussian_constitutionalism = prussian_constitutionalism
+		hms_government = hms_government
+		democracy = democracy
+	}
+
+	defection = none
+	independence = none
+	defect_delay = 8
+	
+	allow_all_cultures = yes
+	allow_all_religions = yes
+	allow_all_ideologies = yes
+
+	ideology = liberal
+	
+	resilient = yes
+	reinforcing = yes
+	general = yes
+	smart = no
+	unit_transfer = yes
+
+	occupation_mult = 1.0
+
+	will_rise = {
+		factor = 0.4
+
+		modifier = {
+			war = yes
+			factor = 0.8
+		}
+		
+		modifier = {
+			war_exhaustion = 4
+			factor = 0.95
+		}
+		
+		modifier = {
+			war_exhaustion = 6
+			factor = 0.95
+		}
+		
+		modifier = {
+			war_exhaustion = 8
+			factor = 0.95
+		}
+	}
+	
+	spawn_chance = {
+		factor = 500
+		# should be mostly military	- 'combat drug'
+		modifier = {
+			factor = 0.01
+			NOT = {
+				type = officers  
+			}
+			NOT = {
+				type = soldiers 
+			}
+		}
+
+		modifier = {
+			factor = 0
+			country = { NOT = { has_country_flag = tonic_for_the_troops } }
+		}
+		modifier = {
+			factor = 0
+			country = { NOT = { has_global_flag = cthulhu_is_dead } }
+		}
+	}
+ 
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		# Pick on Arkham
+		modifier = {
+			factor = 2
+			province_id = 247
+		}
+	}
+
+ 	#siege_won_trigger = { 
+	#}
+	
+	siege_won_effect = {
+		any_pop = {
+			reduce_pop = 0.8 # don't kill too many
+			militancy = 7
+			consciousness = -3
+		}
+	}
+	
+	#demands_enforced_trigger = {
+	#}
+
+	#demands_enforced_effect = {
+	#}
+}

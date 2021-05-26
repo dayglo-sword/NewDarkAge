@@ -99,6 +99,13 @@ political_decisions = {
 				accepted_culture = cultists 
 				primary_culture = cultists
 			}
+			any_core = { 
+				owner = { 	
+					ai = yes 
+					OR = { in_sphere = THIS vassal_of = THIS alliance_with = THIS }	
+					has_country_modifier = early_cultists
+				}
+			}
 		}
 		allow = {
 			any_core = { 
@@ -167,12 +174,13 @@ political_decisions = {
 		}		
 	}
 	
-	# Create Carnaki Lighting in cities
+	# Create Carnacki Lighting in cities
 	light_the_cities = {
 		picture = "light_the_cities" 
 		potential = {
 			ai = no
 			has_country_flag = carnacki_succesful
+			NOT = { has_country_flag = carnacki_lights } # run once
 		}
 		
 		allow = {
@@ -184,6 +192,7 @@ political_decisions = {
 		
 		effect = {
 			# add country wide effect that reduces cultist presence
+			set_country_flag = carnacki_lights
 			# any cultists - same as purge but less consequences
 			any_pop = {
             	limit = { 
@@ -197,8 +206,11 @@ political_decisions = {
             	reduce_pop = 0.1
 				militancy = 7.0
             }
-			any_owned = { #add flag for ongoing effects - how to implement as province modifier?
-				#add_province_modifier = carnaki_lights
+			any_owned = { 
+				#add_province_modifier = carnacki_lights
+				treasury = -1000 # needs money to implement.
+				
+				#add flag for ongoing effects - how to implement as province modifier?
 			}
 		}
 		

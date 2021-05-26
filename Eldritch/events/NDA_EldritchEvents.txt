@@ -9,11 +9,11 @@
 #94127 - Decide on offer
 #94128 - Imperial America
 #94130 - Release New England
-#94131 - Carnaki Parties in England
-#94132 - Carnaki Requests exile
-#94133 - Carnaki Research
-#94134 - Carnaki Succeeds
-#94135 - Death of Carnaki
+#94131 - Carnacki Parties in England
+#94132 - Carnacki Requests exile
+#94133 - Carnacki Research
+#94134 - Carnacki Succeeds
+#94135 - Death of Carnacki
 #94136 - House on the Borderlands
 #94140 - Appeal for reinstatement
 #94141 - Plague in Arkham
@@ -205,7 +205,7 @@ country_event = {
 	id = 94123
 	title = "EVTNAME94123" #"The King in Yellow"
 	desc = "EVTDESC94123"
-	picture = "Almqvist"
+	picture = "kinginyellow"
 	fire_only_once = yes
 	news = yes
 	news_desc_long = "EVTDESC94123_NEWS_LONG"
@@ -252,7 +252,7 @@ country_event = {
 	id = 94124
 	title = "EVTNAME94124"
 	desc = "EVTDESC94124"
-	picture = "Almqvist"
+	picture = "kinginyellow"
 
 	trigger = {
 		year = 1891	
@@ -339,7 +339,7 @@ country_event = {
 	id = 94126
 	title = "EVTNAME94126" # The Repairer of Reputations
 	desc = "EVTDESC94126"
-	picture = "Almqvist"
+	picture = "kinginyellow"
 	
 	fire_only_once = yes
 
@@ -374,7 +374,7 @@ country_event = {
 	id = 94127
 	title = "EVTNAME94127" # The Repairers offer
 	desc = "EVTDESC94127"
-	picture = "Almqvist"
+	picture = "kinginyellow"
 	
 	is_triggered_only = yes
 
@@ -398,7 +398,7 @@ country_event = {
 	id = 94128
 	title = "EVTNAME94128" # Create Imperial America
 	desc = "EVTDESC94128"
-	picture = "Almqvist"
+	picture = "Alice"
 	
 	is_triggered_only = yes
 
@@ -647,10 +647,16 @@ country_event = {
 
 	option = {
 		name = "EVTOPT94133A" # continue research
- 
+		
 		country_event = { id=94134 days=150 }
 		# warm up for other Carnacki events
 		set_country_flag = carnacki_pentangle
+		treasury = -10000 
+	}
+	option = {
+		name = "EVTOPT94133B" 
+		# Carnacki is doomed
+ 		country_event = { id=94135 days=150 }		
 	}
 }
 
@@ -667,12 +673,17 @@ country_event = {
 	fire_only_once = yes
 
 	option = {
-		name = "EVTOPT94134A" # A tragic event
- 
-		#country_event = { id=94135 days=150 }
-		# warm up for other Carnacki events
+		name = "EVTOPT94134A" 
+		treasury = -10000 
+
+		# warm up for other Carnacki events\decisions
 		set_global_flag = carnacki_succesful
 		set_country_flag = carnacki_succesful	
+	}
+	option = {
+		name = "EVTOPT94133B" 
+		# Carnacki is doomed
+ 		country_event = { id=94135 days=150 }		
 	}
 }
 
@@ -697,7 +708,6 @@ country_event = {
 	option = {
 		name = "EVTOPT94135A" # A tragic event
  
-		# warm up for other Carnacki events
 		set_global_flag = carnacki_dead	
 	}
 }
