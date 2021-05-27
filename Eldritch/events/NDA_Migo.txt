@@ -6,6 +6,8 @@
 #94175 - Moving On
 #94176 - The End Is Nigh
 #94177 - The End Of Time
+#94178 - A Bad Place - Hostile IAM
+#94179 - A Bad Place - Cultist Controlled
 
 country_event = {
 	id = 94170
@@ -62,7 +64,7 @@ country_event = {
 
 		add_country_modifier = {
 			name = migo_timetable
-			duration = 2900 # 8 years to rule
+			duration = 2920 # 8 years to rule
 		}
 	}
 }
@@ -160,7 +162,7 @@ country_event = {
 		FROM = {
 			add_country_modifier = {
 				name = migo_timetable
-				duration = 35 #1825  # 5 years
+				duration = 3640 # 10 years
 			}
 		}
 
@@ -451,5 +453,49 @@ country_event = {
 	
 	option = {
 		name = "EVTOPT94177A"		
+	}
+}
+
+country_event = {
+	id = 94178
+	title = "EVTNAME94178" # A Bad Place - Imperial America
+	desc = "EVTDESC94178"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+		tag = IAM # Imperial America - Hastur is anti-mi-go
+		ai = no
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 	
+	}
+
+	immediate = {
+	}
+	
+	option = {
+		name = "EVTOPT94178A"		
+	}
+}
+
+country_event = {
+	id = 94179
+	title = "EVTNAME94179" # A Strange Place - Full Cultist Country
+	desc = "EVTDESC94179"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+		has_country_modifier = full_cultists 	
+		ai = no
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 	
+	}
+
+	immediate = {
+	}
+	
+	option = {
+		name = "EVTOPT94179A"		
 	}
 }

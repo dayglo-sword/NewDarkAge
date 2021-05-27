@@ -24,8 +24,9 @@
 # 94023 - Transfer to Yig
 # 94030 - Cultist Pan-National!
 # 94031 - Cultist Union
+# 94041 - Initial cult presence - none spam
 
-# Initial cult presence
+# Initial cult presence - notify version - for non-spam see # 94041
 country_event = {
 	id = 94001
 	title = EVTNAME94001
@@ -55,6 +56,8 @@ country_event = {
 				tag = YIG
 			}
 		}
+		rank = 40 # message for top 40 countries
+
 		ai = yes		    
 	}
 
@@ -185,6 +188,36 @@ country_event = {
 				add_accepted_culture = yigian 
 			}
 		}	
+		# if country contains following provinces make Deep Ones acceptable and convert POPs
+		# Deep Ones should originate in Pacific Islands 1405 - Banda Aceh	1485 - Taibei	
+		any_owned = {
+			limit = {
+				OR = {
+					province_id = 1405
+					province_id = 1485
+					province_id = 610 # Ponape  
+					province_id = 1637 
+					province_id = 1632
+					province_id = 1641
+				}
+			}
+
+			# temp change - will this work?
+			THIS = {
+				primary_culture = deep_ones	 # country likes fish
+				add_accepted_culture = cultists
+				religion = cultist
+			}
+			
+			add_core = DAG			
+			assimilate = yes
+			
+			#revert back
+			THIS = {
+				primary_culture = cultists
+				add_accepted_culture = deep_ones	 
+			}
+		}
 	}
 }
 
@@ -224,7 +257,7 @@ country_event = {
 	}
 }
 
-#Make ELD unstoppable.
+#Make Cultists unstoppable.
 country_event = {
 	id = 94005
 	title = EVTNAME94005
@@ -261,14 +294,14 @@ country_event = {
 			add_core = THIS
 		}
 		tech_school = eldritch_tech_school
-		prestige = 100 #It's super lame if they're not #1 GP.
+		prestige = 200 #It's super lame if they're not #1 GP.
 		badboy = -20.0 
 		plurality = 15
 	}
 }
 
-# gutter crown is internal event based on cultural union - it'll create ELD in certain conditions. - how to initially create DAG and YIG??
-#Because of gutter crown, it's possible ELD is actually something like #6 GP if they formed out of Belgium or someone similarly lame.  ~1880, we have them inherit another GP, just to keep the player on their toes.
+# gutter crown is internal event based on cultural union - it'll create ELD in certain conditions. Eldritch Rebels can also create ELD.
+#Because of gutter crown or revolt, it's possible ELD is actually something like #6 GP if they formed out of Belgium or someone similarly lame.  ~1880, we have them inherit another GP, just to keep the player on their toes.
 country_event = {
 	id = 94006
 	title = "EVTNAME94006"
@@ -386,9 +419,35 @@ country_event = {
 	option = {
 		name = "EVTOPT94007"
 		set_global_flag = ritual_started
-		add_country_modifier = {
-			name = ritual_in_progress
-			duration = -1
+		# All 3 main cultist should join ritual
+		ELD = {
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 200 #We should be at #1 at this point.
+			badboy = -25.0 #We do what we want.
+			plurality = 10
+		}
+		DAG = {
+			remove_country_modifier = full_cultists # can retain this from creating country so remove
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 100 #We should be a power by this point.
+			badboy = -15.0 #We do what we want.
+			plurality = 10
+		}
+		YIG = {
+			remove_country_modifier = full_cultists # can retain this from creating country so remove
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 100 #We should be a power by this point.
+			badboy = -15.0 #We do what we want.
+			plurality = 10
 		}
 		prestige = 200 #We should be at #1 at this point.
 		badboy = -25.0 #We do what we want.
@@ -423,10 +482,10 @@ country_event = {
 			any_pop = { # try and increase internal strife from cultists
 				limit = {
 					 OR = {
-                        	culture = cultists
-                        	culture = yigian
-							culture = deep_ones
-                    }
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                   			 }
 				}
 				militancy = 4 
 			}
@@ -615,10 +674,26 @@ country_event = {
 	option = {
 		name = "EVTOPT94009"
 		set_global_flag = ritual_faster
-		remove_country_modifier = ritual_in_progress
-		add_country_modifier = {
-			name = intense_ritual
-			duration = -1
+		ELD = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
+		}
+		DAG = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
+		}
+		YIG = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
 		}
 		prestige = 200 #We should really be at #1 at this point.
 		plurality = 10
@@ -1673,7 +1748,7 @@ country_event = {
     				}
 
 				remove_core = DAG
-    				secede_province = YIG
+    			secede_province = YIG
 				add_core = YIG 
 			}
 		}
@@ -1736,4 +1811,55 @@ country_event = {
 		}
 	}
 
+}
+
+# Initial cult presence - notify version - for non-spam see # 94041
+country_event = {
+	id = 94041
+	title = EVTNAME94001 
+	desc = EVTDESC94001
+	picture = "Alice"
+	#major = yes # stop spam
+	
+	trigger = {	
+		has_global_flag = nameless_cults_exists	# kick off regardless of any supression of book
+		NOT = {
+			OR = {
+				has_country_modifier = early_cultists
+				has_country_modifier = mid_cultists
+				has_country_modifier = full_cultists
+			}
+		}
+		NOT = {	# Do not convert after final war has started - must conquor instead
+			OR = {
+				has_global_flag = cthulhu_is_dead
+				has_global_flag = final_war_started
+			}
+		}
+		NOT = {
+			OR = {
+				tag = ELD
+				tag = DAG
+				tag = YIG
+			}
+		}
+		
+		NOT = { rank = 40 } # rank works in reverse?
+		#is_greater_power = no 
+		#is_secondary_power = no
+
+		ai = yes		    
+	}
+
+	mean_time_to_happen = {
+		years = 9 # was 11
+	}
+
+	option = {
+		name = EVTOPT94001
+		add_country_modifier = {
+			name = early_cultists
+			duration = -1
+		}
+	}
 }

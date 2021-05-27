@@ -416,9 +416,19 @@ country_event = {
 			change_tag = IAM
 			government = absolute_monarchy
 			nationalize = yes
+
+			add_country_modifier = {
+				name = full_cultists 
+				duration = -1
+			}
+
+			primary_culture = cultists
+			add_accepted_culture = yankee # presume created from USA or NEN so retain
+			add_accepted_culture = yigian
+			add_accepted_culture = deep_ones	
+
 			# need to add extra cores else good chance of flip to 'Kingdom of America' via decision
 			# all of america should do
-
 			any_country = { 				
 				any_owned = { 
 					limit = { continent = north_america }
@@ -432,135 +442,6 @@ country_event = {
 
 }
 
-#country_event = {
-#	id = 94130
-#	title = "EVTNAME94130" # Release New England with option to play
-#	desc = "EVTDESC94130"
-#	picture = "Almqvist"
-#	
-#	fire_only_once = yes
-#	
-#	trigger = { ai = no
-#			year = 1835 month = 1 }
-#	option = {
-#		name = "EVTOPT94130A"	# Do nothing
-#		
-#	}
-#
-#	option = {
-#		name = "EVTOPT94130B"	# Release Country
-#		USA = { release = NEN }
-#		NEN = {
-#			247 = { # 245 isn't coastal!?
-#				change_province_name = "Arkham"
-#				add_province_modifier = {
-#					name = miskatonic_campus
-#					duration = -1
-#				}
-#			}
-#
-#			set_country_flag = miskatonic_u_class_of_1836
-#
-#			# add leaders else will get swamped by USA
-#			define_general = {
-#				name = "William Peabody"
-#				personality = audacious
-#				background = school_of_defense
-#			}
-#			define_general = {
-#				name = "Howard Wilmarth"
-#				personality = defiant
-#				background = school_of_the_bayonet
-#			}
-#
-#			# New England needs powerful friend - but seems to lose it quickly - put in sphere??
-#			relation = { who = ENG value = 200 }
-#			create_alliance = ENG
-#		
-#			ENG = {
-#				diplomatic_influence = { who = NEN value = 400 }
-#
-#
-#			}
-#				# give Caribou? 250
-#				250 = {
-#					remove_core = ENG
-#					secede_province = NEN
-#				}
-#
-#			relation = { who = MEX value = 200 }
-#			relation = { who = FRA value = 200 }
-#
-#			any_owned = {
-#				fort = 1
-#			}
-#
-#			# give tech boost
-#			activate_technology = strategic_mobility
-#			activate_technology = muzzle_loaded_rifles
-#			activate_technology = iron_muzzle_loaded_artillery
-#			activate_technology = military_plans
-#			activate_technology = army_professionalism
-#		}
-#	}
-#
-#	option = {
-#		name = "EVTOPT94130C"	# Release and play as (need to stop insta war by USA)
-#		USA = { release = NEN }
-#		NEN = {
-#			247 = { # 245 isn't coastal!? Change to Concord
-#				change_province_name = "Arkham"
-#				add_province_modifier = {
-#					name = miskatonic_campus
-#					duration = -1
-#				}
-#			}
-#			set_country_flag = miskatonic_u_class_of_1836
-#
-#			# add leaders else will get swamped by USA
-#			define_general = {
-#				name = "William Peabody"
-#				personality = audacious
-#				background = school_of_defense
-#			}
-#			define_general = {
-#				name = "Howard Wilmarth"
-#				personality = defiant
-#				background = school_of_the_bayonet
-#			}
-#
-#			# New England needs powerful friend - but seems to lose it quickly - put in sphere??
-#			relation = { who = ENG value = 200 }
-#			create_alliance = ENG
-#		
-#			ENG = {
-#				diplomatic_influence = { who = NEN value = 400 }
-#			}
-#
-#				# give Caribou? 250
-#				250 = {
-#					remove_core = ENG
-#					secede_province = NEN
-#				}
-#
-#			relation = { who = MEX value = 200 }
-#			relation = { who = FRA value = 200 }
-#
-#			any_owned = {
-#				fort = 1
-#			}
-#
-#			# give tech boost
-#			activate_technology = strategic_mobility
-#			activate_technology = muzzle_loaded_rifles
-#			activate_technology = iron_muzzle_loaded_artillery
-#			activate_technology = military_plans
-#			activate_technology = army_professionalism
-#		}
-#
-#		change_tag_no_core_switch = NEN	
-#	}
-#}
 
 # Carnacki the ghostfinder in London (William Hope Hodgeson)
 country_event = {
