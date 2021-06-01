@@ -27,9 +27,11 @@ country_event = {
 	id = 94160
 	title = "EVTNAME94160" #"Start of the game"
 	desc = "EVTDESC94160"
-	picture = "Almqvist"
+	picture = "sight"
 	fire_only_once = yes
 	
+	major = yes
+
 	trigger = { # will this work?
 		year = 1835
 		ai = no
