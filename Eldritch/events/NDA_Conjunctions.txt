@@ -11,7 +11,10 @@
 # 94110 - Eldritch Cash aid to Yig and Dagon
 # 94111 - Cultists distribute money
 # 94112 - Distribute money (All)
- # 25 January 1842	22:22:31	32' South	26.8° West	Capricorn
+# 94113 - Conjunction in Player Early\Mid Cultist Country
+# 94114 - Conjunction in Player Full Cultist Country
+
+# 25 January 1842	22:22:31	32' South	26.8° West	Capricorn
 country_event = {
 
 	id = 94100
@@ -36,13 +39,6 @@ country_event = {
 	immediate = { 
 		set_global_flag = alignment_1_occured # stop retriggering
 
-		# don't need to do any of the below as not yet existing?
-
-		# keep overt cultist nations close
-		#ELD = { country_event = { id=94105 days=1 } }
-		#DAG = { country_event = { id=94106 days=2 } }
-		#YIG = { country_event = { id=94107 days=3 } }
-
 		# make non-cultist country cultist agitated?
 		any_country = { 
 			limit = { 
@@ -57,14 +53,65 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					 OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				militancy = 3 
 				consciousness = 2
+				# reduce atheism among cultists! Try and make Cultism accepted.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Pluralism
+					value = 0.5
+				}
 			}	
+		}
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+				ai = no
+			}
+			country_event = 94113
+		}
+		any_country = { 
+			limit = { 
+					has_country_modifier = full_cultists
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+									culture = deep_ones
+                    			}
+				}
+				# reduce atheism among cultists! Spread state religion - which should be cultist.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Moralism
+					value = 0.5
+				}
+				move_issue_percentage  = { 
+					from = Secularized 
+					to = Moralism
+					value = 0.5
+				}				
+			}	
+		}
+		any_country = { 
+			limit = { 
+					has_country_modifier = full_cultists
+					ai = no
+			}
+			country_event = 94114
 		}
 	}
 
@@ -96,9 +143,7 @@ country_event = {
 	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
 	news_desc_short = "EVTDESC94100_NEWS_SHORT"
 
-	option = {
-		name = "EVTOPT94100A" #"A bit worrying..."
-
+	immediate = { 
 		set_global_flag = alignment_2_occured # stop retriggering
 
 		# make this a called event?
@@ -145,15 +190,48 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				militancy = 4 
 				consciousness = 3
+				# reduce atheism among cultists! Try and make Cultism accepted.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Pluralism
+					value = 0.5
+				}
 			}	
 		}
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+				ai = no
+			}
+			country_event = 94113
+		}
+		
+		any_country = { 
+			limit = { 
+					has_country_modifier = full_cultists
+					ai = no
+			}
+			country_event = 94114
+		}		
+	}
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+
 	}
 }
 
@@ -179,9 +257,7 @@ country_event = {
 	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
 	news_desc_short = "EVTDESC94100_NEWS_SHORT"
 
-	option = {
-		name = "EVTOPT94100A" #"A bit worrying..."
-
+	immediate = { 
 		set_global_flag = alignment_3_occured # stop retriggering
 
 		# make this a called event?
@@ -232,7 +308,7 @@ country_event = {
 				value = -100
 			}
 		}
-
+		
 		# keep overt cultist nations close
 		ELD = { country_event = { id=94105 days=1 } }
 		DAG = { country_event = { id=94106 days=2 } }
@@ -243,14 +319,14 @@ country_event = {
 			limit = { money = 30000000}
 			DAG = { limit = { exists = yes } country_event = 94110}
 			YIG = { limit = { exists = yes } country_event = 94110}
-			country_event = 94111
+			country_event = { id=94111 days= 1 }
 		}
 		# more money if v rich
 		ELD = {
 			limit = { money = 60000000}
 			DAG = { limit = { exists = yes } country_event = 94110}
 			YIG = { limit = { exists = yes } country_event = 94110}
-			country_event = 94111
+			country_event = { id=94111 days= 2 }
 		}
 		# add some if poor
 		ELD = {
@@ -261,12 +337,12 @@ country_event = {
 		YIG = {
 			limit = { exists = yes not = { money = 1000000 } }
 			treasury = 1000000
-			country_event = 94111
+			country_event = { id=94111 days= 3 }
 		}
 		DAG = {
 			limit = { exists = yes not = { money = 1000000 } }
 			treasury = 1000000
-			country_event = 94111
+			country_event = { id=94111 days= 4 }
 		}
 		
 		# make non-cultist country cultist agitated?
@@ -290,8 +366,41 @@ country_event = {
 				}
 				militancy = 4 
 				consciousness = 3
+				# reduce atheism among cultists! Try and make Cultism accepted.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Pluralism
+					value = 0.5
+				}
 			}	
 		}
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+				ai = no
+			}
+			country_event = 94113
+		}		
+
+		any_country = { 
+			limit = { 
+					has_country_modifier = full_cultists
+					ai = no
+			}
+			country_event = 94114
+		}		
+	}
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+
+
 	}
 }
 
@@ -317,8 +426,7 @@ country_event = {
 	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
 	news_desc_short = "EVTDESC94100_NEWS_SHORT"
 
-	option = {
-		name = "EVTOPT94100A" #"A bit worrying..."
+	immediate = { 
 
 		set_global_flag = alignment_4_occured # stop retriggering
 
@@ -418,15 +526,47 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					 OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				militancy = 4 
 				consciousness = 3
-			}	
+				# reduce atheism among cultists! Try and make Cultism accepted.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Pluralism
+					value = 0.5
+				}					
+			}		
+		}
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+				ai = no
+			}
+			country_event = 94113
+		}		
+
+		any_country = { 
+			limit = { 
+					has_country_modifier = full_cultists
+					ai = no
+			}
+			country_event = 94114
 		}	
+	}
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."
+	
 	}
 }
 
@@ -452,9 +592,7 @@ country_event = {
 	news_desc_medium = "EVTDESC94100_NEWS_MEDIUM"
 	news_desc_short = "EVTDESC94100_NEWS_SHORT"
 
-	option = {
-		name = "EVTOPT94100A" #"A bit worrying..."
-
+	immediate = { 
 		set_global_flag = alignment_4_occured # stop retriggering
 
 		# make this a called event?
@@ -507,15 +645,15 @@ country_event = {
 		# distribute excess money
 		ELD = {
 			limit = { money = 30000000}
-			DAG = { limit = { exists = yes } country_event = 94110}
-			YIG = { limit = { exists = yes } country_event = 94110}
-			country_event = 94111
+			DAG = { limit = { exists = yes } country_event = { id=94110 days=1} }
+			YIG = { limit = { exists = yes } country_event = { id=94110 days=1} }
+			country_event = { id=94111 days=1 }
 		}
 		# more money if v rich
 		ELD = {
 			limit = { money = 60000000}
-			DAG = { limit = { exists = yes } country_event = 94110}
-			YIG = { limit = { exists = yes } country_event = 94110}
+			DAG = { limit = { exists = yes } country_event = { id=94110 days=2} }
+			YIG = { limit = { exists = yes } country_event = { id=94110 days=1} }
 			country_event = 94111
 		}
 		# add some if poor
@@ -547,15 +685,46 @@ country_event = {
 			any_pop = { # try and increase internal strife amongst cultists
 				limit = {
 					OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				militancy = 4
 				consciousness = 4
+				# reduce atheism among cultists! Try and make Cultism accepted.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Pluralism
+					value = 0.5
+				}				
 			}	
+		}
+		any_country = { 
+			limit = { 
+				OR = {
+					has_country_modifier = early_cultists
+					has_country_modifier = mid_cultists 
+				}
+				NOT = {
+					has_country_modifier = full_cultists
+				}
+				ai = no
+			}
+			country_event = 94113
+		}		
+		
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+				ai = no
+			}
+			country_event = 94114
 		}	
+	}
+
+	option = {
+		name = "EVTOPT94100A" #"A bit worrying..."	
 	}
 }
 
@@ -572,29 +741,75 @@ country_event = {
 		years = 1
 	}
 
+	immediate = { 
+	
+		military_access = DAG 
+		military_access = YIG
+
+		# Increase jingoism in cultists
+		any_pop = { 
+			limit = {
+				OR = {
+                        		culture = cultists
+                        		culture = yigian
+					culture = deep_ones
+                    		}
+			}
+			dominant_issue = { value = moralism factor = 0.10 }
+			dominant_issue = { value = jingoism factor = 0.10 }
+			ideology = { value = reactionary factor = 0.10 }
+		}
+		# make war not love
+		war_exhaustion = -5
+		badboy = -5
+
+
+		# cult country should have Moralism
+		any_country = { 
+			limit = { 
+				has_country_modifier = full_cultists
+			}
+			any_pop = { # try and increase internal strife amongst cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				# reduce atheism among cultists! Spread state religion - which should be cultist.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Moralism
+					value = 0.5
+				}
+				move_issue_percentage  = { 
+					from = Secularized 
+					to = Moralism
+					value = 0.5
+				}				
+			}
+		}
+	}
 	option = {
 		name = "EVTOPT94105" #"Getting Stronger"
 
-		ELD = {
-			military_access = DAG 
-			military_access = YIG
-
-			# Increase jingoism in cultists
-			any_pop = { 
-				limit = {
-					OR = {
-                        culture = cultists
-                        culture = yigian
-						culture = deep_ones
-                    }
+		# Increase ELDs diplomatic influence among Minors
+		any_country = { 
+			limit = { 
+				exists = yes
+				is_greater_power = no
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+				NOT = { 
+					tag = ELD
+					tag = DAG
+					tag = YIG
 				}
-				dominant_issue = { value = moralism factor = 0.10 }
-				dominant_issue = { value = jingoism factor = 0.10 }
-				ideology = { value = reactionary factor = 0.10 }
 			}
-			# make war not love
-			war_exhaustion = -5
-			badboy = -5
+			ELD = {
+				diplomatic_influence = { who = THIS value = 200 }
+			}
 		}
 	}
 }
@@ -630,10 +845,10 @@ country_event = {
 			any_pop = { 
 				limit = {
 					OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
@@ -658,6 +873,7 @@ country_event = {
 		# check for Dagonic cultist conversion
 		any_country = { 
 			limit = { 
+				exists = yes
 				ai = yes
 					OR = { 
 						continent = oceania 
@@ -685,6 +901,9 @@ country_event = {
 			plurality = 25
 			capital_scope = {
 				assimilate = yes
+			}
+			DAG = {
+				diplomatic_influence = { who = THIS value = 100 }
 			}
 		}
 		# transfer cultist provinces to DAG
@@ -723,7 +942,7 @@ country_event = {
 					}
     				}
 				remove_core = ELD
-    			secede_province = DAG
+    				secede_province = DAG
 				add_core = DAG
 			}
 		}
@@ -762,7 +981,7 @@ country_event = {
 					}
     				}
 				remove_core = YIG
-    			secede_province = DAG
+    				secede_province = DAG
 				add_core = DAG
 			}
 		}
@@ -776,7 +995,7 @@ country_event = {
 					}
     			}
 				remove_core = DAG
-    			secede_province = ELD
+    				secede_province = ELD
 				add_core = ELD
 			}
 		}
@@ -791,10 +1010,6 @@ country_event = {
 	picture = "Alice"
 
 	is_triggered_only = yes
-
-	#mean_time_to_happen = {
-	#	years = 1
-	#}
 
 	option = {
 		name = "EVTOPT94107" #"Getting Stronger"
@@ -818,10 +1033,10 @@ country_event = {
 			any_pop = { 
 				limit = {
 					OR = {
-                        culture = cultists
-                        culture = yigian
+                        			culture = cultists
+                        			culture = yigian
 						culture = deep_ones
-                    }
+                    			}
 				}
 				dominant_issue = { value = moralism factor = 0.10 }
 				dominant_issue = { value = jingoism factor = 0.10 }
@@ -836,6 +1051,7 @@ country_event = {
 		# check for Yigian cultist conversion
 		any_country = { 
 			limit = { 
+				exists = yes
 				ai = yes
 				OR = {
 					capital_scope = { continent = south_america }
@@ -850,6 +1066,7 @@ country_event = {
 					tag = CHI	
 					tag = PAR
 					tag = COL
+					tag = VNZ
 				}
 				primary_culture = cultists
 				has_country_modifier = full_cultists
@@ -857,6 +1074,7 @@ country_event = {
 					tag = ELD
 					tag = DAG
 					tag = YIG
+					tag = ENG # England keeps getting snakes - try and stop
 				}
 			}
 
@@ -868,6 +1086,10 @@ country_event = {
 				assimilate = yes
 			}
 			relation = { who = YIG value = 200 }
+
+			YIG = {
+				diplomatic_influence = { who = THIS value = 100 }
+			}	
 		}
 		any_country = { 
 			limit = { #should also limit to capital in these area?
@@ -915,12 +1137,13 @@ country_event = {
 						is_core = ARG
 						is_core = CHI	
 						is_core = PAR
-						is_core = COL				
+						is_core = COL	
+						is_core = VNZ			
 					}
     			}
 
 				remove_core = ELD
-    			secede_province = YIG
+    				secede_province = YIG
 				add_core = YIG 
 			}
 		}
@@ -940,11 +1163,12 @@ country_event = {
 						is_core = CHI	
 						is_core = PAR
 						is_core = COL
+						is_core = VNZ
 					}
     			}
 
 				remove_core = DAG
-    			secede_province = YIG
+    				secede_province = YIG
 				add_core = YIG 
 			}
 		}
@@ -958,7 +1182,7 @@ country_event = {
 					}
     			}
 				remove_core = YIG
-    			secede_province = ELD
+    				secede_province = ELD
 				add_core = ELD
 			}
 		}
@@ -985,7 +1209,7 @@ country_event = {
 		THIS = {
 			treasury = 5000000	
 		}
-		country_event = { id=94111 days=2 }
+		country_event = { id=94111 days=3 }
 	}
 }
 
@@ -1251,4 +1475,69 @@ country_event = {
 	#option = {
 	#	name = "EVTOPT94112B" # do nothing
 	#}
+}
+
+
+# 94113 - Conjunction in Player Early\Mid Cultist Country
+country_event = {
+	id = 94113 
+	title = "EVTNAME94113"
+	desc = "EVTDESC94113"
+	picture = "sight"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94113A"
+		random_pop = {
+			limit = {
+				OR = {
+                    			has_pop_culture = cultists
+                    			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                		}
+			}
+			# make it slightly worse for Player country (already agitated by main conjuction effects)
+			militancy = 1 
+			consciousness = 1
+		}
+	}
+}
+# 94114 - Conjunction in Player Full Cultist Country
+country_event = {
+	id = 94114 
+	title = "EVTNAME94114"
+	desc = "EVTDESC94114"
+	picture = "sight"
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94114A" # Be rude not too...
+		random_pop = {
+			limit = {
+				OR = {
+                    			has_pop_culture = cultists
+                    			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                		}
+			}
+		}
+	}
+	option = {
+		name = "EVTOPT94114B"
+		random_pop = {
+			limit = {
+				OR = {
+                    			has_pop_culture = cultists
+                    			has_pop_culture = yigian
+					has_pop_culture = deep_ones
+                		}
+			}
+			# make it slightly better for Player country (already agitated by main conjuction effects)
+			militancy = -1 
+			consciousness = -1
+		}
+		# check if Yellow Sign is onto the Player		
+	}
 }

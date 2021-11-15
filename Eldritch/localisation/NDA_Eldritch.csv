@@ -75,6 +75,9 @@ EVTOPT94020;From the Depths;;;;;;;;;;;;;x;;;;
 EVTNAME94021;The Return of Yig!;;;;;;;;;;;;;x;;;;
 EVTDESC94021;The end times approach nigh!\n\nThe venomous serpent people have come out of hiding and are working towards the return of the snake god Yig!;;;;;;;;;;;;;x;;;;
 EVTOPT94021;From the Ground;;;;;;;;;;;;;x;;;;
+EVTNAME94025;Ritual Sacrifice!;;;;;;;;;;;;;x;;;;
+EVTDESC94025;The Cultists have taken a large number of the inhabitants of $PROV$ and taken them the the capital $CAPITAL$ to be sacrificed to fuel what they refer to as 'The Ritual'!;;;;;;;;;;;;;x;;;;
+EVTOPT94025;What the...;;;;;;;;;;;;;x;;;;
 EVTNAME94030;Cultists Unite!;;;;;;;;;;;;;x;;;;
 EVTDESC94030;It begins! The revolution of the cultists' in $COUNTRY$ shows the way to the future! Unite!;;;;;;;;;;;;;x;;;;
 early_cultists;Cultist Presence;;;;;;;;;;;;;x;;;;
@@ -127,3 +130,6 @@ IAM_communist;Servants of Hastur;;;;;;;;;;;;;x;;;;
 IAM_fascist;Devourers of Carcosa;;;;;;;;;;;;;x;;;;
 cultist;Cultist;;;;;;;;;;;;;x;;;;
 eldritch_tech_school;Ancient Occult Teachings;;;;;;;;;;;;;x;;;;
+aquire_artifact;Aquire Artifacts;;;;;;;;;;;;;x;;;;
+aquire_artifact_desc;These Occult Artifacts belongs to us;;;;;;;;;;;;;x;;;;
+NORMAL_WAR_ARTIFACT_NAME;$ORDER$$FIRST$ seizure of $SECOND_COUNTRY$ artifacts;;;;;;;;;;;;;x

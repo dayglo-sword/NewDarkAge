@@ -22,6 +22,7 @@
 # 94021 - Yig
 # 94022 - Transfer to Dagon
 # 94023 - Transfer to Yig
+# 94025 - Ritual Sacrifice
 # 94030 - Cultist Pan-National!
 # 94031 - Cultist Union
 # 94041 - Initial cult presence - none spam
@@ -181,10 +182,11 @@ country_event = {
 			
 			add_core = YIG			
 			assimilate = yes
-			
+			fort = 2
+
 			#revert back
 			THIS = {
-				primary_culture = cultists # country likes snakes
+				primary_culture = cultists # country likes snakes but is cultist
 				add_accepted_culture = yigian 
 			}
 		}	
@@ -211,13 +213,35 @@ country_event = {
 			
 			add_core = DAG			
 			assimilate = yes
-			
+			fort = 1
+			naval_base = 2
+
 			#revert back
 			THIS = {
 				primary_culture = cultists
 				add_accepted_culture = deep_ones	 
 			}
 		}
+			any_pop = { # try and reduce atheism and pacifism
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                    			}
+				}
+				# reduce atheism among cultists! Spread state religion - which should be cultist.
+				move_issue_percentage  = { 
+					from = Atheism 
+					to = Moralism
+					value = 0.5
+				}
+				move_issue_percentage  = { 
+					from = Secularized 
+					to = Moralism
+					value = 0.5
+				}				
+			}
 	}
 }
 
@@ -449,14 +473,12 @@ country_event = {
 			badboy = -15.0 #We do what we want.
 			plurality = 10
 		}
-		prestige = 200 #We should be at #1 at this point.
-		badboy = -25.0 #We do what we want.
-		plurality = 10
-		random_pop = {
-			reduce_pop = 0.5
-			militancy = 7.0
+
+		random_owned = {
+			limit = { is_capital = no }
+			province_event = 94025 # Sacrifice
 		}
-				
+		
 
 		# Free people should worry
 		any_country = { 
@@ -489,6 +511,23 @@ country_event = {
 				}
 				militancy = 4 
 			}
+		}
+
+		# Increase ELDs diplomatic influence among Minors
+		any_country = { 
+			limit = { 
+				is_greater_power = no
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+				NOT = { 
+					tag = ELD
+					tag = DAG
+					tag = YIG
+				}
+			}
+			ELD = {
+				diplomatic_influence = { who = THIS value = 50 }
+			}	
 		}
 	}
 }
@@ -669,10 +708,17 @@ country_event = {
 			factor = 0.1
 			year = 1910
 		}
+		modifier = {
+			factor = 0.1
+			year = 1920
+		}
+		modifier = {
+			factor = 0.1
+			year = 1925
+		}
 	}
 
-	option = {
-		name = "EVTOPT94009"
+	immediate = {
 		set_global_flag = ritual_faster
 		ELD = {
 			remove_country_modifier = ritual_in_progress
@@ -697,9 +743,38 @@ country_event = {
 		}
 		prestige = 200 #We should really be at #1 at this point.
 		plurality = 10
-		random_pop = {
-			reduce_pop = 0.25
-			militancy = 7.0
+
+		random_owned = {
+			limit = { is_capital = no }
+			province_event = 94025 # Sacrifice
+		}
+
+
+	}
+	option = {
+		name = "EVTOPT94009"
+
+		set_global_flag = ritual_faster
+		add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+		}
+
+		# Increase ELDs diplomatic influence among Minors
+		any_country = { 
+			limit = { 
+				is_greater_power = no
+				primary_culture = cultists
+				has_country_modifier = full_cultists
+				NOT = { 
+					tag = ELD
+					tag = DAG
+					tag = YIG
+				}
+			}
+			ELD = {
+				diplomatic_influence = { who = THIS value = 100 }
+			}	
 		}
 	}
 }
@@ -760,6 +835,10 @@ country_event = {
 		modifier = {
 			factor = 0.1
 			year = 1925
+		}
+		modifier = {
+			factor = 0.1
+			year = 1930
 		}
 	}
 
@@ -833,8 +912,8 @@ country_event = {
 			any_pop = { # try and increase strife from cultists
 				limit = {
 					OR = {
-                    	culture = cultists
-                    	culture = yigian
+                    				culture = cultists
+                    				culture = yigian
 						culture = deep_ones
                     }
 				}
@@ -889,9 +968,7 @@ country_event = {
 		}
 	}
 
-	option = {
-		name = EVTOPT94012
-
+	immediate = {
 		# end all wars - stop 'ghost armies'		
 		any_country= { 
 			limit = { war_with = THIS }
@@ -922,6 +999,10 @@ country_event = {
 				add_core = ELD
 			}
 		}
+	}
+	
+	option = {
+		name = EVTOPT94012
 	}
 }
 
@@ -1068,8 +1149,7 @@ country_event = {
 		days = 2
 	}
 
-	option = {
-		name = "EVTOPT94015"
+	immediate = {
 		prestige = 750
 		remove_country_modifier = final_war
 		set_global_flag = cthulhu_is_dead
@@ -1087,6 +1167,7 @@ country_event = {
 				duration = -1
 			}			
 		}
+
 		any_country = {
 			limit = { 
 				NOT = { 
@@ -1111,13 +1192,17 @@ country_event = {
 		any_pop = { 
 			limit = {
 				OR = {
-                    has_pop_culture = cultists
-                    has_pop_culture = yigian
+                    			has_pop_culture = cultists
+                    			has_pop_culture = yigian
 					has_pop_culture = deep_ones
-                }
+                		}
 			}
-			reduce_pop = 0.9
+			reduce_pop = 0.5
 		}
+	}
+	option = {
+		name = "EVTOPT94015"
+
 		# need to try and set primary cultures for major players - for every country?
 		ABU = { limit = { primary_culture = cultists } primary_culture = bedouin religion = shiite}
 		AFG = { limit = { primary_culture = cultists } primary_culture = pashtun religion = sunni}
@@ -1187,8 +1272,13 @@ country_event = {
 		days = 40 # dropped from 50
 	}
 
+	immediate = {
+
+	}
+
 	option = {
 		name = "EVTOPT94017" #"We have failed."
+
 		any_country = {
 			limit = {
 				any_core = { owned_by = THIS }
@@ -1226,8 +1316,7 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
-		name = "EVTOPT94018" #"Freedom"
+	immediate = {
 
 		FROM = {
 			prestige = -20
@@ -1252,14 +1341,19 @@ country_event = {
 			any_pop = { 
 				limit = {
 					OR = {
-                       	has_pop_culture = cultists
-                      	has_pop_culture = yigian
+                       				has_pop_culture = cultists
+                      				has_pop_culture = yigian
 						has_pop_culture = deep_ones
-                   	}
+                   			}
 				}
 				reduce_pop = 0.5
 			}						
 		}
+	}
+
+	option = {
+		name = "EVTOPT94018" #"Freedom"
+
 	}
 }	
 	
@@ -1272,9 +1366,8 @@ country_event = {
 	desc = "EVTDESC94019" #"The end is nigh! Time for the cultists' to unite!"
 
 	is_triggered_only = yes
-	
-	option = {
-		name = "EVTOPT94019" #"Stronger Together"
+
+	immediate = {
 		
 		ELD = {
 			end_war = THIS
@@ -1282,7 +1375,11 @@ country_event = {
 			any_owned = {
 				add_core = ELD
 			}
-		}
+		}	
+	}
+	
+	option = {
+		name = "EVTOPT94019" #"Stronger Together"
 	}
 }
 
@@ -1300,7 +1397,7 @@ country_event = {
 	news_desc_medium = EVTDESC94020
 	news_desc_short = EVTDESC94020
 
-	fire_only_once = yes
+	#fire_only_once = yes
 
 	trigger = {
 		has_country_modifier = full_cultists
@@ -1322,16 +1419,18 @@ country_event = {
 			tag = AST
 		}
 		exists = ELD
-		NOT = { exists = DAG}
+		NOT = { 
+			exists = DAG
+			tag = ELD 
+			tag = YIG
+		}
 	}
 
 	mean_time_to_happen = {
 		years = 4
 	}
 
-	option = {
-		name = "EVTOPT94020" #"From the Depths"
-			
+	immediate = {
 		# if capital coastal make deep one prior to transfer
 		primary_culture = deep_ones 
 		add_accepted_culture = cultists
@@ -1453,6 +1552,9 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = "EVTOPT94020" #"From the Depths"
+	}
 }
 
 #Yig is returning
@@ -1463,7 +1565,7 @@ country_event = {
 	desc = "EVTDESC94021" #"The end times approach nigh! Yig is returning!"
 	picture = "Alice"
 	major = yes
-	fire_only_once = yes
+	#fire_only_once = yes
 
 	news = yes
 	news_desc_long = EVTDESC94021
@@ -1474,16 +1576,18 @@ country_event = {
 		has_country_modifier = full_cultists
 		capital_scope = { OR = { continent = south_america continent = north_america } }
 		exists = ELD
-		NOT = { exists = YIG}
+		NOT = { 
+			exists = YIG 
+			tag = ELD 
+			tag = DAG
+		}
 	}
 
 	mean_time_to_happen = {
 		years = 4
 	}
 
-	option = {
-		name = "EVTOPT94021" #"From the Jungle"
-		
+	immediate = {
 		# convert cultists to serpent people
 		add_accepted_culture = cultists # still friends with other cults
 		primary_culture = yigian # but now we are snake people
@@ -1512,6 +1616,7 @@ country_event = {
 
 			prestige = 100 # give boost to prestige
 		}
+
 		
 		# try and assimilate other countries
 		any_country = {
@@ -1591,6 +1696,10 @@ country_event = {
 			}
 		}
 	}
+
+	option = {
+		name = "EVTOPT94021" #"From the Jungle"
+	}
 }
 
 # Event to transfer to dagon
@@ -1602,8 +1711,7 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
-		name = "EVTOPT94020"
+	immediate = {
 
 		ELD = {
 			any_owned = {
@@ -1679,12 +1787,15 @@ country_event = {
 						region = ENG_2224 #w indies
 						region = ENG_2228 #lesser antillies  
 					}
-    			}
+    				}
 				remove_core = YIG
-    			secede_province = DAG
+    				secede_province = DAG
 				add_core = DAG
 			}
 		}
+	}
+	option = {
+		name = "EVTOPT94020"
 	}
 
 }
@@ -1698,8 +1809,7 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = {
-		name = "EVTOPT94021"
+	immediate = {
 		ELD = {
 			any_owned = {
  				limit = {
@@ -1748,12 +1858,42 @@ country_event = {
     				}
 
 				remove_core = DAG
-    			secede_province = YIG
+    				secede_province = YIG
 				add_core = YIG 
 			}
-		}
+		}	
 	}
 
+	option = {
+		name = "EVTOPT94021"
+	}
+
+}
+
+# Sacrifical Pop - should be provence event?
+province_event = {
+	id = 94025
+	title = "EVTNAME94025"
+	desc = "EVTDESC94025"
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	major = yes
+	news = yes
+	news_desc_long = EVTDESC94025
+	news_desc_medium = EVTDESC94025
+	news_desc_short = EVTDESC94025
+
+	immediate = {
+		random_pop = {
+			reduce_pop = 0.5
+			militancy = 7.0
+		}
+	}
+	option = {				
+		name = "EVTOPT94025"
+	}
 }
 
 ## Cultist equivalent to pan-national 11100

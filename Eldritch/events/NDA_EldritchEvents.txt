@@ -8,7 +8,8 @@
 #94126 - Repairer of Reputations
 #94127 - Decide on offer
 #94128 - Imperial America
-#94130 - Release New England
+#94129 - Maintain Imperial America
+#94130 - Release New England (Redundant)
 #94131 - Carnacki Parties in England
 #94132 - Carnacki Requests exile
 #94133 - Carnacki Research
@@ -82,6 +83,13 @@ country_event = {
 		add_accepted_culture = cultists
 		# spread book to great and secondary powers (~6 years to imprint)
 		# priests are upset?
+		any_pop = { 
+			limit = {
+				type = clergymen
+			}
+			militancy = 1 
+			consciousness = 1
+		}
 		
 	}
 
@@ -146,6 +154,11 @@ country_event = {
 		# spread book to great and secondary powers (~6 years to imprint)
 		
 		# priest are upset?
+		any_pop = { 
+			limit = { type = clergymen }
+			militancy = 0.5 
+			consciousness = 0.5
+		}
 	}
 
 	option = {
@@ -159,6 +172,7 @@ country_event = {
 		} 
 		# upset people but stops the open spread - increase demand for free press
 		any_pop = { 
+			limit = { not = { type = clergymen}}
 			militancy = 0.5 
 			consciousness = 0.5
 		}
@@ -231,7 +245,13 @@ major = yes # remove once sure it works
 		# make cultists acceptable, script can openly spread abroad
 		set_country_flag = king_in_yellow
 		add_accepted_culture = cultists
-		
+	
+		# priest are upset?
+		any_pop = { 
+			limit = { type = clergymen }
+			militancy = 0.5 
+			consciousness = 0.5
+		}	
 	}
 
 	option = {
@@ -239,6 +259,7 @@ major = yes # remove once sure it works
 		ai_chance =  { factor = 10 } # outside chance of complete halt
 		# upset people but stops the open spread
 		any_pop = { 
+			limit = { not = { type = clergymen}}
 			militancy = 0.5 
 			consciousness = 0.5
 		}
@@ -287,7 +308,14 @@ country_event = {
 		}
 		# make cultists acceptable, play can openly spread abroad
 		set_country_flag = king_in_yellow
-		add_accepted_culture = cultists		
+		add_accepted_culture = cultists	
+
+		# priest are upset?
+		any_pop = { 
+			limit = { type = clergymen }
+			militancy = 0.5 
+			consciousness = 0.5
+		}		
 	}
 
 	option = {
@@ -301,6 +329,7 @@ country_event = {
 		} 
 		# upset people but stops the open spread - increase demand for free press
 		any_pop = { 
+			limit = { not = {type = clergymen } }
 			militancy = 0.5 
 			consciousness = 0.5
 		}
@@ -311,7 +340,7 @@ country_event = {
 	id = 94125
 	title = "EVTNAME94125" # Suicide Chambers - Chrome Event limit to owner of New York
 	desc = "EVTDESC94125"
-	picture = "Almqvist"
+	picture = "kinginyellow"
 	
 	fire_only_once = yes
 
@@ -444,6 +473,39 @@ country_event = {
 
 }
 
+# Force Imperial America back to Absolute Monarchy if it drifts too far.
+# This is for AI only - if player do seperate event if MiGo involved.
+country_event = {
+	id = 94129
+	title = "EVTNAME94129" # Restore the true ruler
+	desc = "EVTDESC94129"
+	picture = "kinginyellow"
+
+	fire_only_once = yes
+
+	trigger = {
+		ai = yes
+		tag = IAM
+		NOT = { government = absolute_monarchy }
+	}
+
+	immediate = {
+		government = absolute_monarchy
+		nationalize = yes
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = no_meeting
+		political_reform = state_press
+		political_reform = no_trade_unions
+		political_reform = underground_parties
+		
+		# drag pops away from reforms? - America is now weird so nothing should be normal?
+	}
+	option = {
+		name = "EVTOPT94129A"	
+	}
+
+}
 
 # Carnacki the ghostfinder in London (William Hope Hodgeson)
 country_event = {

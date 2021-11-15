@@ -9,7 +9,10 @@ political_decisions = {
 			}
 			accepted_culture = cultists
 			NOT = {
-				has_country_flag = full_cultists
+				OR = {
+					has_country_flag = full_cultists
+					has_country_flag = supress_cultists
+				}
 			}
 		}
 		
@@ -36,8 +39,11 @@ political_decisions = {
 				exists = DAG
 			}
 			NOT = {
-				accepted_culture = cultists
-				primary_culture = cultists
+				OR = {
+					accepted_culture = cultists
+					primary_culture = cultists
+					has_country_flag = supress_cultists
+				}
 			}
 		}
 		
@@ -91,29 +97,25 @@ political_decisions = {
 		}		
 	}
 
+	# Need to do differently as can't tell which allies\vassals have cultists in potential or allow conditions
 	war_in_dark_places = { # try and stop allies falling to cult corruption - should be pyrhic victories
 		picture = "war_in_dark_places"
 		potential = {
 			ai = no
+
 			NOT = { 
 				accepted_culture = cultists 
 				primary_culture = cultists
 			}
-			any_core = { 
-				owner = { 	
-					ai = yes 
-					OR = { in_sphere = THIS vassal_of = THIS alliance_with = THIS }	
-					has_country_modifier = early_cultists
-				}
-			}
+			OR = {
+				num_of_vassals = 1
+				num_of_allies = 1
+			}	
 		}
 		allow = {
-			any_core = { 
-				owner = { 	
-					ai = yes 
-					OR = { in_sphere = THIS vassal_of = THIS alliance_with = THIS }	
-					has_country_modifier = early_cultists
-				}
+			OR = {
+				num_of_vassals = 1
+				num_of_allies = 1
 			}
 		}
 
@@ -125,7 +127,7 @@ political_decisions = {
 					OR = { in_sphere = THIS vassal_of = THIS alliance_with = THIS }	
 				}
 				remove_country_modifier = early_cultists
-				THIS = { money = -10000}
+				THIS = { money = -100000}
 			}
 		}
 	}

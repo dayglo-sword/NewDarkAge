@@ -2784,7 +2784,7 @@ cultist_rebels = {
 	independence = none
 	defect_delay = 12			# Can spontaneously declare independence after 12 months (earliest)
 	
-	ideology = liberal
+	ideology = reactionary
 	allow_all_cultures = yes
 	allow_all_culture_groups = no
 	allow_all_religions = yes
@@ -2947,11 +2947,22 @@ cultist_rebels = {
 	demands_enforced_effect = {	
 			THIS = { 
 				end_war = ELD 
+				end_war = YIG
+				end_war = DAG
 				any_owned = {
 					add_core = ELD
 				}
 			}
 			ELD = { 
+				# NOT IN AMERICAS
+				limit = { THIS = { NOT = { continent = south_america continent = north_america } } }
+				end_war = THIS
+				inherit = THIS
+			}
+
+			YIG = { 
+				# IN AMERICAS
+				limit = { THIS = { OR = { continent = south_america continent = north_america } } }
 				end_war = THIS
 				inherit = THIS
 			}

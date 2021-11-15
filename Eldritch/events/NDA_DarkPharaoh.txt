@@ -1,0 +1,247 @@
+#Tomb of Nitocris Found
+country_event = {
+	id = 94050 
+	title = "EVTNAME94050"
+	desc = "EVTDESC94050"
+	picture = "Egyptian"
+
+	major=yes
+	news=yes
+	news_desc_long = EVTDESC94050_NEWS_LONG
+	news_desc_medium = EVTDESC94050_NEWS_MEDIUM
+	news_desc_short = EVTDESC94050_NEWS_SHORT
+
+	trigger = {
+		has_country_modifier = egyptian_excavations
+		NOT = { has_global_flag = tomb_nitocris_found }
+	}
+
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	immediate = { 
+		set_global_flag = tomb_nitocris_found 
+		set_country_flag = tomb_nitocris_found 
+	}
+	option = {
+		name = "EVTOPT94050A"
+		prestige = 2
+		# later have offer of mirror
+	}
+}
+
+#Gain Mirror as Artifact
+country_event = {
+	id = 94051 
+	title = "EVTNAME94051"
+	desc = "EVTDESC94051"
+	picture = "Egyptian"
+
+	trigger = {
+		has_country_flag = tomb_nitocris_found 
+		NOT = { has_country_modifier = artifact_nitocris_mirror }
+	}
+	
+	immediate = { 
+		add_country_modifier = {
+			name = artifact_nitocris_mirror 
+			duration = -1
+		}
+	}
+
+	option = {
+		name = "EVTOPT94051A" # a most welcome addition
+		# add effect to the country
+		# if country not already cultist then compel making cultists acceptable.
+	}
+
+	option = {
+		name = "EVTOPT94051B" # it belongs in a museum
+		# acknowledge ownership but with no effect
+	}
+}
+
+#Influence of Nitocris
+country_event = {
+	id = 94052 
+	title = "EVTNAME94052"
+	desc = "EVTDESC94052"
+	picture = "Egyptian"
+
+	trigger = {
+		has_country_modifier = artifact_nitocris_mirror 
+		NOT = { 
+			OR = { 
+				accepted_culture = cultists 
+				primary_culture = cultists 
+			} 
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = "EVTOPT94052A"
+		# make country Cultist - add cultist flag
+		add_accepted_culture = cultists
+	}
+}
+
+#Trail of the Dark Pyramid
+country_event = {
+	id = 94055 
+	title = "EVTNAME94055"
+	desc = "EVTDESC94055"
+	picture = "Egyptian"
+
+	trigger = {
+		has_country_modifier = egyptian_excavations
+		NOT = { has_global_flag = dark_pyramid_found }
+	}
+
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	option = {
+		name = "EVTOPT94055A"
+		ai_chance = { factor = 75 }
+		# continue search - response from local authority (if not same as searcher)
+		# owner might not be egypt
+		1760 = { owner = { country_event = { id=94056 days=7 } } } # Mut
+		
+	}
+	option = {
+		name = "EVTOPT94055B"
+		ai_chance = { factor = 25 }
+		# stop search
+		set_country_flag = dark_pyramid_refused
+	}
+}
+
+#Local disproval
+country_event = {
+	id = 94056 
+	title = "EVTNAME94056"
+	desc = "EVTDESC94056"
+	picture = "Egyptian"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPT94055A"
+		# allow search
+		ai_chance = { factor = 25 }
+	}
+	option = {
+		name = "EVTOPT94056B"
+		ai_chance = { factor = 25 }
+		# disprove of search - apply relationship hits
+		FROM = { country_event = { id=94057 days=7 } }
+	}
+}
+
+#Override disproval
+country_event = {
+	id = 94057 
+	title = "EVTNAME94057"
+	desc = "EVTDESC94057"
+	picture = "Egyptian"
+
+	is_triggered_only = yes
+
+	#immediate = { 
+	#	set_global_flag = tomb_nitocris_found 
+	#	set_country_flag = tomb_nitocris_found 
+	#}
+	option = {
+		name = "EVTOPT94057A"
+		ai_chance = { factor = 75 }
+		# force search - cause relationship hit
+		set_country_flag = dark_pyramid_search 
+	}
+	option = {
+		name = "EVTOPT94057B"
+		ai_chance = { factor = 25 }
+		# stop search
+	}
+}
+
+#Dark Pyramid Found
+country_event = {
+	id = 94058 
+	title = "EVTNAME94058"
+	desc = "EVTDESC94058"
+	picture = "Egyptian"
+	major=yes
+
+	news = yes
+	news_desc_long = EVTDESC94058_NEWS_LONG
+	news_desc_medium = EVTDESC94058_NEWS_MEDIUM
+	news_desc_short = EVTDESC94058_NEWS_SHORT
+
+	trigger = {
+		has_country_modifier = egyptian_excavations
+		has_country_flag = dark_pyramid_search 
+		NOT = { has_global_flag = dark_pyramid_found }
+		NOT = { has_country_flag = dark_pyramid_refused }
+	}
+
+	immediate = { 
+		set_global_flag = dark_pyramid_found
+		set_country_flag = dark_pyramid_found 
+	}
+	option = {
+		name = "EVTOPT94058A"
+		
+		## annoy the locals and the local gov
+	}
+}
+
+#Book of Thoth Found
+country_event = {
+	id = 94059 
+	title = "EVTNAME94059"
+	desc = "EVTDESC94059"
+	picture = "Egyptian"
+
+	trigger = {
+		has_country_modifier = egyptian_excavations
+		has_global_flag = dark_pyramid_found
+		has_country_flag = dark_pyramid_found 
+		NOT = { has_global_flag = artifact_book_thoth_found }
+	}
+
+	immediate = { 
+		set_global_flag = artifact_book_thoth_found
+	#	set_country_flag = dark_pyramid_found 
+	}
+
+	option = {
+		name = "EVTOPT94059A" # a most welcome addition
+		ai_chance = { factor = 75 }
+		# add artifact to finders country
+		add_country_modifier = {
+			name = artifact_book_thoth 
+			duration = -1
+		}
+	}
+
+	option = {
+		name = "EVTOPT94059B" # belongs to locals
+		ai_chance = { factor = 25 }
+		# give to local country
+		1760 = { 
+			owner = {
+				# do via event? 		
+				add_country_modifier = {
+					name = artifact_book_thoth 
+					duration = -1
+				}
+			} 
+		} # Mut
+	}
+}

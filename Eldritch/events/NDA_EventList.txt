@@ -1,0 +1,81 @@
+# NDA_Cultists
+# 94001 - Initial cult presence
+# 94002 - Cult presence expands
+# 94003 - Country has been taken over.
+# 94004 - cultists recruit
+# 94005 - Unity of purpose
+# 94006 - Eldritch GP Annex
+# 94007 - The ritual begins
+# 94008 - Join the ritual
+# 94009 - The ritual intensifies
+# 94010 - HE ARRIVES!
+# 94011 - Random
+# 94012 - The world surrenders.
+# 94013 - The war begins
+# 94014 - White peace fail.
+# 94015 - Victory.
+# 94016 - Crush the resistance.
+# 94017 - Dismantle Empire
+# 94018 - Granted independence
+# 94019 - Cultists Unite
+# 94020 - Dagon Rises!
+# 94021 - Yig
+# 94022 - Transfer to Dagon
+# 94023 - Transfer to Yig
+# 94030 - Cultist Pan-National!
+# 94031 - Cultist Union
+# 94041 - Initial cult presence - none spam
+# NDA_
+# 94050 -
+# NDA_Conjunctions events
+# 94100 - 1842 conjunction
+# 94101 - 1861 conjuction
+# 94102 - 1881 conjuction
+# 94103 - 1901 conjuction
+# 94104 - 1921 conjuction
+# 94105 - Eldritch conjunction effects
+# 94106 - Dagon conjunction effects
+# 94107 - Yig conjunction effects
+# 94108 - Cultists present effects
+# 94110 - Eldritch Cash aid to Yig and Dagon
+# 94111 - Cultists distribute money
+# 94112 - Distribute money (All)
+# 94113 - Conjunction in Early\Mid Cultist Country
+# 94114 - Conjunction in Full Cultist Country
+#NDA_EldritchEvents
+#94160 - New Dark Age Intro
+#94120 - Nameless Cults published
+#94121 - Spread of the book
+#94122 - Death of Junzt
+#94123 - Play in Paris
+#94124 - Spread of Play
+#94125 - Suicide Chambers
+#94126 - Repairer of Reputations
+#94127 - Decide on offer
+#94128 - Imperial America
+#94129 - Maintain Imperial America
+#94130 - Release New England (Redundant)
+#94131 - Carnacki Parties in England
+#94132 - Carnacki Requests exile
+#94133 - Carnacki Research
+#94134 - Carnacki Succeeds
+#94135 - Death of Carnacki
+#94136 - House on the Borderlands
+#94140 - Appeal for reinstatement
+#94141 - Plague in Arkham
+#94142 - Research breakthrough
+#94143 - Disappearence of Dr West
+#94150 - Holy See Falls
+#94151 - Jerusalem Falls
+#94152 - Mecca Falls
+#NDA_Migo
+#94170 - Migo Intro - In The Night
+#94171 - All A Dream - Migo rejected
+#94172 - We Will Return
+#94173 - Time To Move On
+#94174 - A New Place
+#94175 - Moving On
+#94176 - The End Is Nigh
+#94177 - The End Of Time
+#94178 - A Bad Place - Hostile IAM
+#94179 - A Bad Place - Cultist Controlled

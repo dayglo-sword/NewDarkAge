@@ -881,3 +881,12 @@ state_of_emergency = {
 	org_regain = 0.1
 	icon = 15
 }
+
+#### Artifacts #####
+artifact_nitocris_mirror = {
+	icon = 8
+}
+
+artifact_book_thoth = {
+	icon = 8
+}
