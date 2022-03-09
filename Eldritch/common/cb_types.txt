@@ -16,6 +16,10 @@
 # po_remove_cores - may be used only with: po_transfer_provinces, po_demand_state, po_annex
 # crisis - can be offered as a wargoal in a crisis
 #
+# from forum:
+#on_po_accepted: default scope is the target, THIS is the country enforcing the wargoal
+#on_add: default scope is the country adding the wargoal, FROM is the target
+
 # The peace options are:
 #po_annex
 #po_demand_state
@@ -76,7 +80,7 @@ great_war_penalty_cb
 
 acquire_artifact = {
 	sprite_index = 1
-	is_triggered_only = yes
+	is_triggered_only = no
 	months = 12
 	constructing_cb = yes
 	crisis = no
@@ -109,7 +113,9 @@ acquire_artifact = {
 	}
 	
 	on_po_accepted = {
-		
+		# event to swap country modifiers? how to tell between types?
+		clr_country_modifier = artifact_nitocris_mirror
+		THIS = {  add_country_modifier = { name = artifact_nitocris_mirror duration = 20000 }  }
 	}
 	#po_gunboat = yes
 	

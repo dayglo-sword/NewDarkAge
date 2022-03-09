@@ -15,6 +15,7 @@ deep_ones;Deep One;;;;;;;;;;;;;x;;;;
 EVTNAME94001;Cultists in $COUNTRY$?;;;;;;;;;;;;;x;;;;
 EVTDESC94001;In the back alleys of $CAPITAL$, rumours are beginning to spread.\n\nIt seems a bizarre cult worshipping ancient gods is expanding its ranks in secret.;;;;;;;;;;;;;x;;;;
 EVTOPT94001;I'm sure they're harmless.;;;;;;;;;;;;;x;;;;
+EVTNAME94041;Cultists in $COUNTRY$? (minor);;;;;;;;;;;;;x;;;;
 EVTNAME94002;Cultist movement;;;;;;;;;;;;;x;;;;
 EVTDESC94002;The cultists in $COUNTRY$ are growing bolder and bolder.\n\nBefore, they tried to stay as hidden as possible, but now masked figures move openly in the street even in daylight, and ominous chanting can be heard all across $CAPITAL$ at night.;;;;;;;;;;;;;x;;;;
 EVTOPT94002;Why do I get a sense of impending doom?;;;;;;;;;;;;;x;;;;
@@ -22,8 +23,9 @@ EVTNAME94003;The cult in $COUNTRY$;;;;;;;;;;;;;x;;;;
 EVTDESC94003;There has been a significant change in $COUNTRY$.\n\nAlthough the government and foreign policy still function as normal, it has become clear that at the highest levels, cultists of the old gods have seized control of major institutions.\n\nIn $CAPITAL$, the constant arguments between cultists and normal citizens is gone, replaced with a new unity of purpose.;;;;;;;;;;;;;x;;;;
 EVTOPT94003;All hail.;;;;;;;;;;;;;x;;;;
 EVTNAME94004;The cultists recruit;;;;;;;;;;;;;x;;;;
-EVTDESC94004;Although the cult has seized control of $COUNTRY$, support of the cult is still hardly univeral outside $CAPITAL$.  However, we have ways of being persuasive when we need to be.;;;;;;;;;;;;;x;;;;
-EVTOPT94004;All shall know the horror of beyond.;;;;;;;;;;;;;x;;;;
+EVTDESC94004;Although the cult has seized control of $COUNTRY$, support of the cult is still hardly univeral outside of $CAPITAL$.  However, they have ways of being persuasive when they need to be.;;;;;;;;;;;;;x;;;;
+EVTOPT94004A;All shall know the horror of beyond.;;;;;;;;;;;;;x;;;;
+EVTOPT94004B;I must prevent this.;;;;;;;;;;;;;x;;;;
 EVTNAME94005;Unity of purpose;;;;;;;;;;;;;x;;;;
 EVTDESC94005;Having unified vast swathes of humanity, the cultists centralized government are united in preparing for the next step.;;;;;;;;;;;;;x;;;;
 EVTOPT94005;We act as one;;;;;;;;;;;;;x;;;;
@@ -80,6 +82,10 @@ EVTDESC94025;The Cultists have taken a large number of the inhabitants of $PROV$
 EVTOPT94025;What the...;;;;;;;;;;;;;x;;;;
 EVTNAME94030;Cultists Unite!;;;;;;;;;;;;;x;;;;
 EVTDESC94030;It begins! The revolution of the cultists' in $COUNTRY$ shows the way to the future! Unite!;;;;;;;;;;;;;x;;;;
+EVTNAME94031;The Cultists Wind!;;;;;;;;;;;;;x;;;;
+EVTDESC94031;$MONARCHTITLE$, the $FROMCOUNTRY_ADJ$ ambassador has presented us with news from the $UNION_ADJ$ Congress. $FROMCOUNTRY$ has accepted the $UNION_ADJ$ crown, and proclaimed themselves the one true $UNION_ADJ$ nation. These winds of change will be hard to resist.;$MONARCHTITLE$, l'ambassadeur $FROMCOUNTRY_ADJ$ nous a donné des nouvelles du congrès $UNION_ADJ$. $FROMCOUNTRY$ a accepté la couronne $UNION_ADJ$ et s'est proclamé comme l'unique véritable nation $UNION_ADJ$. Il est difficile de résister à ce vent de changement.;$MONARCHTITLE$, der $FROMCOUNTRY_ADJ$ Botschafter hat uns Nachrichten vom $CULTUREGROUP$-Kongress präsentiert. $FROMCOUNTRY$ hat die $CULTUREGROUP$-Krone akzeptiert und sich selbst als die einzig wahre $CULTUREGROUP$-Nation proklamiert. Diesen Veränderungen wird man sich nur schwer widersetzen können.;;$MONARCHTITLE$, la embajada $FROMCOUNTRY_ADJ$ nos trae noticias de la asamblea $UNION_ADJ$. $FROMCOUNTRY$ ha aceptado la corona $UNION_ADJ$ y se ha proclamado como la auténtica nación $UNION_ADJ$. Estos vientos de cambio serán difíciles de resistir.;;;;;;;;;x
+EVTOPTA94031;Long live the $UNION_ADJ$ people!;Longue vie au peuple $UNION_ADJ$ !;Lang lebe das $CULTUREGROUP$-Volk!;;¡Larga vida al pueblo de $UNION$!;;;;;;;;;x
+EVTOPTB94031;We will not have our ancestral rights infringed by these foul people! This Union means our doom!;Ne laissons pas nos droits ancestraux se faire ainsi bafouer !;Wir werden nicht zulassen, dass jemand unser Erbrecht verletzt!;;¡No permitiremos que infrinjan nuestros derechos ancestrales!;;;;;;;;;x
 early_cultists;Cultist Presence;;;;;;;;;;;;;x;;;;
 desc_early_cultists;Cultists are known to operate here;;;;;;;;;;;;;x;;;;
 mid_cultists;Significant cultist presence;;;;;;;;;;;;;x;;;;

@@ -7,7 +7,10 @@
 #94176 - The End Is Nigh
 #94177 - The End Of Time
 #94178 - A Bad Place - Hostile IAM
-#94179 - A Bad Place - Cultist Controlled
+#94179 - A Strange Place - Cultist Controlled
+#94180 - A Dangerous Place - Cultist Presence
+#94181 - The Brotherhood Visits
+#94182 - The Brotherhood Investigates
 
 country_event = {
 	id = 94170
@@ -497,5 +500,27 @@ country_event = {
 	
 	option = {
 		name = "EVTOPT94179A"		
+	}
+}
+
+country_event = {
+	id = 94180
+	title = "EVTNAME94180" # A Dangerous Place - Cultist Presence
+	desc = "EVTDESC94180"
+	picture = "migo"
+	fire_only_once = yes
+
+	trigger = {
+		has_country_modifier = mid_cultists	
+		ai = no
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 	
+	}
+
+	immediate = {
+	}
+	
+	option = {
+		name = "EVTOPT94180A"		
 	}
 }

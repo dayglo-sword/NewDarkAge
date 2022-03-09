@@ -1,0 +1,243 @@
+# events
+# 94001 - Initial cult presence
+# 94002 - Cult presence expands
+# 94003 - Country has been taken over.
+# 94004 - cultists recruit
+# 94005 - Unity of purpose
+# 94006 - Eldritch GP Annex
+# 94007 - The ritual begins
+# 94008 - Join the ritual
+# 94009 - The ritual intensifies
+# 94010 - HE ARRIVES!
+# 94011 - Random
+# 94012 - The world surrenders.
+# 94013 - The war begins
+# 94014 - White peace fail.
+# 94015 - Victory.
+# 94016 - Crush the resistance.
+# 94017 - Dismantle Empire
+# 94018 - Granted independence
+# 94019 - Cultists Unite
+# 94020 - Dagon Rises!
+# 94021 - Yig
+# 94022 - Transfer to Dagon
+# 94023 - Transfer to Yig
+# 94025 - Ritual Sacrifice
+# 94030 - Cultist Pan-National!
+# 94031 - Cultist Union
+# 94041 - Initial cult presence - none spam
+
+# Sacrifical Pop - should be provence event?
+province_event = {
+	id = 94025
+	title = "EVTNAME94025"
+	desc = "EVTDESC94025"
+	picture = "Alice"
+
+	is_triggered_only = yes
+
+	major = yes
+	news = yes
+	news_desc_long = EVTDESC94025
+	news_desc_medium = EVTDESC94025
+	news_desc_short = EVTDESC94025
+
+	option = {				
+		name = "EVTOPT94025"
+		random_pop = {
+			reduce_pop = 0.5
+			militancy = 7.0
+		}
+	}
+}
+
+## Cultist equivalent to pan-national 11100
+# Pan-Nationalist
+# needs to only effect one country.
+country_event = {
+	title = "EVTNAME94030"
+	desc = "EVTDESC94030"
+	picture = "Celebration"
+
+	id = 94030 
+
+	major = yes
+	news = yes
+	news_desc_long = EVTDESC94030
+	news_desc_medium = EVTDESC94030
+	news_desc_short = EVTDESC94030
+
+	is_triggered_only = yes
+
+	option = {				# Accept inheritance
+		name = "EVTOPTA11100"
+		change_tag = culture
+		any_country = {
+			limit = {
+				NOT = {
+					tag = THIS
+					tag = YIG
+					tag = DAG
+				}
+				is_culture_group = THIS
+				num_of_cities = 1
+			}
+			country_event = { id=94031 days=0 }
+		}
+
+		government = hms_government
+		add_accepted_culture = union
+		prestige = 100
+		badboy = 10
+	}
+}
+
+# Event to Inherit
+country_event = {
+	id = 94031
+	title = "EVTNAME94031"
+	desc = "EVTDESC94031"
+	picture = "Celebration"
+	major = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA94031"
+		FROM = {
+			# end war first
+			end_war = THIS
+			inherit = THIS
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = "EVTOPTB94031"
+		prestige = 1
+		relation = {
+			who = FROM
+			value = -100
+		}
+		any_pop = {
+			militancy = 3
+			consciousness = 2
+		}
+	}
+
+}
+
+
+#rebellion succeeds
+country_event = {
+	id = 94042
+	title = "EVTNAME94008"
+	desc = "EVTDESC94008"
+	picture = "Alice"
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPT94008"
+
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = ELD
+			}
+		}
+
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 10
+				OR = { vassal_of = ELD 
+                    		   in_sphere = ELD 
+				}
+			}
+			modifier = {
+				factor = 0.01
+				capital_scope = { OR = { continent = oceania continent = south_america } }
+			}
+		}
+	}
+	
+	# could join with DAG instead
+	option = {
+		name = "EVTOPT94008"
+
+		DAG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = DAG
+			}
+		}
+
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 8
+				any_owned_province = { is_coastal = yes }
+			}
+			modifier = { # don't want landlocked for sea monsters!
+				factor = 0.01
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+			modifier = {
+				factor = 10
+				capital_scope = { continent = oceania }
+			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
+			}
+		}
+	}
+
+	# could join with YIG instead
+	option = {
+		name = "EVTOPT94008"
+
+		YIG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = YIG
+			}
+		}
+
+		ai_chance = {
+			factor = 10	
+			modifier = {
+				factor = 10
+				capital_scope = { continent = south_america }
+			}
+			modifier = { # ok for landlocked for snakes!
+				factor = 2
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
+			}
+		}
+	}
+}
+

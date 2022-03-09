@@ -30,5 +30,8 @@ EVTOPT94178A;Not Good...;;;;;;;;;;;;;x;;;;
 EVTNAME94179;A Strange Place;;;;;;;;;;;;;x;;;;
 EVTDESC94179;The Mi-Go have placed you in a sticky situation.\n\nThe Cultists are in control of this country and you are now their leader!\n\nYou should be able to stave off the country's enevitable envelopment by the Eldritch forces but will the cultists accept this, or will they rise up with you becoming just another sacrifice to their vile gods?;;;;;;;;;;;;;x;;;;
 EVTOPT94179A;What to do...;;;;;;;;;;;;;x;;;;
+EVTNAME94180;A Dangerous Place;;;;;;;;;;;;;x;;;;
+EVTDESC94180;The Mi-Go have placed you in a dangerous situation.\n\nIt appears that the Cultists are attempting to take over control of this country!\n\nYou should be able to stop them, but how will they respond?;;;;;;;;;;;;;x;;;;
+EVTOPT94180A;What to do...;;;;;;;;;;;;;x;;;;
 migo_timetable;The Mi-Go Experment;;;;;;;;;;;;;x;;;;
 desc_migo_timetable;After which they will return to relocate you (or at least your brain).;;;;;;;;;;;;;x;;;;

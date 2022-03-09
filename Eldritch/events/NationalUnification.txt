@@ -16,6 +16,9 @@ country_event = {
 			limit = {
 				NOT = {
 					tag = THIS
+					tag = ELD
+					tag = YIG
+					tag = DAG
 				}
 				is_culture_group = THIS
 				is_greater_power = no
@@ -118,6 +121,8 @@ country_event = {
 	option = {
 		name = "EVTOPTA11101"
 		FROM = {
+			# end war first
+			end_war = THIS
 			inherit = THIS
 		}
 		ai_chance = {
@@ -144,6 +149,7 @@ country_event = {
 	title = "EVTNAME11103"
 	desc = "EVTDESC11103"
 	picture = "Celebration"
+	major = yes
 
 	id = 11103
 
@@ -151,15 +157,18 @@ country_event = {
 
 	option = {				# Accept inheritance
 		name = "EVTOPTA11103"
-		change_tag = culture
+		change_tag = ITA
 		add_accepted_culture = north_italian
 		add_accepted_culture = south_italian
 		any_country = {
 			limit = {
 				NOT = {
 					tag = THIS
+					tag = ELD
+					tag = YIG
+					tag = DAG
 				}
-				is_culture_group = THIS
+				is_culture_group = italian # restrict to italian only
 				is_greater_power = no
 				num_of_cities = 1
 			}

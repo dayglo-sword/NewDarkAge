@@ -514,7 +514,7 @@ country_event = {
 	desc = "EVTDESC94131"
 	picture = "Almqvist"
 
-	major = yes # remove once sure it works
+	#major = yes # remove once sure it works
 
 	fire_only_once = yes
 	news = yes
@@ -547,7 +547,7 @@ country_event = {
 	desc = "EVTDESC94132"
 	picture = "Almqvist"
 
-	major = yes # remove once sure it works
+	#major = yes # remove once sure it works
 
 	fire_only_once = yes
 	
@@ -556,6 +556,7 @@ country_event = {
 		year = 1906
 		has_global_flag = carnacki_ghostfinder
 		NOT = { has_global_flag = carnacki_in_exile }
+		NOT = { has_country_modifier = full_cultists } ## Can't exile to Cultist Country
 		# needs condition for checking if london is cult controlled? no need for exile?									    
 	}
 
@@ -585,7 +586,7 @@ country_event = {
 	desc = "EVTDESC94133"
 	picture = "Almqvist"
 
-	major = yes # remove once sure it works
+	#major = yes # remove once sure it works
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -612,7 +613,7 @@ country_event = {
 	desc = "EVTDESC94134"
 	picture = "Almqvist"
 
-	major = yes # remove once sure it works
+	#major = yes # remove once sure it works
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -639,7 +640,7 @@ country_event = {
 	desc = "EVTDESC94135"
 	picture = "Almqvist"
 
-	major = yes # remove once sure it works
+	#major = yes # remove once sure it works
 
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -699,6 +700,11 @@ country_event = {
 	fire_only_once = yes
 	
 	major = yes # remove once sure it works
+
+	news = yes
+	news_desc_long = "EVTDESC94140"
+	news_desc_medium = "EVTDESC94140"
+	news_desc_short = "EVTDESC94140"
 
 	trigger = {
 		year = 1903		

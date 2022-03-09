@@ -1,0 +1,465 @@
+#Dagon Rises!
+country_event = {
+	
+	id = 94020
+	title = "EVTNAME94020" #"Dagon Rises!"
+	desc = "EVTDESC94020" #"The end times approach! Dagon prepares to rise!"
+	picture = "Alice"
+	major = yes
+
+	news = yes
+	news_desc_long = EVTDESC94020
+	news_desc_medium = EVTDESC94020
+	news_desc_short = EVTDESC94020
+
+	#fire_only_once = yes
+
+	trigger = {
+		has_country_modifier = full_cultists
+		OR = {
+			capital_scope = { continent = oceania }
+			tag = PHI
+			tag = NZL
+			tag = JAP
+			tag = HAW
+			tag = BRU
+			tag = JAV
+			tag = KOR
+			tag = DAI
+			tag = JOH
+			tag = NEN
+			tag = BAL
+			tag = CUB
+			tag = HAI
+			tag = AST
+		}
+		exists = ELD
+		NOT = { 
+			exists = DAG
+			tag = ELD 
+			tag = YIG
+		}
+	}
+
+	mean_time_to_happen = {
+		years = 4
+	}
+
+	option = {
+		name = "EVTOPT94020" #"From the Depths"
+
+		# if capital coastal make deep one prior to transfer
+		primary_culture = deep_ones 
+		add_accepted_culture = cultists
+			
+		capital_scope = {
+			assimilate = yes
+		}		
+		
+		DAG = {
+			#end_war = THIS # should not be at war as does not exist yet
+			inherit = THIS
+			#set_country_modifier = full_cultists
+
+			add_country_modifier = {
+				name = full_cultists
+				duration = -1
+			}
+	
+			relation = { who = ELD value = 400 }
+			create_alliance = ELD
+			military_access = ELD
+
+			relation = { who = YIG value = 400 }
+			create_alliance = YIG
+			military_access = YIG
+
+			prestige = 100 # give boost to prestige
+
+		}
+
+		# try and assimilate other countries
+		any_country = {
+			limit = {
+				NOT = { tag = DAG }
+				has_country_modifier = full_cultists
+				OR = {
+					capital_scope = { continent = oceania }
+					tag = PHI
+					tag = NZL
+					tag = JAP
+					tag = HAW
+					tag = BRU
+					tag = JAV
+					tag = KOR
+					tag = DAI
+					tag = JOH
+					tag = NEN
+					tag = BAL
+					tag = CUB
+					tag = HAI
+					tag = AST
+				}
+			}
+
+			# if capital coastal make deep one prior to transfer
+			primary_culture = deep_ones
+			add_accepted_culture = cultists
+			
+			capital_scope = {
+				assimilate = yes
+			}		
+
+			DAG = {
+				end_war = THIS
+				inherit = THIS 
+			}
+		}
+
+		# transfer cultist provinces to DAG (same as 94106)
+		DAG = { country_event = { id=94022 days=3 }}
+
+		247 = { # this is Concord\Arkham !!
+			limit = {			
+				NOT = { is_core = DAG }	
+			}
+			
+			remove_core = ELD #need to remove else never ally.
+			remove_core = YIG
+			add_core = DAG 
+		}
+
+		any_owned = {				#Any province owned by the taker
+			limit = {			
+				NOT = { is_core = DAG }	
+			}
+			add_core = DAG 
+			remove_core = ELD #need to remove else never ally.
+			remove_core = YIG
+			#naval_base = 1
+			#fort = 1
+		}
+		DAG = {
+			any_owned = {
+				limit = { is_coastal = yes }	
+				naval_base = 2
+				fort = 2
+			}
+		}
+	}
+}
+
+#Yig is returning
+country_event = {
+	
+	id = 94021
+	title = "EVTNAME94021" #"Yig is returning!"
+	desc = "EVTDESC94021" #"The end times approach nigh! Yig is returning!"
+	picture = "Alice"
+	major = yes
+	#fire_only_once = yes
+
+	news = yes
+	news_desc_long = EVTDESC94021
+	news_desc_medium = EVTDESC94021
+	news_desc_short = EVTDESC94021
+
+	trigger = {
+		has_country_modifier = full_cultists
+		capital_scope = { OR = { continent = south_america continent = north_america } }
+		exists = ELD
+		NOT = { 
+			exists = YIG 
+			tag = ELD 
+			tag = DAG
+			tag = IAM
+		}
+	}
+
+	mean_time_to_happen = {
+		years = 4
+	}
+
+	option = {
+		name = "EVTOPT94021" #"From the Jungle"
+		# convert cultists to serpent people		
+		primary_culture = yigian # but now we are snake people
+		add_accepted_culture = cultists # still friends with other cults
+		religion = yigian
+		plurality = 25
+		capital_scope = {
+				assimilate = yes
+			}
+
+		YIG = { 
+			#end_war = THIS
+			inherit = THIS 
+
+			add_country_modifier = {
+				name = full_cultists
+				duration = -1
+			}
+
+			relation = { who = ELD value = 400 }
+			create_alliance = ELD
+			military_access = ELD
+
+			relation = { who = DAG value = 400 }
+			create_alliance = DAG
+			military_access = DAG
+
+			prestige = 100 # give boost to prestige
+		}
+
+		
+		# try and assimilate other countries
+		any_country = {
+			limit = {
+				NOT = { tag = YIG }
+				has_country_modifier = full_cultists
+				OR = {
+					capital_scope = { continent = south_america }
+					tag = MEX
+					tag = ELS
+					tag = GUA
+					tag = PNM
+					tag = UCA
+					tag = COS
+					tag = BRA
+					tag = ARG
+					tag = CHI	
+					tag = PAR
+					tag = COL
+				}
+			}
+			# convert cultists to snakes
+			add_accepted_culture = cultists # still friends with other cults
+			primary_culture = yigian # but now we are snake people
+			religion = yigian
+
+			capital_scope = {
+				assimilate = yes
+			}
+
+			YIG = {
+				end_war = THIS
+				inherit = THIS 
+			}
+		}
+
+		# transfer cultist provinces to YIG (same as 94107)
+		YIG = { country_event = { id=94023 days=3 } }
+	
+		YIG = {
+			any_owned = {	#Any province owned by the taker
+				limit = {			
+					NOT = { is_core = YIG }	
+				}
+				add_core = YIG 
+				remove_core = ELD #need to remove else never ally.
+				remove_core = DAG
+			}
+			# strongholds
+			any_owned = {
+				limit = { is_coastal = no }	
+				fort = 1
+			}
+		}
+
+		# initially claim neigbours
+		any_neighbor_country = {
+			# don't annoy the powers just yet
+			limit = {
+				OR = { 
+					capital_scope = { continent = south_america }
+					tag = MEX
+					tag = ELS
+					tag = GUA
+					tag = PNM
+					tag = UCA
+					tag = COS
+					tag = BRA
+					tag = ARG
+					tag = CHI	
+					tag = PAR
+					tag = COL
+				}
+			}
+			any_owned = {	
+				add_core = YIG 
+			}
+		}
+	}
+}
+
+# Event to transfer to dagon
+country_event = {
+	id = 94022 # transfer to Dagon
+	title = "EVTNAME94020"
+	desc = "EVTNAME94020"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	immediate = {
+
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_1499 #hannan ?
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies  
+						region = ENG_203 #jamaica, bahamas
+						region = SIA_1392 #bankok
+					}
+    				}
+				remove_core = ELD
+    				secede_province = DAG
+				add_core = DAG
+			}
+		
+		}
+
+		YIG = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = oceania 
+						is_core = PHI
+						is_core = NZL
+						is_core = JAP
+						is_core = HAW
+						is_core = BRU
+						is_core = JAV
+						is_core = KOR
+						is_core = DAI
+						is_core = JOH
+						is_core = NEN
+						is_core = BAL
+						is_core = CUB
+						is_core = HAI
+						region = CHI_1082 #
+						region = CHI_1499 #hannan ?
+						region = CHI_2562 #formosa 
+						region = SPA_2517 #micronesia 
+						region = BRU_1394 #brunei
+						region = ATJ_1405 #atjeh
+						region = NET_1398
+						region = NET_1413
+						region = NET_1423 #borneo
+						region = NET_1449 # moluccas
+						region = NET_1451 # new guinea
+						region = BAL_1438
+						region = ENG_2224 #w indies
+						region = ENG_2228 #lesser antillies  
+						region = ENG_203 #jamaica, bahamas
+						region = SIA_1392 #bankok
+					}
+    				}
+				remove_core = YIG
+    				secede_province = DAG
+				add_core = DAG
+			}
+		}
+	}
+	option = {
+		name = "EVTOPT94020"
+	}
+
+}
+
+# Event to transfer to Yig
+country_event = {
+	id = 94023
+	title = "EVTNAME94021"
+	desc = "EVTDESC94021"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	immediate = {
+		ELD = {
+			any_owned = {
+ 				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS	
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL	
+						region = USA_129 # Oklahoma	
+						region = TEX_132 # Texas
+					}
+    			}
+
+				remove_core = ELD
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}
+		DAG = {
+			any_owned = {
+    				limit = {
+					OR = { 
+						continent = south_america
+						is_core = MEX
+						is_core = ELS
+						is_core = GUA
+						is_core = PNM
+						is_core = UCA
+						is_core = COS
+						is_core = BRA
+						is_core = ARG
+						is_core = CHI	
+						is_core = PAR
+						is_core = COL
+						region = USA_129 # Oklahoma	
+						region = TEX_132 # Texas
+					}
+    				}
+
+				remove_core = DAG
+    				secede_province = YIG
+				add_core = YIG 
+			}
+		}	
+	}
+
+	option = {
+		name = "EVTOPT94021"
+	}
+
+}

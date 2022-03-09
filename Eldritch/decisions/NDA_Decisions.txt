@@ -2,11 +2,11 @@ political_decisions = {
 	supress_cultists = { # within own country - should be able to do before ELD exists?
 		picture = "supress_cultists"
 		potential = {
-			OR = {
-				exists = ELD
-				exists = YIG
-				exists = DAG
-			}
+			#OR = {
+			#	exists = ELD
+			#	exists = YIG
+			#	exists = DAG
+			#}
 			accepted_culture = cultists
 			NOT = {
 				OR = {
@@ -127,8 +127,9 @@ political_decisions = {
 					OR = { in_sphere = THIS vassal_of = THIS alliance_with = THIS }	
 				}
 				remove_country_modifier = early_cultists
-				THIS = { money = -100000}
+				#FROM = { money = -100000} # Using THIS deducts from target country?
 			}
+			money = -100000
 		}
 	}
 
@@ -240,6 +241,51 @@ political_decisions = {
 				name = tonic_for_the_troops 
 				duration = -1
 			}
+		}
+		
+		ai_will_do = {
+			factor = 0 # never
+		}		
+	}
+
+	resist_cultists = { # Migo swap - already cultists so downgrade to next lower level
+		picture = "supress_cultists"
+		potential = {
+			OR = {
+				accepted_culture = cultists
+				primary_culture = cultists
+			}
+
+			NOT = {
+				has_country_modifier = mid_cultists
+			}
+		}
+		allow = {
+			OR = {
+				accepted_culture = cultists
+				primary_culture = cultists
+			}
+
+			NOT = {
+				has_country_modifier = mid_cultists
+			}
+		}
+		effect = {
+			remove_country_modifier = early_cultists
+			add_country_modifier = {
+				name = mid_cultists
+				duration = -1
+			}
+			any_pop = {
+            			limit = { 
+                			OR = {
+						culture = cultists
+						culture = yigian
+						culture = deep_ones
+					}
+            			}
+				militancy = 7.0
+                 	}
 		}
 		
 		ai_will_do = {

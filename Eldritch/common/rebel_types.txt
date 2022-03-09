@@ -1890,9 +1890,9 @@ red_shirts = {
 	demands_enforced_effect = {
 		random_country = {
 			limit = {
-				is_culture_group = THIS
+				is_culture_group = italian # restrict to italian only - can displace Cults
 				OR = {
-					is_greater_power = yes
+					is_greater_power = yes # change to secondary power?
 					tag = SAR
 				}
 				NOT = {
@@ -2944,28 +2944,58 @@ cultist_rebels = {
 		}
 	}
 	
-	demands_enforced_effect = {	
-			THIS = { 
-				end_war = ELD 
-				end_war = YIG
-				end_war = DAG
-				any_owned = {
-					add_core = ELD
-				}
-			}
-			ELD = { 
-				# NOT IN AMERICAS
-				limit = { THIS = { NOT = { continent = south_america continent = north_america } } }
-				end_war = THIS
-				inherit = THIS
-			}
+	demands_enforced_effect = {
 
-			YIG = { 
-				# IN AMERICAS
-				limit = { THIS = { OR = { continent = south_america continent = north_america } } }
-				end_war = THIS
-				inherit = THIS
-			}
+		country_event = 94042
+#		random_country = {
+#			limit = {
+#				tag = THIS
+#			}
+#			country_event = { id=94042 days=0 }
+#		}
+#
+#			ELD = { 
+#				end_war = THIS
+#				inherit = THIS
+#				any_owned = {
+#					add_core = ELD
+#				}
+#			}
+#
+#		random_country = {
+#			limit = {
+#				tag = THIS
+#				NOT = {
+#					OR = { 
+#						continent = south_america 
+#						continent = north_america 
+#					} 
+#				}
+#			}
+#			ELD = { 
+#				end_war = THIS
+#				inherit = THIS
+#				any_owned = {
+#					add_core = ELD
+#				}
+#			}
+#		}
+#		random_country = {
+#			limit = {
+#				tag = THIS
+#				OR = { 
+#					continent = south_america 
+#					continent = north_america 
+#				} 
+#			}
+#			YIG = { 
+#				end_war = THIS
+#				inherit = THIS
+#				any_owned = {
+#					add_core = YIG
+#				}
+#			}
+#		}		
 	}
 }
 

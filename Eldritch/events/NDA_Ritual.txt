@@ -1,0 +1,346 @@
+#The ritual begins! ~1900
+country_event = {
+	id = 94007
+	title = "EVTNAME94007"
+	desc = "EVTDESC94007"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94007"
+	news_desc_medium = "EVTDESC94007"
+	news_desc_short = "EVTDESC94007"
+
+	trigger = {
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}
+		NOT = {
+			has_global_flag = ritual_started
+		}
+		year = 1895
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.1
+			year = 1899
+		}
+	}
+
+	option = {
+		name = "EVTOPT94007"
+		set_global_flag = ritual_started
+		# All 3 main cultist should join ritual
+		ELD = {
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 200 #We should be at #1 at this point.
+			badboy = -25.0 #We do what we want.
+			plurality = 10
+		}
+		DAG = {
+			remove_country_modifier = full_cultists # can retain this from creating country so remove
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 100 #We should be a power by this point.
+			badboy = -15.0 #We do what we want.
+			plurality = 10
+		}
+		YIG = {
+			remove_country_modifier = full_cultists # can retain this from creating country so remove
+			add_country_modifier = {
+				name = ritual_in_progress
+				duration = -1
+			}
+			prestige = 100 #We should be a power by this point.
+			badboy = -15.0 #We do what we want.
+			plurality = 10
+		}
+
+		#random_owned = {
+		#	limit = { is_capital = no }
+		#	province_event = 94025 # Sacrifice
+		#}
+		
+
+		# Free people should worry
+		any_country = { 
+			limit = { 
+				ai = yes
+				NOT = { has_country_modifier = full_cultists }
+			}
+
+			# make scared of cultists - do tags need to exist or can it be raised 'in secret'?
+			relation = {
+				who = ELD
+				value = -100
+			}
+			relation = {
+				who = DAG
+				value = -100
+			}
+			relation = {
+				who = YIG
+				value = -100
+			}
+
+			any_pop = { # try and increase internal strife from cultists
+				limit = {
+					 OR = {
+                        			culture = cultists
+                        			culture = yigian
+						culture = deep_ones
+                   			 }
+				}
+				militancy = 4 
+			}
+		}
+
+		# Increase ELDs diplomatic influence among Minors
+		#any_country = { 
+		#	limit = { 
+		#		is_greater_power = no
+		#		primary_culture = cultists
+		#		has_country_modifier = full_cultists
+		#		NOT = { 
+		#			tag = ELD
+		#			tag = DAG
+		#			tag = YIG
+		#		}
+		#	}
+		#	ELD = {
+		#		diplomatic_influence = { who = THIS value = 50 }
+		#	}	
+		#}
+	}
+}
+
+#The ritual intensifies ~1910
+country_event = {
+	id = 94009
+	title = "EVTNAME94009"
+	desc = "EVTDESC94009"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94009"
+	news_desc_medium = "EVTDESC94009"
+	news_desc_short = "EVTDESC94009"
+
+	trigger = {
+		OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+		}
+		NOT = {
+			has_global_flag = ritual_faster
+		}
+		has_global_flag = ritual_started
+		year = 1905
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.1
+			year = 1910
+		}
+		modifier = {
+			factor = 0.1
+			year = 1915
+		}
+	}
+
+	option = {
+		name = "EVTOPT94009"
+		set_global_flag = ritual_faster
+		ELD = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
+		}
+		DAG = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
+		}
+		YIG = {
+			remove_country_modifier = ritual_in_progress
+			add_country_modifier = {
+				name = intense_ritual
+				duration = -1
+			}
+		}
+		prestige = 200 #We should really be at #1 at this point.
+		#plurality = 10
+
+		#random_owned = {
+		#	limit = { is_capital = no }
+		#	province_event = 94025 # Sacrifice
+		#}
+	}
+}
+
+
+#Join the ritual
+country_event = {
+	id = 94008
+	title = "EVTNAME94008"
+	desc = "EVTDESC94008"
+	picture = "Alice"
+	major = yes
+	
+	trigger = {
+		NOT = {
+			OR = {
+			tag = ELD
+			tag = DAG
+			tag = YIG
+			} #These are possible annexers.
+		}
+		exists = ELD
+		has_global_flag = ritual_started
+		has_country_modifier = full_cultists
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		years = 35 #50% chance over the rest of the game if ritual starts in 1900.
+
+		#Strong nations try to hold on to independence.
+		modifier = {
+			factor = 2.0
+			is_secondary_power = yes
+		}
+		
+		modifier = {
+			factor = 6.0
+			is_greater_power = yes
+		}
+
+		modifier = {
+			factor = 0.5
+			has_global_flag = ritual_faster
+		}
+	}
+
+	option = {
+		name = "EVTOPT94008"
+
+		ELD = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = ELD
+			}
+		}
+
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 10
+				OR = { vassal_of = ELD 
+                    		   in_sphere = ELD 
+				}
+			}
+			modifier = {
+				factor = 0.01
+				capital_scope = { OR = { continent = oceania continent = south_america } }
+			}
+		}
+	}
+	
+	# could join with DAG instead
+	option = {
+		name = "EVTOPT94008"
+
+		DAG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = DAG
+			}
+		}
+
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 8
+				any_owned_province = { is_coastal = yes }
+			}
+			modifier = { # don't want landlocked for sea monsters!
+				factor = 0.01
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+			modifier = {
+				factor = 10
+				capital_scope = { continent = oceania }
+			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
+			}
+		}
+	}
+
+	# could join with YIG instead
+	option = {
+		name = "EVTOPT94008"
+
+		YIG = {
+			end_war = THIS
+			inherit = THIS
+			
+			prestige = 10 #Keep them at #1 GP.
+			badboy = -2.0
+			any_owned = {
+				add_core = YIG
+			}
+		}
+
+		ai_chance = {
+			factor = 10	
+			modifier = {
+				factor = 10
+				capital_scope = { continent = south_america }
+			}
+			modifier = { # ok for landlocked for snakes!
+				factor = 2
+				NOT = { 
+				   any_owned_province = { is_coastal = yes }
+				}
+			}
+			modifier = { # keep europe for the ELD
+				factor = 0.01
+				capital_scope = { continent = europe }
+			}
+		}
+	}
+}
+
