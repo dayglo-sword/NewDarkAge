@@ -1,0 +1,157 @@
+#Dark Star - A close shave or possible full on hit by an extraterrestial 'object'. Loosely based on HG Wells short story 'The Star'
+#94190 - Initial Observation
+#94191 - The chance of it happening
+#94192 - Migo Warning
+#94193 - A Close escape - non-cultist ending.
+#94194 - A Meaningful Impact
+#94195 - The Damage Done
+
+country_event = {
+	id = 94190
+	title = "EVTNAME94190"
+	desc = "EVTDESC94190"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94190"
+	news_desc_medium = "EVTDESC94190"
+	news_desc_short = "EVTDESC94190"
+
+	trigger = {
+		year = 1865
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.1
+			year = 1899
+		}
+	}
+
+	option = {
+		name = "EVTOPT94190"
+		set_global_flag = dark_star
+		country_event = 94191
+	}
+}
+
+country_event = {
+	id = 94191
+	title = "EVTNAME94191"
+	desc = "EVTDESC94191"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94191"
+	news_desc_medium = "EVTDESC94191"
+	news_desc_short = "EVTDESC94191"
+
+
+	option = {
+		name = "EVTOPT94191"
+		
+		random_country = {
+			country_event = 94194
+		}
+	}
+}
+
+country_event = {
+	id = 94192
+	title = "EVTNAME94192" # Migo Warning
+	desc = "EVTDESC94192"
+	picture = "migo"
+
+	trigger = {
+		ai = no
+		has_global_flag = dark_star
+		has_global_flag = migo_experiment
+		has_country_modifier = migo_timetable 	
+	}
+
+	option = {
+		name = "EVTOPT94192"		
+	}
+}
+
+country_event = {
+	id = 94194
+	title = "EVTNAME94194"
+	desc = "EVTDESC94194"
+	picture = "Alice"
+	major = yes
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	news = yes
+	news_desc_long = "EVTDESC94194"
+	news_desc_medium = "EVTDESC94194"
+	news_desc_short = "EVTDESC94194"
+
+	option = {
+		name = "EVTOPT94194"
+		random_owned = {
+    			add_province_modifier = {
+    				name = impact_desolation 
+    				duration = 7200
+			}
+
+			province_event =  { id = 94195 }
+		}
+	}
+}
+
+province_event = {
+	id = 94195
+	title = "EVTNAME94195"
+	desc = "EVTDESC94195"
+	picture = "Alice"
+	#major = yes
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#news = yes
+	#news_desc_long = "EVTDESC94195"
+	#news_desc_medium = "EVTDESC94195"
+	#news_desc_short = "EVTDESC94195"
+
+	option = {
+		name = "EVTOPT94195"
+
+		any_pop = { 
+			reduce_pop = 0.1
+			militancy = 7
+		}
+		fort = -5
+		life_rating = -10
+		naval_base = -5
+		infrastructure  = -5
+
+		any_neighbor_province = {
+    			add_province_modifier = {
+    				name = impact_disruption 
+    				duration = 7200
+			}
+			any_pop = { 
+				reduce_pop = 0.5
+				militancy = 7
+			}
+ 
+   			fort = -2
+			life_rating = -5
+			naval_base = -2
+			infrastructure  = -2
+		}
+	}
+}

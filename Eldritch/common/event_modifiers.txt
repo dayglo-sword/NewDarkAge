@@ -890,3 +890,22 @@ artifact_nitocris_mirror = {
 artifact_book_thoth = {
 	icon = 8
 }
+
+#### Dark Star ####
+impact_desolation = {
+	icon = 18
+	farm_rgo_eff = -0.50
+	mine_rgo_eff = -0.20
+	pop_militancy_modifier = 0.08
+	population_growth = -0.025
+	immigrant_attract = -0.025
+}
+
+impact_disruption = {
+	icon = 18
+	farm_rgo_eff = -0.10
+	mine_rgo_eff = -0.10
+	pop_militancy_modifier = 0.04
+	population_growth = -0.010
+	immigrant_attract = -0.010
+}
